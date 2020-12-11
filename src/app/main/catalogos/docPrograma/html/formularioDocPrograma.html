@@ -1,0 +1,79 @@
+<md-dialog style="width: 70%">
+<a id="descargarArchivo"></a>
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Registro de documentos por programa</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+            <form name="dataProgram" novalidate>
+                <label>Clasificación:   </label>
+                <md-input-container flex="100">
+                    <md-select ng-model="clasificacion.modelo" placeholder="Clasificación" class="md-no-underline" flex="100">
+                        <md-option value="0">- -SELECCIONA -</md-option>
+                        <md-option ng-repeat="pais in clasificacion.opciones" value="{{pais.id}}">{{pais.Program_Classification}}</md-option>
+
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Nombre del documento:</label>
+                    <input style="width: 417px;" required md-no-asterisk name="ProgramName" ng-model="data.DocumentName">
+                    <div ng-messages="dataProgram.ProgramName.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+            
+                <div layout="column" layout-gt-xs="row">
+
+                    <md-input-container flex>
+                        <md-checkbox ng-model="data.RequiresTemplateFile" aria-label="Checkbox 1">
+                            Requiere un formato
+                        </md-checkbox>
+                    </md-input-container>
+
+                    <md-input-container flex>
+                        <div data-provides="fileinput">
+                            <input ng-disabled="!data.RequiresTemplateFile" ng-change="anexarArchivo()" type="file" ng-model="file" name="documentFile" id="documentFile">
+                        </div>
+                    </md-input-container>
+
+                </div>
+
+
+                <div layout="column" layout-gt-xs="row">
+                    <md-input-container flex>
+                        <md-checkbox ng-click="restriccionForScho()" ng-disabled="enableForScholarshipAssignation" ng-model="data.ForScholarshipAssignation" aria-label="Checkbox 1">
+                            Documento para asignación de beca
+                        </md-checkbox>
+                    </md-input-container>
+                </div>
+
+                <div layout="column" layout-gt-xs="row">
+                    <md-input-container flex>
+                        <md-checkbox ng-click="restriccionMedicalSupport()" ng-model="data.for_ticket_or_medical_support" aria-label="Checkbox 2">
+                            Documento para apoyo de boletos o gastos médicos
+                        </md-checkbox>
+                    </md-input-container>
+                </div>
+                <div layout="column" layout-gt-xs="row">
+                    <md-input-container flex>
+                        <md-checkbox ng-click="" ng-model="data.url" aria-label="Checkbox 2">
+                            Se debe subir una URL
+                        </md-checkbox>
+                    </md-input-container>
+                </div>
+
+                <label ng-show="disabledBoton">Guardando archivo, espere por favor...</label>
+                <md-dialog-actions class="footerModal">
+                    <md-button ng-disabled="disabledBoton" ng-click="enviarInformacion()">Guardar</md-button>
+                    <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                </md-dialog-actions>
+            </form>
+        </md-content>
+
+    </div>
+</md-dialog>

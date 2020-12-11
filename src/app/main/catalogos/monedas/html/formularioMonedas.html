@@ -1,0 +1,37 @@
+s <md-dialog style="width: 40%">
+
+     <div id="contenidoModal" name="contenidoModal">
+         <md-toolbar>
+             <div class="md-toolbar-tools">
+                 <h2>Registro de Monedas</h2>
+             </div>
+         </md-toolbar>
+
+         <md-content layout-padding>
+             <form name="dataForm" novalidate>
+
+                 <md-input-container flex="100">
+                     <label>Tipo de Moneda</label>
+                     <input style="width: 417px;" required md-no-asterisk name="name" ng-model="data.coin_name">
+                     <div ng-messages="data.coin_name.$error">
+                         <div ng-message="required">Este campo es requerido.</div>
+                     </div>
+                 </md-input-container>
+
+                 <md-input-container flex="100">
+                     <label>Tipo de Cambio</label>
+                     <input onkeypress="validaSoloNumeros(this.value,'TipoCambio','txtExchange');" onkeydown="validaSoloNumeros(this.value,'TipoCambio','txtExchange');" onkeyup="validaSoloNumeros(this.value,'TipoCambio','txtExchange');" id="txtExchange" style="width: 417px;" required md-no-asterisk name="name" ng-model="data.Exchange_Rate">
+                     <div ng-messages="data.Exhange_Rate.$error">
+                         <div ng-message="required">Este campo es requerido.</div>
+                     </div>
+                 </md-input-container>
+
+                 <md-dialog-actions class="footerModal">
+                     <md-button ng-disabled="vm.data" ng-click="enviarInformacion()">Guardar</md-button>
+                     <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                 </md-dialog-actions>
+             </form>
+         </md-content>
+
+     </div>
+ </md-dialog>

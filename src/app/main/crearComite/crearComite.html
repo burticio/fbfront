@@ -1,0 +1,134 @@
+<div class="page-layout carded fullwidth single-scroll" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-clipboard-text"></md-icon>
+                    <span>Sesiones de comité</span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span>Total de sesiones:</span>
+                    <span>{{comites.length}}</span>
+                </div>
+            </div>
+
+            <div>
+                <md-button ng-show="accionSupervisor" class="md-raised md-background" ng-click="vm.agregarSesion()" ng-hide = 'uType==7'>
+                    <span>Agregar</span>
+                </md-button>
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" layout="column" flex>
+
+            <div class="content fullpage-datatable" layout="column" flex>
+
+                <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance" dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">ID</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Nombre</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Clasificación</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Fecha</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title"># Solicitudes</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Estatus</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Acción</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="comite in comites">
+                            <td>{{comite.id}}</td>
+                            <td>{{comite.name}}</td>
+                            <td>{{comite.Classification_Name}}</td>
+                            <td>{{comite.date}}</td>
+                            <td>{{comite.applications_Number}}</td>
+                            <td>
+                                {{comite.status === '0' ? 'Activa' : ''}} {{comite.status === '1' ? 'Cancelada' : ''}} {{comite.status === '2' ? 'Plazo Extendido'
+                                : ''}} {{comite.status === '3' ? 'Completada' : ''}}
+                            </td>
+
+                            <td>
+
+                                <!-- Acciones para perfil de supervisor inicio -->
+                                <md-button ng-show="comite.status !== '1'" class="edit-button md-icon-button" ng-click="vm.verSolicitudes(comite)">
+                                    <md-icon md-font-icon="icon-eye" class="s16"></md-icon>
+                                    <md-tooltip md-direction="top">Ver Solicitudes</md-tooltip>
+                                </md-button>
+
+                                <md-button ng-show="comite.status === '3'" class="edit-button md-icon-button" ng-click="downloadFile(comite)">
+                                    <md-icon md-font-icon="icon-file-excel" class="s16"></md-icon>
+                                    <md-tooltip md-direction="top">Descargar Excel</md-tooltip>
+                                </md-button>
+
+                                <md-button ng-disabled="comite.status == '3' || comite.status =='1'" ng-show="accionSupervisor" class="edit-button md-icon-button"
+                                    ng-click="vm.extenderSesion(ev, comite)" ng-hide = 'uType==7'>
+                                    <md-icon md-font-icon="icon-calendar-plus" class="s16"></md-icon>
+                                    <md-tooltip md-direction="top">Extender Sesión de comité</md-tooltip>
+                                </md-button>
+
+                                <md-button ng-disabled="comite.status == '3' || comite.status =='1'" ng-show="accionSupervisor" class="edit-button md-icon-button"
+                                    ng-click="vm.finalizarSesion(comite.id)" aria-label="Product details" translate translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                    <md-icon md-font-icon="icon-calendar-check" class="s16"></md-icon>
+                                    <md-tooltip md-direction="top">Finalizar Sesión de comité</md-tooltip>
+                                </md-button>
+
+                                <md-button ng-disabled="comite.status == '3' || comite.status =='1'" ng-show="accionSupervisor" class="edit-button md-icon-button"
+                                    ng-click="vm.cancelarSesion(comite.id)" aria-label="Product details" translate translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                    <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                                    <md-tooltip md-direction="top">Cancelar Sesión de comité</md-tooltip>
+                                </md-button>
+                                <!-- Acciones para perfil de supervisor fin -->
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

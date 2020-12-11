@@ -1,0 +1,58 @@
+<md-dialog style="width: 70%">
+
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Registro de calificaciones</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+            <form name="dataCalificacion" novalidate>
+
+                <md-select ng-model="clasificaciones.modelo" placeholder="Clasificacion" class="md-no-underline" flex="100">
+                    <md-option value="0">- Clasificacion -</md-option> 
+                    <md-option ng-repeat="clasificacion in clasificaciones.opciones" value="{{clasificacion.id}}">{{clasificacion.Program_Classification}}</md-option> 
+                  </md-select>
+
+                    <md-input-container flex="100">
+                        <label>Max C:</label>
+                        <input id="maxC" onkeydown="validaSoloNumeros(this.value, '','maxC');" onkeypress="validaSoloNumeros(this.value, '','maxC');" onkeyup="validaSoloNumeros(this.value, '','maxC');" style="width: 417px;" required md-no-asterisk name="name" ng-model="data.Max_C">
+                        <div ng-messages="dataCalificacion.name.$error">
+                            <div ng-message="required">Este campo es requerido.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="100">
+                        <label>Max B</label>
+                        <input id="maxB" onkeydown="validaSoloNumeros(this.value, '','maxB');" onkeypress="validaSoloNumeros(this.value, '','maxB');" onkeyup="validaSoloNumeros(this.value, '','maxB');" style="width: 417px;" required md-no-asterisk name="name" ng-model="data.Max_B">
+                        <div ng-messages="dataCalificacion.name.$error">
+                            <div ng-message="required">Este campo es requerido.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="100">
+                        <label>Max A</label>
+                        <input id="maxA" onkeydown="validaSoloNumeros(this.value, '','maxA');" onkeypress="validaSoloNumeros(this.value, '','maxA');" onkeyup="validaSoloNumeros(this.value, '','maxA');" style="width: 417px;" required md-no-asterisk name="name" ng-model="data.Max_A">
+                        <div ng-messages="dataCalificacion.name.$error">
+                            <div ng-message="required">Este campo es requerido.</div>
+                        </div>
+                    </md-input-container>
+
+                     <md-input-container flex="100">
+                        <label>Max A +</label>
+                        <input id="maxAPlus" onkeydown="validaSoloNumeros(this.value, '','maxAPlus');" onkeypress="validaSoloNumeros(this.value, '','maxAPlus');" onkeyup="validaSoloNumeros(this.value, '','maxAPlus');" style="width: 417px;" required md-no-asterisk name="name" ng-model="data.Max_AMas">
+                        <div  ng-messages="dataCalificacion.name.$error">
+                            <div ng-message="required">Este campo es requerido.</div>
+                        </div>
+                    </md-input-container>
+ 
+                <md-dialog-actions class="footerModal">
+                    <md-button ng-disabled="vm.dataCalificacion" ng-click="enviarInformacion()">Guardar</md-button>
+                    <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                </md-dialog-actions>
+            </form>
+        </md-content>
+
+    </div>
+</md-dialog>

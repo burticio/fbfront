@@ -1,0 +1,1499 @@
+<div class="page-layout carded left-sidenav single-scroll" layout="row">
+    
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+	<div class="center" flex>
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row">
+            <div>
+            	<md-button ng-show = "arraysolicitud.Classification_Name == 'Posgrado' || arraysolicitud.Classification_Name == 'Otros Cursos'" ng-click="exportarPDFPosgrado()" style="background-color:#ffffff; color: #781f23; padding: 0px 20px !important;">EXPORTAR ENTREVISTA</md-button>
+            	<md-button ng-show = "arraysolicitud.Classification_Name == 'Licenciatura'" ng-click="exportarPDFLic()" style="background-color:#ffffff; color: #781f23; padding: 0px 20px !important;">EXPORTAR ENTREVISTA</md-button>                
+            </div>
+            <br>
+        </div>
+
+        <!-- / CONTENT HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+        	<div ng-if="arraysolicitud.Classification_Name == 'Posgrado' || arraysolicitud.Classification_Name == 'Otros Cursos'" id="entrePos">
+
+		        <form id="capturaEntrevistaPosgrado" ng-cloak>
+		            <md-toolbar style="background-color: #781f23 !important; color:white !important;">
+		                <div class="md-toolbar-tools">
+				            <i style="cursor: pointer;" ng-click="volver()" class="icon-keyboard-backspace">
+		                        <md-tooltip>Volver</md-tooltip>
+		                    </i> 
+		                    <h2>Entrevista de Posgrado ({{entrevista.applicant}}) - {{entrevista.textscore}} </h2>
+		                </div>
+		            </md-toolbar>
+
+		            <md-dialog-content>
+		                <md-tabs md-dynamic-height md-border-bottom>
+
+		                    <md-tab label="Solicitud">
+		                        <md-content class="md-padding">
+
+		                            <div layout-gt-sm="row">
+		                                
+		                                <div class="form-wrapper md-whiteframe-1dp" flex="100">
+
+		                                    <form name="formSolicitud" class="md-inline-form" novalidate>
+
+		                                        <div layout="column" layout-gt-sm="row">
+		                                            <md-input-container flex>
+		                                                <input disabled disabled type="text" ng-model="arraysolicitud.Person_Name" id="nombre" name="nombre" placeholder="Nombre(s)">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" ng-model="arraysolicitud.Person_lastName" id="aPaterno" name="aPaterno" placeholder="Primer Apellido">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" ng-model="arraysolicitud.Person_mLastName" id="aMaterno" name="aMaterno" placeholder="Segundo Apellido">
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" ng-model="arraysolicitud.nationality" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <label>País de residencia</label>
+		                                                <md-select disabled id="countryRecidence" ng-model="arraysolicitud.residenceCountry">
+		                                                    <md-option ng-repeat="gen in country" value="{{gen.id}}">
+		                                                        {{gen.name}}
+		                                                    </md-option>
+		                                                </md-select>
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <label>Estado</label>
+		                                                <md-select disabled ng-model="arraysolicitud.state">
+		                                                    <md-option ng-repeat="est in bycountry" value="{{est.id}}">
+		                                                        {{est.name}}
+		                                                    </md-option>
+		                                                </md-select>
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <label>Género</label>
+		                                                <md-select disabled ng-model="arraysolicitud.gender">
+		                                                    <md-option ng-repeat="gen in genero.opciones" value="{{gen.id}}">
+		                                                        {{gen.name}}
+		                                                    </md-option>
+		                                                </md-select>
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <label>Estado Civil</label>
+		                                                <md-select disabled ng-model="arraysolicitud.civilStatus">
+		                                                    <md-option ng-repeat="edo in edoCivil.opciones" value="{{edo.id}}">
+		                                                        {{edo.name}}
+		                                                    </md-option>
+		                                                </md-select>
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="telefonoCasa" name="telefonoCasa" ng-model="arraysolicitud.phoneHome" placeholder="Teléfono de casa">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="telefonoOficina" name="telefonoOficina" ng-model="arraysolicitud.phoneOffice" placeholder="Teléfono de Oficina">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="telefono" name="telefono" ng-model="arraysolicitud.cellphone" placeholder="Teléfono Celular">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+
+		                                                <md-datepicker disabled ng-model="arraysolicitud.birthdate" md-placeholder="Fecha de Nacimiento" md-min-date="ctrl.minDateActual" md-max-date="ctrl.maxDateActual"></md-datepicker>
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="calle" name="calle" ng-model="arraysolicitud.street" placeholder="Calle">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" string-to-number id="noInterior" name="noInterior" ng-model="arraysolicitud.indoorNumber" placeholder="Número Interior">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" string-to-number id="noExterior" name="noExterior" ng-model="arraysolicitud.outdoorNumber" placeholder="Número Exterior">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="colonia" name="colonia" ng-model="arraysolicitud.neighborhood" placeholder="Colonia">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <label>Código postal</label>
+		                                                <input disabled id="postalcode" name="postalcode" ng-model="arraysolicitud.zipCode" placeholder="12345" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" disabled id="correo" name="correo" ng-model="arraysolicitud.email" placeholder="Correo electrónico" ng-pattern="/^.+@.+\..+$/">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="facebook" name="facebook" ng-model="arraysolicitud.facebook" placeholder="Facebook">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="twitter" name="twitter" ng-model="arraysolicitud.skype" placeholder="Twitter">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="institucion" name="institucion" ng-model="arraysolicitud.lastSchool" placeholder="Institución">
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <p>Último grado de estudios:</p>
+		                                                <md-radio-group disabled ng-model="arraysolicitud.lastGrade">
+		                                                    <md-radio-button style="float: left; clear: none;" value="Preparatoria">Preparatoria &nbsp;&nbsp;</md-radio-button>
+		                                                    <md-radio-button style="float: left; clear: none;" value="Licenciatura"> Licenciatura &nbsp;&nbsp;</md-radio-button>
+		                                                    <md-radio-button style="float: left; clear: none;" value="Maestría">Maestría &nbsp;&nbsp;</md-radio-button>
+		                                                    <md-radio-button style="float: left; clear: none;" value="Doctorado">Doctorado &nbsp;&nbsp;</md-radio-button>
+		                                                </md-radio-group>
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row" >
+		                                            <md-input-container class="md-block" flex="50">
+		                                                <span>Primera Opción: </span><strong>{{arraysolicitud.Program_Name_1}}</strong><br>
+		                                                <span>Universidad: </span><strong>{{arraysolicitud.Program1_University_Name}}</strong>
+		                                            </md-input-container>
+		                                            <md-input-container class="md-block" flex="50">
+		                                                <div ng-show="arraysolicitud.Program_Name_2 != null">
+		                                                    <span>Segunda Opción: </span><strong>{{arraysolicitud.Program_Name_2}}</strong><br>
+		                                                    <span>Universidad: </span><strong>{{arraysolicitud.Program2_University_Name}}</strong>
+		                                                </div>
+		                                            </md-input-container>
+		                                        </div>                                    
+
+		                                      
+
+		                                        
+
+		                                        <br><br><hr><br><br>
+
+		                                        <div layout="column" layout-gt="row">
+		                                            <md-input-containter>
+		                                                <label>¿Cómo te enteraste?</label>
+		                                                <md-select disabled ng-model="arraysolicitud.How_Did_You_Find">
+		                                                    <md-option value="1">Por una feria</md-option>
+		                                                    <md-option value="2">Por la Universidad</md-option>
+		                                                    <md-option value="3">Por una plática/taller en mi colegio</md-option>
+		                                                    <md-option value="4">Por un amigo</md-option>
+		                                                    <md-option value="5">Por Internet</md-option>
+		                                                    <md-option value="6">Otro</md-option>
+		                                                </md-select>
+		                                            </md-input-containter>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt="row">
+		                                            <md-input-container class="md-block">
+		                                                <label>¿Cómo te enteraste de Fundación Beca?</label>
+		                                                <textarea disabled ng-model="arraysolicitud.Other_How_Did_You_Find" maxlength="500" rows="2"></textarea>
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <md-input-container>
+		                                            <input disabled ng-model="arraysolicitud.Classification_Id" type="hidden">
+		                                        </md-input-container>
+		                                        <md-input-container>
+		                                            <input disabled ng-model="arraysolicitud.Type_Id" type="hidden" value="5">
+		                                        </md-input-container>
+		                                        <md-input-container>
+		                                            <input disabled ng-model="arraysolicitud.Program1_Id" type="hidden">
+		                                        </md-input-container>
+		                                        <md-input-container>
+		                                            <input disabled ng-model="arraysolicitud.Program2_Id" type="hidden">
+		                                        </md-input-container>
+		                                        <md-input-container>
+		                                            <input disabled id="tipoClasificacion" type="hidden" ng-model="arraysolicitud.Classification_Id">
+		                                        </md-input-container>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="unipos1" value="{{universidades.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="unipost2" value="{{universidades2.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="paipost1" value="{{pais.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="paipost2" value="{{pais2.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="tipopost1" value="{{tipo.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="tipopost2" value="{{tipo2.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="modapost1" value="{{modalidad.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="modapost2" value="{{modalidad2.modelo}}">
+		                                            </md-input-container>
+		                                        </div>
+
+		                                    </form>
+		                                </div>
+		                            </div>
+		                        </md-content>
+		                    </md-tab>
+
+		                    <md-tab label="Datos Personales" ng-click="mostrarBotonParcial()">
+		                        <md-content class="md-padding">
+
+		                            
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Núm. Hijos (ej. 2)</label>
+		                                    <input disabled id="numhijos" ng-model="arrayentrevista.post_children" type="text" min="0" max="100" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Reconocimientos ¿Cuáles?</label>
+		                                    <input disabled id="reconocimientos" ng-model="arrayentrevista.post_recognition">
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Otros Estudios ¿Cuál?</label>
+		                                    <input disabled id="otrosestudios" ng-model="arrayentrevista.post_other_studies">
+		                                </md-input-container>
+		                            </div>
+
+		                            <label>De tus ultimos estudios cursados, ¿Cuentas con certificado?*</label>
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <md-radio-group disabled ng-model="arrayentrevista.post_certificated" required>
+		                                        <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                        <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                        <md-radio-button style="float: left; clear: none;" value="2">En trámite &nbsp;&nbsp;</md-radio-button>
+		                                    </md-radio-group>
+		                                </md-input-container>
+		                                <md-input-container ng-hide = "arrayentrevista.post_certificated != 0" class="md-block" flex-gt-sm>
+		                                    <label>Último Periodo (Cuatrimestre, etc...)</label>
+		                                    <input disabled id="ultimosestudios" ng-model="arrayentrevista.post_last_semester" type="text" min="0" max="20" required>
+		                                </md-input-container>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Por qué decidiste estudiar este posgrado?</label>
+		                                    <input disabled id="porqueesteprograma" ng-model="arrayentrevista.both_program_reasons" required>
+		                                </md-input-container> 
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Con quién vives?</label>
+		                                    <input disabled id="conquienvives" ng-model="arrayentrevista.both_live_with" required>
+		                                </md-input-container>
+		                            </div>
+
+		                            <label>¿Cómo te ves en 5 años?</label>
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Profesionalmente</label>
+		                                    <textarea disabled id="cincoaniosprofe" ng-model="arrayentrevista.both_professional_vision" maxlength="500" rows="2" required></textarea>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Personalmente</label>
+		                                    <textarea disabled id="cincoaniosperso" ng-model="arrayentrevista.both_personal_vision" maxlength="500" rows="2" required></textarea>
+		                                </md-input-container> 
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿De qué te sientes orgulloso?</label>
+		                                    <textarea disabled id="orgullosodeti" ng-model="arrayentrevista.post_proud_about" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Características que tengas buenas</label>
+		                                    <textarea disabled id="caracteristicasbuenas" ng-model="arrayentrevista.both_qualities" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Características que puedas mejorar</label>
+		                                    <textarea disabled id="caracteristicasmejorar" ng-model="arrayentrevista.both_defects" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                            </div>
+		                        </md-content>
+		                    </md-tab>
+		                    <md-tab label="Datos Escolares" ng-click="mostrarBotonParcial()">
+		                        <md-content class="md-padding">
+		                            
+		                            <div layout-gt-sm="row">
+		                                <md-input-container flex>
+		                                    <label>Inglés (0-100%)</label>
+		                                    <input disabled id="ingles" type="text" string-to-number  ng-model="arrayentrevista.both_english_percentage" min="0" max="100" step="10" required> 
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Francés (0-100%)</label>
+		                                    <input disabled id="frances" string-to-number ng-model="arrayentrevista.both_french_percentage" type="text" min="0" max="100" step="10" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Alemán (0-100%)</label>
+		                                    <input disabled id="aleman" string-to-number ng-model="arrayentrevista.both_german_percentage" type="text" min="0" max="100" step="10" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Portugués (0-100%)</label>
+		                                    <input disabled id="portugues" string-to-number ng-model="arrayentrevista.both_portuguese_percentage" type="text" min="0" max="100" step="10" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Chino (0-100%)</label>
+		                                    <input disabled id="chino" string-to-number ng-model="arrayentrevista.both_chinese_percentage" type="text" min="0" max="100" step="10" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Otro Idioma</label>
+		                                    <input disabled id="otroidioma" ng-model="arrayentrevista.both_aditional_language" type="text">
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Porcentaje (0-100%)</label>
+		                                    <input disabled id="porcentajeotroidioma" string-to-number ng-model="arrayentrevista.both_aditional_language_percentage" min="0" max="100" step="10" type="text">
+		                                </md-input-container>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Acreditación (En caso de un examen que certifique el nivel del idioma)</label>
+		                                    <input disabled id="acreditacion" ng-model="arrayentrevista.post_language_accreditation" type="text"> 
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Comentarios sobre los idiomas?</label>
+		                                    <input disabled id="comentarioslenguaje" ng-model="arrayentrevista.both_languages_comments">
+		                                </md-input-container>
+		                            </div>
+		                        </md-content>
+		                    </md-tab>
+		                    <md-tab label="Experiencia Laboral" ng-click="mostrarBotonParcial()">
+		                        <md-content class="md-padding">
+
+		                            
+
+		                            <div layout-gt-sm="row">
+		                                <label>¿Trabajas?* &nbsp;&nbsp;</label> <input disabled id="trabajas" type="hidden" class="radioValue" value="{{ arrayentrevista.both_worker}}">
+		                                <md-radio-group disabled ng-model="arrayentrevista.both_worker" style="float: left; clear: none;" required>
+		                                    <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                </md-radio-group>
+		                            </div>
+
+		                            <div ng-show="arrayentrevista.both_worker == '1'">
+		                                <div layout-gt-sm="row">
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Empresa</label>
+		                                        <md-tooltip md-direction="top">Especificar si ya saben que se va a ir a estudiar al extranjero</md-tooltip>
+		                                        <input disabled id="empresa" ng-model="arrayentrevista.both_enterprise">
+		                                    </md-input-container>
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Cargo</label>
+		                                        <input disabled id="cargo" ng-model="arrayentrevista.both_job_title">
+		                                    </md-input-container>
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Antigüedad (En años, ej. 2)</label>
+		                                        <input disabled id="antiguedad" string-to-number type="text" min="0" max="100" ng-model="arrayentrevista.both_labor_old_years">
+		                                    </md-input-container>
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Sueldo Actual (ej. 100000.00)</label>
+		                                        <input disabled id="sueldoactual" string-to-number type="text" min="0" max="1000000000" step="500" ng-model="arrayentrevista.both_actual_salary">
+		                                    </md-input-container>
+		                                </div>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Experiencia laboral</label>
+		                                    <textarea disabled id="experiencialaboral" ng-model="arrayentrevista.post_labor_experience" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                            </div>
+		                        </md-content>
+		                    </md-tab>
+		                    <md-tab label="FUNDACIÓN BECA" ng-click="ocultarBotonParcial()">
+		                        <md-content class="md-padding">
+
+		                            <div layout="column" layout-gt-xs="row">
+		                                <md-input-container class="md-block" flex="50">
+		                                    <span>Programa Seleccionado: </span><strong>{{arraysolicitud.Program_Name_1}}</strong><br>
+		                                    <span>Universidad: </span><strong>{{arraysolicitud.Program1_University_Name}}</strong><br>
+		                                    <span>Modalidad: </span><strong>{{arraysolicitud.Program1_modality}}</strong><br>
+		                                    <span>Costo: </span><strong>{{arraysolicitud.Program1_Cost}} {{arraysolicitud.Program1_Coin}}</strong><br>
+		                                    <span>% Beca: </span><strong>{{arraysolicitud.Program1_Scholarship_Percentage}}</strong><br>
+		                                    <span>Apoyo Boleto Avión: </span><strong>{{arraysolicitud.Program1_TicketSupport}}</strong><br>
+		                                    <span>Apoyo Gastos Instalación: </span><strong>{{arraysolicitud.Program1_Settlement}}</strong><br>
+		                                    <span>Apoyo Gastos Médicos: </span><strong><span ng-show ="arraysolicitud.Program1_Medical_Expenses==1">SI</span><span ng-show ="arraysolicitud.Program1_Medical_Expenses==0">NO</span></strong><br>
+		                                </md-input-container>
+		                            </div>
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Presupuesto</label>
+		                                    <textarea disabled id="presupuesto" ng-model="arrayentrevista.post_budget" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                            </div>
+
+		                            <div>
+		                                <div layout-gt-sm="row">
+		                                    <label>¿Cuál es el estatus de tu tramite con la Universidad? &nbsp;&nbsp;</label> <input disabled id="estatusUni" type="hidden" class="radioValue" value="{{ arrayentrevista.post_university_status}}">
+		                                    <md-radio-group disabled ng-model="arrayentrevista.post_university_status" style="float: left; clear: none;">
+		                                        <md-radio-button style="float: left; clear: none;" value="1">Aceptado &nbsp;&nbsp;</md-radio-button>
+		                                        <md-radio-button style="float: left; clear: none;" value="2">En Proceso &nbsp;&nbsp;</md-radio-button>
+		                                        <md-radio-button style="float: left; clear: none;" value="0">Sin contacto &nbsp;&nbsp;</md-radio-button>
+		                                    </md-radio-group>
+		                                </div>
+		                                <div layout-gt-sm="row">
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Comentarios sobre trámite con Universidad</label>
+		                                        <textarea disabled id="comentariosestatusUni" ng-model="arrayentrevista.post_university_status_comments" md-maxlength="500" rows="3" md-select-on-focus></textarea>
+		                                    </md-input-container>
+		                                </div>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <label>¿Conoces el Proyecto de RS de Fundación Beca?* &nbsp;&nbsp;</label> <input disabled id="acercaproyRS" type="hidden" class="radioValue" value="{{ arrayentrevista.post_SR_FB_acknowledgment}}">
+		                                <md-radio-group disabled ng-model="arrayentrevista.post_SR_FB_acknowledgment" style="float: left; clear: none;" required>
+		                                    <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                </md-radio-group>
+		                            </div>
+
+		                            <div>
+		                                <div layout-gt-sm="row">
+		                                    <label>¿Aceptas participar en el proyecto de RS de Fundación Beca? &nbsp;&nbsp;</label> <input disabled id="aceptasproyRS" type="hidden" class="radioValue" value="{{ arrayentrevista.post_SR_FB_agreement}}">
+		                                    <md-radio-group disabled ng-model="arrayentrevista.post_SR_FB_agreement" style="float: left; clear: none;">
+		                                        <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                        <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                    </md-radio-group>
+		                                </div>
+		                                <div layout-gt-sm="row">
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Comentarios acerca de Programa RS</label>
+		                                        <textarea disabled id="comentariosacercaRS" ng-model="arrayentrevista.post_SR_FB_comments" md-maxlength="500" rows="3" md-select-on-focus></textarea>
+		                                    </md-input-container>
+		                                </div>
+		                            </div>
+
+		                            
+
+		                            <div layout-gt-sm="row">
+		                                <label>¿Participas/Has participado en algún proyecto social?* &nbsp;&nbsp;</label> <input disabled id="participadoproysocial" type="hidden" class="radioValue" value="{{ arrayentrevista.post_social_labor}}">
+		                                <md-radio-group disabled ng-model="arrayentrevista.post_social_labor" style="float: left; clear: none;" required>
+		                                    <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="2">Universidad &nbsp;&nbsp;</md-radio-button>
+		                                </md-radio-group>
+		                            </div>
+		                            <div ng-show="arrayentrevista.post_social_labor == '1' || arrayentrevista.post_social_labor == '2'">
+		                                <div layout-gt-sm="row">
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>¿Cuál?</label>
+		                                        <input disabled id="cualproysocial" ng-model="arrayentrevista.post_social_labor_text">
+		                                    </md-input-container>
+		                                </div>
+		                            </div>
+		                            <div layout-gt-sm="row">
+		                                <label>¿Cuentas con una beca/financiamiento adicional?* &nbsp;&nbsp;</label> <input disabled id="cuentasbecaadicional" type="hidden" class="radioValue" value="{{ arrayentrevista.post_additional_founding}}">
+		                                <md-radio-group disabled ng-model="arrayentrevista.post_additional_founding" style="float: left; clear: none;">
+		                                    <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                </md-radio-group>
+		                            </div>
+
+		                            <div ng-show="arrayentrevista.post_additional_founding == '1'">
+		                                <div layout-gt-sm="row">
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>¿Cuál beca adicional?</label>
+		                                        <input disabled id="cualbecaadicional" ng-model="arrayentrevista.post_additional_founding_text">
+		                                    </md-input-container>
+		                                </div>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Qué harías si no quedas seleccionado?</label>
+		                                    <textarea disabled id="quesinoseleccionado" ng-model="arrayentrevista.both_what_if_not" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Por qué crees que deberíamos apoyarte?</label>
+		                                    <textarea disabled id="porqueapoyarte" ng-model="arrayentrevista.both_scholarship_merit" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Comentarios Finales</label>
+		                                    <textarea disabled id="comentariosfinales" ng-model="arrayentrevista.both_general_comments" md-maxlength="500" rows="3" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                            </div>
+
+		                            <!--md-button ng-show = "$scope.muestraGuardaParcial" ng-click="respuestaCapturarEntrevista(true,1,intercambioprograma)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+		                                GUARDAR ESTA SECCIÓN
+		                            </md-button-->
+
+		                        </md-content>
+		                    </md-tab>
+		                </md-tabs>
+		            </md-dialog-content>
+		            <md-dialog-actions layout="row">
+		                
+		            </md-dialog-actions>
+
+		        </form>
+		    </div>
+
+		    <div ng-if="arraysolicitud.Classification_Name == 'Licenciatura'">
+
+		        <form id="capturaEntrevistaLicenciatura" ng-cloak>
+		            <md-toolbar style="background-color: #781f23 !important; color:white !important;">
+		                <div class="md-toolbar-tools">
+		                    <h2>Capturar Entrevista de Licenciatura ({{solicitante}})</h2>
+		                </div>
+		            </md-toolbar>
+
+		            <md-dialog-content>
+		                <md-tabs md-dynamic-height md-border-bottom>
+
+		                    <md-tab label="Solicitud">
+		                        <md-content class="md-padding">
+
+		                            <div layout-gt-sm="row">
+		                                <div class="form-wrapper md-whiteframe-1dp" flex="100">
+
+		                                    <form name="formSolicitud" class="md-inline-form" novalidate>
+
+		                                        <div layout="column" layout-gt-sm="row">
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" ng-model="arraysolicitud.Person_Name" id="nombre" name="nombre" placeholder="Nombre(s)">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" ng-model="arraysolicitud.Person_lastName" id="aPaterno" name="aPaterno" placeholder="Primer Apellido">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" ng-model="arraysolicitud.Person_mLastName" id="aMaterno" name="aMaterno" placeholder="Segundo Apellido">
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" ng-model="arraysolicitud.nationality" id="nacionalidad" name="nacionalidad" placeholder="Nacionalidad">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <label>País de residencia</label>
+		                                                <md-select disabled id="countryRecidence" ng-model="arraysolicitud.residenceCountry">
+		                                                    <md-option ng-repeat="gen in country" value="{{gen.id}}">
+		                                                        {{gen.name}}
+		                                                    </md-option>
+		                                                </md-select>
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <label>Estado</label>
+		                                                <md-select disabled ng-model="arraysolicitud.state">
+		                                                    <md-option ng-repeat="est in bycountry" value="{{est.id}}">
+		                                                        {{est.name}}
+		                                                    </md-option>
+		                                                </md-select>
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <label>Género</label>
+		                                                <md-select disabled ng-model="arraysolicitud.gender">
+		                                                    <md-option ng-repeat="gen in genero.opciones" value="{{gen.id}}">
+		                                                        {{gen.name}}
+		                                                    </md-option>
+		                                                </md-select>
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <label>Estado Civil</label>
+		                                                <md-select disabled ng-model="arraysolicitud.civilStatus">
+		                                                    <md-option ng-repeat="edo in edoCivil.opciones" value="{{edo.id}}">
+		                                                        {{edo.name}}
+		                                                    </md-option>
+		                                                </md-select>
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="telefonoCasa" name="telefonoCasa" ng-model="arraysolicitud.phoneHome" placeholder="Teléfono de casa">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="telefonoOficina" name="telefonoOficina" ng-model="arraysolicitud.phoneOffice" placeholder="Teléfono de Oficina">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="telefono" name="telefono" ng-model="arraysolicitud.cellphone" placeholder="Teléfono Celular">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <md-datepicker disabled ng-model="arraysolicitud.birthdate" md-placeholder="Fecha de Nacimiento"></md-datepicker>
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="calle" name="calle" ng-model="arraysolicitud.street" placeholder="Calle">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" string-to-number id="noInterior" name="noInterior" ng-model="arraysolicitud.indoorNumber" placeholder="Número Interior">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" string-to-number id="noExterior" name="noExterior" ng-model="arraysolicitud.outdoorNumber" placeholder="Número Exterior">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="colonia" name="colonia" ng-model="arraysolicitud.neighborhood" placeholder="Colonia">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <label>Código postal</label>
+		                                                <input disabled id="postalcode" name="postalcode" ng-model="arraysolicitud.zipCode" placeholder="12345" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" disabled id="correo" name="correo" ng-model="arraysolicitud.email" placeholder="Correo electrónico" ng-pattern="/^.+@.+\..+$/">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="facebook" name="facebook" ng-model="arraysolicitud.facebook" placeholder="Facebook">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="twitter" name="twitter" ng-model="arraysolicitud.skype" placeholder="Twitter">
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <input disabled type="text" id="institucion" name="institucion" ng-model="arraysolicitud.lastSchool" placeholder="Institución">
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <p>Último grado de estudios:</p>
+		                                                <md-radio-group disabled ng-model="arraysolicitud.lastGrade">
+		                                                    <md-radio-button style="float: left; clear: none;" value="Preparatoria">Preparatoria &nbsp;&nbsp;</md-radio-button>
+		                                                    <md-radio-button style="float: left; clear: none;" value="Licenciatura"> Licenciatura &nbsp;&nbsp;</md-radio-button>
+		                                                    <md-radio-button style="float: left; clear: none;" value="Maestría">Maestría &nbsp;&nbsp;</md-radio-button>
+		                                                    <md-radio-button style="float: left; clear: none;" value="Doctorado">Doctorado &nbsp;&nbsp;</md-radio-button>
+		                                                </md-radio-group>
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container class="md-block" flex="50">
+		                                                <span>Primera Opción: </span><strong>{{arraysolicitud.Program_Name_1}}</strong><br>
+		                                                <span>Universidad: </span><strong>{{arraysolicitud.Program1_University_Name}}</strong>
+		                                            </md-input-container>
+		                                            <md-input-container class="md-block" flex="50">
+		                                                <div ng-show="arraysolicitud.Program_Name_2 != null">
+		                                                    <span>Segunda Opción: </span><strong>{{arraysolicitud.Program_Name_2}}</strong><br>
+		                                                    <span>Universidad: </span><strong>{{arraysolicitud.Program2_University_Name}}</strong>
+		                                                </div>
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container flex>
+		                                                <label style="float: left; clear: none;">Deséo cambiar primera opción</label>
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <md-radio-group disabled id="" ng-model="objetos.cambioprimeralicenciatura" ng-checked="0">
+		                                                    <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                                    <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                                </md-radio-group>
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <div ng-show="arraysolicitud.Program_Name_2 != null">
+		                                                    <label style="float: left; clear: none;">Deséo cambiar segunda opción</label>
+		                                                </div>
+		                                            </md-input-container>
+		                                            <md-input-container flex>
+		                                                <div ng-show="arraysolicitud.Program_Name_2 != null">
+		                                                    <md-radio-group disabled id="" ng-model="objetos.cambiosegundalicenciatura" ng-checked="0">
+		                                                        <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                                        <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                                    </md-radio-group>
+		                                                </div>
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <input disabled id="cambioprimeralicenciatura" type="hidden" value="{{objetos.cambioprimeralicenciatura}}">
+		                                            <input disabled id="cambiosegundalicenciatura" type="hidden" value="{{objetos.cambiosegundalicenciatura}}">
+		                                        </div>
+
+		                                        <div layout="column" layout-gt-xs="row">
+
+		                                            <script type="text/javascript">
+
+		                                                function buscaPrograma1Licenciatura(){
+
+		                                                    var objData = {
+		                                                        "university_id": $("#unilic1").val(),
+		                                                        "country_id": $("#pailic1").val(),
+		                                                        "type_id": $("#tipolic1").val(),
+		                                                        "modality_id": $("#modalic1").val(),
+		                                                        "classification_id": $("#tipoClasificacion").val()
+		                                                    };
+		                                        
+		                                                    AjaxCall("POST", URL_SERVIDOR + "/Program/search", objData, function (response) {
+		                                                        var valores = "";
+		                                                        for (var index = 0; index < response.datos.length; index++) {
+		                                                                valores += "<option value='"+response.datos[index].id+"'>"+response.datos[index].ProgramName+"</option><br>";
+		                                                        }
+		                                                        $("#primerprogramalicenciatura").html(valores);                  
+		                                                    }, function () {});
+		                                                }
+
+		                                                function buscaPrograma2Licenciatura(){
+
+		                                                    var objData = {
+		                                                        "university_id": $("#unilic2").val(),
+		                                                        "country_id": $("#pailic2").val(),
+		                                                        "type_id": $("#tipolic2").val(),
+		                                                        "modality_id": $("#modalic2").val(),
+		                                                        "classification_id": $("#tipoClasificacion").val()
+		                                                    };
+
+		                                                    AjaxCall("POST", URL_SERVIDOR + "/Program/search", objData, function (response) {
+		                                                        var valores = "";
+		                                                        for (var index = 0; index < response.datos.length; index++) {
+		                                                                valores += "<option value='"+response.datos[index].id+"'>"+response.datos[index].ProgramName+"</option><br>";
+		                                                        }
+		                                                        $("#segundoprogramalicenciatura").html(valores);              
+		                                                    }, function () {
+		                                                        
+		                                                    });
+		                                                }
+		    
+		                                            </script>
+
+		                                            
+
+		                                            <div ng-show="objetos.cambioprimeralicenciatura == 1">
+		                                                <md-input-container class="md-block" flex="50">
+		                                                    <h3>Primer Programa</h3>
+		                                                    <div layout="row" layout-align="start" flex>
+		                                                        <md-input-container flex="50">
+		                                                            <label>Universidad</label>
+		                                                            <md-select disabled ng-model="universidadeslic.modelo">
+		                                                                <md-option>
+		                                                                    <em>Ninguno</em>
+		                                                                </md-option>
+		                                                                <md-option ng-repeat="uni in arrayuniversities" ng-value="uni.University_Id">
+		                                                                    {{uni.name}}
+		                                                                </md-option>
+		                                                            </md-select>
+		                                                        </md-input-container>
+		                                                        <md-input-container flex="50">
+		                                                            <label>País</label>
+		                                                            <md-select disabled ng-model="paislic.modelo">
+		                                                                <md-option>
+		                                                                    <em>Ninguno</em>
+		                                                                </md-option>
+		                                                                <md-option ng-repeat="pai in arraycountries" ng-value="pai.Country_Id">
+		                                                                    {{pai.name}}
+		                                                                </md-option>
+		                                                            </md-select>
+		                                                        </md-input-container>
+		                                                        <md-input-container flex="50">
+		                                                            <label>Tipo de programa</label>
+		                                                            <md-select disabled ng-model="tipolic.modelo">
+		                                                                <md-option>
+		                                                                    <em>Ninguno</em>
+		                                                                </md-option>
+		                                                                <md-option ng-repeat="tip in arrayProgram_Types" ng-value="tip.Type_Id">
+		                                                                    {{tip.Program_Type}}
+		                                                                </md-option>
+		                                                            </md-select>
+		                                                        </md-input-container>
+		                                                        <md-input-container flex="50">
+		                                                            <label>Modalidad</label>
+		                                                            <md-select disabled ng-model="modalidadlic.modelo">
+		                                                                <md-option>
+		                                                                    <em>Ninguno</em>
+		                                                                </md-option>
+		                                                                <md-option ng-repeat="modal in arrayProgram_Modalities" ng-value="modal.Modality_Id">
+		                                                                    {{modal.Program_Modality}}
+		                                                                </md-option>
+		                                                            </md-select>
+		                                                        </md-input-container>
+		                                                        <md-button class="md-raised" onclick="buscaPrograma1Licenciatura()" style="height: 40px !important;" ng-hide = 'uType==7'>Buscar</md-button>
+		                                                    </div>
+		                                                    <select id="primerprogramalicenciatura" style="height: 40px !important; max-width: 600px !important; background-color: white !important; border: 1px solid #E0E0E0;"><select>
+		                                                </md-input-container>
+		                                            </div>
+
+		                                            <div ng-show="objetos.cambiosegundalicenciatura == 1">
+		                                                <md-input-container class="md-block" flex="100">
+		                                                    <h3>Segundo Programa</h3>
+		                                                    <div layout="row" layout-align="start" flex>
+		                                                        <md-input-container flex="50">
+		                                                            <label>Universidad</label>
+		                                                            <md-select disabled ng-model="universidadeslic2.modelo">
+		                                                                <md-option>
+		                                                                    <em>Ninguno</em>
+		                                                                </md-option>
+		                                                                <md-option ng-repeat="uni in arrayuniversities" ng-value="uni.University_Id">
+		                                                                    {{uni.name}}
+		                                                                </md-option>
+		                                                            </md-select>
+		                                                        </md-input-container>
+		                                                        <md-input-container flex="50">
+		                                                            <label>País</label>
+		                                                            <md-select disabled ng-model="paislic2.modelo">
+		                                                                <md-option>
+		                                                                    <em>Ninguno</em>
+		                                                                </md-option>
+		                                                                <md-option ng-repeat="pai in arraycountries" ng-value="pai.Country_Id">
+		                                                                    {{pai.name}}
+		                                                                </md-option>
+		                                                            </md-select>
+		                                                        </md-input-container>
+		                                                        <md-input-container flex="50">
+		                                                            <label>Tipo de programa</label>
+		                                                            <md-select disabled ng-model="tipolic2.modelo">
+		                                                                <md-option>
+		                                                                    <em>Ninguno</em>
+		                                                                </md-option>
+		                                                                <md-option ng-repeat="tip in arrayProgram_Types" ng-value="tip.Type_Id">
+		                                                                    {{tip.Program_Type}}
+		                                                                </md-option>
+		                                                            </md-select>
+		                                                        </md-input-container>
+		                                                        <md-input-container flex="50">
+		                                                            <label>Modalidad</label>
+		                                                            <md-select disabled ng-model="modalidadlic2.modelo">
+		                                                                <md-option>
+		                                                                    <em>Ninguno</em>
+		                                                                </md-option>
+		                                                                <md-option ng-repeat="modal in arrayProgram_Modalities" ng-value="modal.Modality_Id">
+		                                                                    {{modal.Program_Modality}}
+		                                                                </md-option>
+		                                                            </md-select>
+		                                                        </md-input-container>
+		                                                        <md-button class="md-raised" onclick="buscaPrograma2Licenciatura()" style="height: 40px !important;" ng-hide = 'uType==7'>Buscar</md-button>
+		                                                    </div>
+		                                                    <select id="segundoprogramalicenciatura" style="height: 40px !important; max-width: 600px !important; background-color: white !important; border: 1px solid #E0E0E0;"><select>
+		                                                </md-input-container>
+		                                            </div>
+
+		                                        </div>
+
+		                                        <br><br><hr><br><br>
+
+		                                        <div layout="column" layout-gt="row">
+		                                            <md-input-containter>
+		                                                <label>¿Cómo te enteraste?</label>
+		                                                <md-select disabled ng-model="arraysolicitud.How_Did_You_Find">
+		                                                    <md-option value="1">Por una feria</md-option>
+		                                                    <md-option value="2">Por la Universidad</md-option>
+		                                                    <md-option value="3">Por una plática/taller en mi colegio</md-option>
+		                                                    <md-option value="4">Por un amigo</md-option>
+		                                                    <md-option value="5">Por Internet</md-option>
+		                                                    <md-option value="6">Otro</md-option>
+		                                                </md-select>
+		                                            </md-input-containter>
+		                                        </div>
+
+		                                        <div layout="column" layout-gt="row">
+		                                            <md-input-container class="md-block">
+		                                                <label>¿Cómo te enteraste de Fundación Beca?</label>
+		                                                <textarea disabled ng-model="arraysolicitud.Other_How_Did_You_Find" maxlength="500" rows="2"></textarea>
+		                                            </md-input-container>
+		                                        </div>
+
+		                                        <!--md-button ng-click="respuestaCapturarEntrevista(true,1,0)" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-hide = 'uType==7'>
+		                                            GUARDAR ESTA SECCIÓN
+		                                        </md-button-->
+
+		                                        <md-input-container>
+		                                            <input disabled ng-model="arraysolicitud.Classification_Id" type="hidden">
+		                                        </md-input-container>
+		                                        <md-input-container>
+		                                            <input disabled ng-model="arraysolicitud.Type_Id" type="hidden" value="5">
+		                                        </md-input-container>
+		                                        <md-input-container>
+		                                            <input disabled ng-model="arraysolicitud.Program1_Id" type="hidden">
+		                                        </md-input-container>
+		                                        <md-input-container>
+		                                            <input disabled ng-model="arraysolicitud.Program2_Id" type="hidden">
+		                                        </md-input-container>
+		                                        <md-input-container>
+		                                            <input disabled id="tipoClasificacion" type="hidden" ng-model="arraysolicitud.Classification_Id">
+		                                        </md-input-container>
+
+		                                        <div layout="column" layout-gt-xs="row">
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="unilic1" value="{{universidadeslic.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="unilic2" value="{{universidadeslic2.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="pailic1" value="{{paislic.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="pailic2" value="{{paislic2.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="tipolic1" value="{{tipolic.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="tipolic2" value="{{tipolic2.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="modalic1" value="{{modalidadlic.modelo}}">
+		                                            </md-input-container>
+		                                            <md-input-container>
+		                                                <input disabled type="hidden" id="modalic2" value="{{modalidadlic2.modelo}}">
+		                                            </md-input-container>
+		                                        </div>
+
+		                                    </form>
+		                                </div>
+		                            </div>
+		                        </md-content>
+		                    </md-tab>
+
+		                    <md-tab label="Datos Personales">
+		                        <md-content class="md-padding">
+
+		                            <div layout-gt-sm="row">
+		                                <label>¿Vive tu padre?* &nbsp;&nbsp;</label> <input disabled id="bach_father_lives" type="hidden" class="radioValue" value="{{ arrayentrevista.bach_father_lives }}">
+		                                <md-radio-group disabled ng-model="arrayentrevista.bach_father_lives" style="float: left; clear: none;" required>
+		                                    <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                </md-radio-group>
+		                            </div>
+		                            <div layout-gt-sm="row">
+		                                <label>¿Vive tu madre?* &nbsp;&nbsp;</label> <input disabled id="bach_mother_lives" type="hidden" class="radioValue" value="{{ arrayentrevista.bach_mother_lives }}">
+		                                <md-radio-group disabled ng-model="arrayentrevista.bach_mother_lives" style="float: left; clear: none;" required>
+		                                    <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                </md-radio-group>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <label>¿Tus padres están? * &nbsp;&nbsp;</label> <input disabled id="bach_parents_civil_status_id" type="hidden" class="radioValue" value="{{ arrayentrevista.bach_parents_civil_status_id }}">
+		                                <md-radio-group disabled ng-model="arrayentrevista.bach_parents_civil_status_id" style="float: left; clear: none;" required>
+		                                    <md-radio-button style="float: left; clear: none;" value="1">Casados &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="2">Separados &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="3">Divorciados &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="4">Viudo(a) &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="5">Unión Libre &nbsp;&nbsp;</md-radio-button>
+		                                </md-radio-group>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Lo acompaña?</label>
+		                                    <input disabled id="bach_companion" ng-model="arrayentrevista.bach_companion" required>
+		                                </md-input-container>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Hermanos (Sexo y edad)</label>
+		                                    <textarea disabled id="bach_siblings" ng-model="arrayentrevista.bach_siblings" md-maxlength="500" rows="3" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Por qué decidiste estudiar este programa?</label>
+		                                    <input disabled id="porqueesteprograma" ng-model="arrayentrevista.both_program_reasons" required>
+		                                </md-input-container> 
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Con quién vives?</label>
+		                                    <input disabled id="conquienvives" ng-model="arrayentrevista.both_live_with" required>
+		                                </md-input-container>
+		                            </div>
+
+		                            <!--md-button ng-click="respuestaCapturarEntrevista(true,1,0)" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-hide = 'uType==7'>
+		                                GUARDAR ESTA SECCIÓN
+		                            </md-button-->
+
+		                        </md-content>
+		                    </md-tab>
+
+		                    <md-tab label="DATOS ESCOLARES">
+		                        <md-content class="md-padding">
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container flex>
+		                                    <label>Inglés (0-100%)</label>
+		                                    <input disabled id="ingles" type="text" string-to-number  ng-model="arrayentrevista.both_english_percentage" min="0" max="100" step="10" required> 
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Francés (0-100%)</label>
+		                                    <input disabled id="frances" string-to-number ng-model="arrayentrevista.both_french_percentage" type="text" min="0" max="100" step="10" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Alemán (0-100%)</label>
+		                                    <input disabled id="aleman" string-to-number ng-model="arrayentrevista.both_german_percentage" type="text" min="0" max="100" step="10" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Portugués (0-100%)</label>
+		                                    <input disabled id="portugues" string-to-number ng-model="arrayentrevista.both_portuguese_percentage" type="text" min="0" max="100" step="10" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Chino (0-100%)</label>
+		                                    <input disabled id="chino" string-to-number ng-model="arrayentrevista.both_chinese_percentage" type="text" min="0" max="100" step="10" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Otro Idioma</label>
+		                                    <input disabled id="otroidioma" ng-model="arrayentrevista.both_aditional_language" type="text">
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Porcentaje (0-100%)</label>
+		                                    <input disabled id="porcentajeotroidioma" string-to-number ng-model="arrayentrevista.both_aditional_language_percentage" min="0" max="100" step="10" type="text">
+		                                </md-input-container>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Comentarios sobre los idiomas?</label>
+		                                    <input disabled id="comentarioslenguaje" ng-model="arrayentrevista.both_languages_comments" required>
+		                                </md-input-container>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Promedio general (ej. 9.8)</label>
+		                                    <input disabled id="bach_general_average" type="text" min="0" max="10" ng-model="arrayentrevista.bach_general_average" required>
+		                                </md-input-container> 
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Área en último año de preparatoria</label>
+		                                    <input disabled id="bach_high_school_specialty" ng-model="arrayentrevista.bach_high_school_specialty" required>
+		                                </md-input-container> 
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <label>¿Has presentado exámenes extraordinarios?* &nbsp;&nbsp;</label> <input disabled id="bach_extraordinary_exams" type="hidden" class="radioValue" value="{{ arrayentrevista.bach_extraordinary_exams }}">
+		                                <md-radio-group disabled ng-model="arrayentrevista.bach_extraordinary_exams" style="float: left; clear: none;" required>
+		                                    <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                </md-radio-group>
+		                            </div>
+
+		                            <div ng-show="arrayentrevista.bach_extraordinary_exams == '1'">
+		                                <div layout-gt-sm="row">
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Materias</label>
+		                                        <input disabled id="bach_extra_subject" ng-model="arrayentrevista.bach_extra_subject">
+		                                    </md-input-container>
+		                                </div>
+		                            </div>
+
+		                            <!--md-button ng-click="respuestaCapturarEntrevista(true,1,0)" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-hide = 'uType==7'>
+		                                GUARDAR ESTA SECCIÓN
+		                            </md-button-->
+
+		                        </md-content>
+		                    </md-tab>
+
+		                    <md-tab label="CONTEXTO PERSONAL">
+		                        <md-content class="md-padding">
+
+		                            <div layout-gt-sm="row">
+		                                <label>Taller impartido* &nbsp;&nbsp;</label>
+		                                <md-radio-group disabled ng-model="arrayentrevista.bach_workshop" style="float: left; clear: none;" required>
+		                                    <md-radio-button style="float: left; clear: none;" value="Freelance, empleado, empresario">Freelance, empleado, empresario &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="Cuanto cuesta la universidad">¿Cuánto cuesta la universidad? &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="3">Otro &nbsp;&nbsp;</md-radio-button>
+		                                </md-radio-group>
+		                            </div>
+
+		                            <div ng-show="arrayentrevista.bach_workshop == '3'">
+		                                <div layout-gt-sm="row">
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>¿Cuál taller?</label>
+		                                        <input disabled type="text" ng-model="arrayentrevista.bach_workshop_subject">
+		                                    </md-input-container>
+		                                </div>
+		                            </div>
+
+		                            <label>¿Cómo te ves en 5 años?</label>
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Profesionalmente</label>
+		                                    <textarea disabled id="cincoaniosprofe" ng-model="arrayentrevista.both_professional_vision" maxlength="500" rows="2" required></textarea>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Personalmente</label>
+		                                    <textarea disabled id="cincoaniosperso" ng-model="arrayentrevista.both_personal_vision" maxlength="500" rows="2" required></textarea>
+		                                </md-input-container> 
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Características que tengas buenas</label>
+		                                    <textarea disabled id="caracteristicasbuenas" ng-model="arrayentrevista.both_qualities" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Características que puedas mejorar</label>
+		                                    <textarea disabled id="caracteristicasmejorar" ng-model="arrayentrevista.both_defects" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                            </div>
+
+		                            <!--md-button ng-click="respuestaCapturarEntrevista(true,1,0)" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-hide = 'uType==7'>
+		                                GUARDAR ESTA SECCIÓN
+		                            </md-button-->
+
+		                        </md-content>
+		                    </md-tab>
+
+		                    <md-tab label="EXPERIENCIA LABORAL">
+		                        <md-content class="md-padding">
+
+		                            <div layout-gt-sm="row">
+		                                <label>¿Trabajas?* &nbsp;&nbsp;</label> <input disabled id="trabajas" type="hidden" class="radioValue" value="{{ arrayentrevista.both_worker}}">
+		                                <md-radio-group disabled ng-model="arrayentrevista.both_worker" style="float: left; clear: none;" required>
+		                                    <md-radio-button style="float: left; clear: none;" value="1">Si &nbsp;&nbsp;</md-radio-button>
+		                                    <md-radio-button style="float: left; clear: none;" value="0">No &nbsp;&nbsp;</md-radio-button>
+		                                </md-radio-group>
+		                            </div>
+
+		                            <div ng-show="arrayentrevista.both_worker == '1'">
+		                                <div layout-gt-sm="row">
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Empresa</label>
+		                                        <md-tooltip md-direction="top">Especificar si ya saben que se va a ir a estudiar al extranjero</md-tooltip>
+		                                        <input disabled id="empresa" ng-model="arrayentrevista.both_enterprise">
+		                                    </md-input-container>
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Cargo</label>
+		                                        <input disabled id="cargo" ng-model="arrayentrevista.both_job_title">
+		                                    </md-input-container>
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Antigüedad (En años, ej. 2)</label>
+		                                        <input disabled id="antiguedad" string-to-number type="text" min="0" max="100" ng-model="arrayentrevista.both_labor_old_years">
+		                                    </md-input-container>
+		                                    <md-input-container class="md-block" flex-gt-sm>
+		                                        <label>Sueldo Actual (ej. 100000.00)</label>
+		                                        <input disabled id="sueldoactual" string-to-number type="text" min="0" max="1000000000" step="500" ng-model="arrayentrevista.both_actual_salary">
+		                                    </md-input-container>
+		                                </div>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Cómo se encuentra la situación económica en casa?</label>
+		                                    <textarea disabled id="bach_home_economics" ng-model="arrayentrevista.bach_home_economics" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Tienes un plan B de carrera? ¿Cuál sería?</label>
+		                                    <input disabled id="cincoaniosprofe" ng-model="arrayentrevista.bach_career_alternative" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Tus padres te apoyan en tu elección? Sí, no y ¿por qué?</label>
+		                                    <input disabled id="cincoaniosperso" ng-model="arrayentrevista.bach_parents_support" required>
+		                                </md-input-container> 
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Qué harías si no quedas seleccionado?</label>
+		                                    <textarea disabled id="quesinoseleccionado" ng-model="arrayentrevista.both_what_if_not" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>¿Por qué crees que deberíamos apoyarte?</label>
+		                                    <textarea disabled id="porqueapoyarte" ng-model="arrayentrevista.both_scholarship_merit" md-maxlength="500" rows="2" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                            </div>
+
+		                            <!--md-button ng-click="respuestaCapturarEntrevista(true,1,0)" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-hide = 'uType==7'>
+		                                GUARDAR ESTA SECCIÓN
+		                            </md-button-->
+
+		                        </md-content>
+		                    </md-tab>
+		                    
+		                    <md-tab label="SITUACIÓN ECONÓMICA">
+		                        <md-content class="md-padding">
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <table table class="row-border hover" style="width: 100% !important;">
+		                                        <thead>
+		                                            <tr>
+		                                                <th style="text-align: center !important;">CONCEPTO</th>
+		                                                <th style="text-align: center !important;">INGRESOS</th>
+		                                            </tr>
+		                                        </thead>
+		                                        <tbody style="text-align: center !important;">
+		                                            <tr>
+		                                                <td>¿Cuánto pagan actualmente en la preparatoria?* </td>
+		                                                <td>
+		                                                    <md-input-container class="md-block" flex-gt-sm>
+		                                                        <input disabled id="bach_high_school_actual_cost" type="text" style="color:black; text-align: center;" ng-model="arrayentrevista.bach_high_school_actual_cost" required>
+		                                                    </md-input-container>
+		                                                </td>
+		                                            </tr>
+		                                            <tr>
+		                                                <td>¿Cuánto quisieran pagar en la universidad?* </td>
+		                                                <td>
+		                                                    <md-input-container class="md-block" flex-gt-sm>
+		                                                        <input disabled id="bach_high_school_desired_cost" type="text" style="color:black; text-align: center;" ng-model="arrayentrevista.bach_high_school_desired_cost" required>
+		                                                    </md-input-container>
+		                                                </td>
+		                                            </tr>
+		                                            <tr>
+		                                                <td>¿Cuánto sería lo máximo que podrían pagar?* </td>
+		                                                <td>
+		                                                    <md-input-container class="md-block" flex-gt-sm>
+		                                                        <input disabled id="bach_maximum_cost" type="text" ng-model="arrayentrevista.bach_maximum_cost" style="color:black; text-align: center;" required>
+		                                                    </md-input-container>
+		                                                </td>
+		                                            </tr>
+		                                        </tbody>
+		                                    </table>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm style="width: 100% !important; padding-top: 50px;">
+		                                    <h4 style="color:black; text-align: center;">DIFERENCIA DE INGRESOS</h4><br>
+		                                    <h2 style="color:black; text-align: center;">${{arrayentrevista.bach_maximum_cost - arrayentrevista.bach_high_school_actual_cost}}</h2>
+		                                </md-input-container>
+		                            </div>
+
+		                            <hr><br>
+
+		                            <h4 style="text-align: center; width: 100%;">INFORMACIÓN DEL TUTOR</h4>
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Empresa</label>
+		                                    <input disabled id="bach_tutor_enterprise" ng-model="arrayentrevista.bach_tutor_enterprise" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Cargo</label>
+		                                    <input disabled id="bach_tutor_job_title" ng-model="arrayentrevista.bach_tutor_job_title" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Antigüedad (En años, ej. 2)</label>
+		                                    <input disabled id="bach_tutor_labor_old_years" string-to-number type="text" min="0" max="100" ng-model="arrayentrevista.bach_tutor_labor_old_years" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Ingreso Fijo (ej. 10000.00)</label>
+		                                    <input disabled id="bach_fix_income" string-to-number type="text" min="0" max="1000000000" ng-model="arrayentrevista.bach_fix_income" required>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Ingreso Variable (ej. 10000.00)</label>
+		                                    <input disabled id="bach_variable_income" string-to-number type="text" min="0" max="1000000000" ng-model="arrayentrevista.bach_variable_income" required>
+		                                </md-input-container>
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm style="width: 100% !important; border: 1px solid #E0E0E0; padding: 10px !important;">
+
+		                                    <h4 style="text-align: center;">AGREGA UN CONCEPTO Y SU CANTIDAD</h4>
+		                                    <div layout-gt-sm="row">
+		                                        <md-input-container class="md-block" flex-gt-sm>
+		                                            <label>Concepto</label>
+		                                            <input disabled id="concepto" ng-model="objetos.concepto" type="text" style="color:black;">
+		                                        </md-input-container>
+		                                        <md-input-container class="md-block" flex-gt-sm>
+		                                            <label>Cantidad</label>
+		                                            <input disabled id="cantidad" ng-model="objetos.cantidad" type="text" min="0" max="1000000000" style="color:black;">
+		                                        </md-input-container>
+		                                        <div ng-if="objetos.concepto != null && objetos.cantidad != null">
+		                                            <md-input-container class="md-block" flex-gt-sm style="text-align: center;">
+		                                                <md-button id="btnCrearList" onclick="crear()" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-hide = 'uType==7'>AGREGAR</md-button>
+		                                            </md-input-container>
+		                                        </div>
+		                                    </div>
+		                                </md-input-container>
+
+		                                <input disabled id="expenses_from_db" type="text" ng-model="arrayentrevista.bach_total_expenses" style="display: none;">
+		                                <input disabled id="list_expenses_from_db" type="text" ng-model="arrayentrevista.bach_expenses_list" style="display: none;">
+
+		                                <md-input-container class="md-block" flex-gt-sm style="width: 100% !important; border: 1px solid #E0E0E0; padding: 10px !important;">
+
+		                                    <script type="text/javascript">
+		                                    
+		                                        var flag = 0;
+		                                        var jsonDataExpenses = [];
+		                                        var totalExpenses = 0;
+
+		                                        function show_data(){
+		                                            totalExpenses = parseInt($("#expenses_from_db").val());
+		                                            jsonDataExpenses = JSON.parse($("#list_expenses_from_db").val());
+		                                            mostrarDatos();
+		                                            generarDiferencia();
+		                                        };
+		                                        window.setTimeout(show_data, 5000);
+
+		                                        $('#bach_fix_income').bind('input', function() { 
+		                                            generarDiferencia()
+		                                        });
+
+		                                        $('#bach_variable_income').bind('input', function() { 
+		                                            generarDiferencia()
+		                                        });
+
+		                                        function crear() {
+
+		                                            flag++;
+		                                            
+		                                            jsonDataExpenses.push({
+		                                                concepto: $("#concepto").val(),
+		                                                cantidad: $("#cantidad").val()
+		                                            });
+
+		                                            totalExpenses += parseInt($("#cantidad").val());
+
+		                                            $("#concepto").val(null);
+		                                            $("#cantidad").val(null);
+
+		                                            mostrarDatos();
+		                                            generarDiferencia()
+		                                        }
+
+		                                        function mostrarDatos(){
+		                                            $("#bach_total_expenses").val(totalExpenses);
+		                                            $("#viewerExpenses").html("");
+		                                            $.each(jsonDataExpenses, (i, item) => {
+		                                                $("#viewerExpenses").append("Concepto: <input disabled readonly style='color:black; border: none; text-align:center;' value='"+item.concepto+"'> Cantidad: <input disabled readonly style='color:black; border: none; text-align:center;' value='"+item.cantidad+"'><br>")
+		                                            })
+		                                        }
+
+		                                        function eliminar(posicion, cantidad) {
+		                                            jsonDataExpenses.splice(posicion, 1);
+		                                            totalExpenses = (totalExpenses - cantidad);
+		                                            mostrarDatos();
+		                                            generarDiferencia()
+		                                        }
+
+		                                        function generarDiferencia() {
+		                                            var total = 0;
+		                                            total = ((parseInt($("#bach_fix_income").val()) + parseInt($("#bach_variable_income").val())) - parseInt($("#bach_total_expenses").val()));
+		                                            $("#diferenciaGastos").html(total);
+		                                        }
+
+		                                    </script>
+		                                    
+		                                    <div id="viewerExpenses"></div>
+		                                    
+		                                </md-input-container>
+		                            </div>
+		                            
+		                            <h4>Total de gastos</h4>
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <input disabled type="text" id="bach_total_expenses" readonly required style="color:black; text-align: center;" value="0">
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label style="color:black; text-align: start;">DIFERENCIA DE GASTOS: $ </label><label id="diferenciaGastos" style="color:black; text-align: center;">0</label>
+		                                </md-input-container> 
+		                            </div>
+
+		                            <div layout-gt-sm="row">
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Buró de Crédito</label>
+		                                    <textarea disabled id="bach_credit_bureau" ng-model="arrayentrevista.bach_credit_bureau" md-maxlength="200" rows="3" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                                <md-input-container class="md-block" flex-gt-sm>
+		                                    <label>Comentarios Finales</label>
+		                                    <textarea disabled id="comentariosfinales" ng-model="arrayentrevista.both_general_comments" md-maxlength="500" rows="3" md-select-on-focus required></textarea>
+		                                </md-input-container>
+		                            </div>
+
+		                            <!--md-button ng-click="respuestaCapturarEntrevista(true,1,0)" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-hide = 'uType==7'>
+		                                GUARDAR ESTA SECCIÓN
+		                            </md-button-->
+
+		                        </md-content>
+		                    </md-tab>
+
+		                </md-tabs>
+		            </md-dialog-content>
+
+		            <md-dialog-actions layout="row">
+		                <div ng-show="
+		                arrayentrevista.bach_father_lives != null
+		                && arrayentrevista.bach_mother_lives != null
+		                && arrayentrevista.bach_parents_civil_status_id != null
+		                && arrayentrevista.bach_companion != null
+		                && arrayentrevista.bach_siblings != null
+		                && arrayentrevista.both_program_reasons != null 
+		                && arrayentrevista.both_live_with != null 
+		                && arrayentrevista.both_english_percentage != null 
+		                && arrayentrevista.both_french_percentage != null 
+		                && arrayentrevista.both_german_percentage != null 
+		                && arrayentrevista.both_portuguese_percentage != null 
+		                && arrayentrevista.both_chinese_percentage != null 
+		                && arrayentrevista.both_languages_comments != null 
+		                && arrayentrevista.bach_general_average != null 
+		                && arrayentrevista.bach_high_school_specialty != null 
+		                && arrayentrevista.bach_extraordinary_exams != null 
+		                && arrayentrevista.bach_workshop != null 
+		                && arrayentrevista.both_professional_vision != null 
+		                && arrayentrevista.both_personal_vision != null 
+		                && arrayentrevista.both_qualities != null 
+		                && arrayentrevista.both_defects != null 
+		                && arrayentrevista.both_worker != null 
+		                && arrayentrevista.bach_home_economics != null 
+		                && arrayentrevista.bach_career_alternative != null 
+		                && arrayentrevista.bach_parents_support != null 
+		                && arrayentrevista.both_what_if_not != null 
+		                && arrayentrevista.both_scholarship_merit != null 
+		                && arrayentrevista.bach_high_school_actual_cost != null
+		                && arrayentrevista.bach_high_school_desired_cost != null
+		                && arrayentrevista.bach_maximum_cost != null
+		                && arrayentrevista.bach_tutor_enterprise != null
+		                && arrayentrevista.bach_tutor_job_title != null
+		                && arrayentrevista.bach_tutor_labor_old_years != null
+		                && arrayentrevista.bach_fix_income != null
+		                && arrayentrevista.bach_variable_income != null
+		                && arrayentrevista.bach_total_expenses != null
+		                && arrayentrevista.bach_credit_bureau != null
+		                && arrayentrevista.both_general_comments != null
+		                ">
+		                    <!--md-button ng-click="respuestaCapturarEntrevista(true,0)" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-hide = 'uType==7'>
+		                        ACEPTAR
+		                    </md-button-->
+		                </div>
+		                <div ng-show="
+		                arrayentrevista.bach_father_lives == null
+		                || arrayentrevista.bach_mother_lives == null
+		                || arrayentrevista.bach_parents_civil_status_id == null
+		                || arrayentrevista.bach_companion == null
+		                || arrayentrevista.bach_siblings == null
+		                || arrayentrevista.both_program_reasons == null 
+		                || arrayentrevista.both_live_with == null 
+		                || arrayentrevista.both_english_percentage == null 
+		                || arrayentrevista.both_french_percentage == null 
+		                || arrayentrevista.both_german_percentage == null 
+		                || arrayentrevista.both_portuguese_percentage == null 
+		                || arrayentrevista.both_chinese_percentage == null 
+		                || arrayentrevista.both_languages_comments == null 
+		                || arrayentrevista.bach_general_average == null 
+		                || arrayentrevista.bach_high_school_specialty == null 
+		                || arrayentrevista.bach_extraordinary_exams == null 
+		                || arrayentrevista.bach_workshop == null 
+		                || arrayentrevista.both_professional_vision == null 
+		                || arrayentrevista.both_personal_vision == null 
+		                || arrayentrevista.both_qualities == null 
+		                || arrayentrevista.both_defects == null 
+		                || arrayentrevista.both_worker == null 
+		                || arrayentrevista.bach_home_economics == null 
+		                || arrayentrevista.bach_career_alternative == null 
+		                || arrayentrevista.bach_parents_support == null 
+		                || arrayentrevista.both_what_if_not == null 
+		                || arrayentrevista.both_scholarship_merit == null 
+		                || arrayentrevista.bach_high_school_actual_cost == null
+		                || arrayentrevista.bach_high_school_desired_cost == null
+		                || arrayentrevista.bach_maximum_cost == null
+		                || arrayentrevista.bach_tutor_enterprise == null
+		                || arrayentrevista.bach_tutor_job_title == null
+		                || arrayentrevista.bach_tutor_labor_old_years == null
+		                || arrayentrevista.bach_fix_income == null
+		                || arrayentrevista.bach_variable_income == null
+		                || arrayentrevista.bach_total_expenses == null
+		                || arrayentrevista.bach_credit_bureau == null
+		                || arrayentrevista.both_general_comments == null
+		                ">
+		                    <h5>Aún hay campos vacíos, asegúrate de llenar todos con (*)</h5>
+		                </div>
+		                <md-button ng-click="respuestaCapturarEntrevista(false,0)" style="padding: 0px 20px !important;" class="md-raised">
+		                    CERRAR
+		                </md-button>
+		            </md-dialog-actions>
+		        </form>
+
+		    </div>
+
+
+        </div>
+	</div>
+</div>

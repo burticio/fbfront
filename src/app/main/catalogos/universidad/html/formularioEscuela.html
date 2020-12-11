@@ -1,0 +1,124 @@
+ <md-dialog style="width: 80%">
+
+     <div id="contenidoModal" name="contenidoModal">
+         <md-toolbar>
+             <div class="md-toolbar-tools">
+                 <h2>Registro de Universidades</h2>
+             </div>
+         </md-toolbar>
+
+         <md-content layout-padding>
+             <form name="dataUser" novalidate>
+
+                    <md-content  layout-padding>
+                        <div layout-gt-sm="row">
+                            <md-input-container flex="100">
+                                <label>Nombre:</label>
+                                <input style="width: 417px;" required md-no-asterisk name="name" ng-model="data.name">
+                                <div ng-messages="dataUser.name.$error">
+                                    <div ng-message="required">Este campo es requerido.</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container flex="100">
+                                <md-select ng-model="paises.modelo" placeholder="País" class="md-no-underline" flex="100">
+                                    <md-option value="0">- País -</md-option> 
+                                    <md-option ng-repeat="pa in paises.opciones" value="{{pa.id}}">{{pa.name}}</md-option> 
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </md-content>
+                    <md-content  layout-padding>
+                        <div layout-gt-sm="row">
+                            <md-input-container flex="100">
+                                <label>Clave para Buscador</label>
+                                <input style="width: 300px" md-no-asterisk name="leads" ng-model="data.leads">
+                            </md-input-container>
+                            <md-input-container flex="100">
+                                <label>Logotipo (URL)</label>
+                                <input style="width: 300px" md-no-asterisk name="logo_url" ng-model="data.logo_url">
+                            </md-input-container>
+                        </div>
+                    </md-content>
+
+                    <md-content  layout-padding>
+                        <div layout-gt-sm="row">
+                            <md-input-container flex="100">
+                                <label>Sitio web</label>
+                                <input required md-no-asterisk name="name" ng-model="data.website">
+                                <div ng-messages="dataUser.name.$error">
+                                    <div ng-message="required">Este campo es requerido.</div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container flex="100">
+                                <label>Dirección</label>
+                                <input required md-no-asterisk name="name" ng-model="data.address">
+                                <div ng-messages="dataUser.name.$error">
+                                    <div ng-message="required">Este campo es requerido.</div>
+                                </div>
+                            </md-input-container>
+
+                             <md-input-container flex="100">
+                                <label>Teléfono:</label>
+                                <input required md-no-asterisk name="name" ng-model="data.phone">
+                                <div ng-messages="dataUser.name.$error">
+                                    <div ng-message="required">Este campo es requerido.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </md-content>
+
+                     
+                    
+
+                    <md-content  layout-padding>
+                        <div layout-gt-sm="row">
+                            <md-input-container flex="100">
+                                <label>Nombre del contacto</label>
+                                <input style="width: 300px" md-no-asterisk name="contact_name" ng-model="newContactName">
+                            </md-input-container>
+
+                            <md-input-container flex="100">
+                                <label>Correo electrónico</label>
+                                <input style="width: 300px" required md-no-asterisk name="email"  ng-model="newContactEmail">
+                            </md-input-container>
+
+                            <md-input-container flex="100">
+                                <md-select ng-model="clasif.modelo" placeholder="Clasificación" class="md-no-underline" flex="100">
+                                    <md-option value="99">General</md-option> 
+                                    <md-option ng-repeat="cla in clasif.opciones" value="{{cla.id}}">{{cla.Program_Classification}}</md-option> 
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex="100">
+                                <md-button style="background-color:#844648;color: white;" ng-click="addContact()">Agregar</md-button>
+                            </md-input-container>
+                        </div>
+                    </md-content>
+                    <md-content  layout-padding>
+                        <div layout-gt-sm="row" ng-repeat="contacto in contactos">
+                            <md-input-container flex="100">
+                                <strong>Clasificacion:</strong> {{getClassification(contacto.classification)}}
+                            </md-input-container>
+                            <md-input-container flex="100">
+                                <strong>Nombre:</strong> {{contacto.contact_name}}
+                            </md-input-container>
+                            <md-input-container flex="100">
+                                <strong>Email:</strong> {{contacto.contact_email}}
+                            </md-input-container>
+                            <md-input-container flex="100">
+                                <md-button style="background-color:#844648;color: white;" ng-click="remContact(contacto.classification)">Remover</md-button>
+                            </md-input-container>
+                            
+                        </div>
+                    </md-content>
+ 
+                 <md-dialog-actions class="footerModal">
+                    <span>{{mensaje}}</span>
+                     <md-button ng-disabled="vm.dataUser" ng-click="enviarInformacion()">Guardar</md-button>
+                     <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                 </md-dialog-actions>
+             </form>
+         </md-content>
+
+     </div>
+ </md-dialog>

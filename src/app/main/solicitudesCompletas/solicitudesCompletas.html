@@ -1,0 +1,192 @@
+<div id="profile" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="space-between end">
+        <div class="user-info" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="start center">
+            <img class="profile-image avatar huge" src="./assets/images/backgrounds/logoFundacionBecaBlanco.png">
+
+            <div class="name">¡Bienvenido(a) a Fundación Beca!</div>
+        </div>
+
+        <!-- <div class="actions" layout="row" layout-align="end center">
+            <md-button class="md-raised md-accent" aria-label="Follow" translate="PROFILE.FOLLOW"
+                       translate-attr-aria-label="PROFILE.FOLLOW">Follow
+            </md-button>
+            <md-button class="md-raised md-primary" translate="PROFILE.SEND_MESSAGE"
+                       translate-attr-aria-label="PROFILE.SEND_MESSAGE">Send Message
+            </md-button>
+        </div> -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" flex>
+
+        <md-tabs md-dynamic-height>
+            <md-tab>
+                <md-tab-label>
+                    <span>Inicio</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout="row" layout-wrap>
+                        <div>
+                            <md-button ng-click="downloadFile()" style="background-color:white;" class="md-fab md-primary md-hue-2" aria-label="Profile">
+                                <md-tooltip>Exportar Contenido</md-tooltip>
+                                <md-icon style="color: #844648;font-size: 26px;" class="icon-file-excel"></md-icon>
+                            </md-button>
+                        </div>
+                        <div class="about" layout="column" flex="100" flex-gt-sm="100" flex-gt-md="100">
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <header style=" background-color:#781f23; color: white;">
+                                    <div class="title">SOLICITUDES COMPLETAS</div>
+                                </header>
+                                <div class="content fullpage-datatable" layout="column" flex>
+
+                                    <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                                        dt-options="vm.dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Aspirante</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Email</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Programa</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Universidad</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Clasificación</span>
+                                                    </div>
+                                                </th>
+                                                <!--th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">D. Requeridos</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">D. Subidos</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">D. Validados</span>
+                                                    </div>
+                                                </th-->
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Fecha de Solicitud</span>
+                                                    </div>
+                                                </th>
+                                                <!--th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Estatus</span>
+                                                    </div>
+                                                </th-->
+
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">ACCIONES</span>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="solicitud in solicitudes">
+                                                <td>{{solicitud.Person_Name}} {{solicitud.Person_lastName}}
+                                                    {{solicitud.Person_mLastName}}</td>
+                                                <td>{{solicitud.email}}</td>
+                                                <td>{{solicitud.Program_Name_1}}</td>
+                                                <td>{{solicitud.Program1_University_Name}}</td>
+                                                <td>{{solicitud.Classification_Name}}</td>
+                                                <!--td class="text-center">{{solicitud.RequiredDocs}}</td>
+                                                <td class="text-center">{{solicitud.UploadedDocs}}</td>
+                                                <td class="text-center">{{solicitud.ValidatedDocs}}</td-->
+                                                <td>{{solicitud.created_at.split(' ')[0]}}</td>
+                                                <!--td>
+                                                    {{solicitud.status === "0" ? "CREADA: EN VALIDACION DE DOCUMENTOS" : ''}} {{solicitud.status ===
+                                                    "1" ? "CANCELADA SIN DOCUMENTOS" : ''}} {{solicitud.status
+                                                    === "2" ? "CANCELADA POR SOLICITANTE" : ''}} {{solicitud.status ===
+                                                    "3" ? "DOCUMENTOS
+                                                    COMPLETOS: POR ENTREVISTAR" : ''}} {{solicitud.status === "4" ? "RECHAZADA EN
+                                                    ENTREVISTA" : ''}}
+                                                    {{solicitud.status === "5" ? "CANALIZAR A ESTUDIA MAS" : ''}}
+                                                    {{solicitud.status
+                                                    === "6" ? "ENTREVISTA COMPLETA" : ''}} {{solicitud.status === "7" ?
+                                                    "EN REVISION DE COMITÉ" : ''}} 
+                                                    {{solicitud.status === "8" ? "RECHAZADA
+                                                    EN COMITÉ"
+                                                    : ''}} 
+                                                    {{solicitud.status === "9" ? "APLAZADA EN COMITÉ" : ''}}
+                                                    {{solicitud.status
+                                                    === "10" ? "ACEPTADA EN COMITÉ: EN VALIDACIÓN DE UNIVERSIDAD" : ''}} {{solicitud.status === "11"
+                                                    ? "ACEPTADA
+                                                    Y EXPORTADA" : ''}} 
+                                                    {{solicitud.status === "12" ? "DOCUMENTOS
+                                                    COMPLETOS A ORIENTACION
+                                                    VOCACIONAL" : ''}} 
+                                                    {{solicitud.status === "13" ? "CANALIZADO A OTRO
+                                                    PROGRAMA
+                                                    EN ORIENTACION VOCACIONAL" : ''}} {{solicitud.status === "14" ?
+                                                    "RECHAZADA EN
+                                                    ORIENTACION VOCACIONAL" : ''}} 
+                                                    {{solicitud.status === "15" ?
+                                                    "PROCESO COMPLETO" : ''}}
+                                                    {{solicitud.status === "16" ?
+                                                    "PROCESO COMPLETO" : ''}}
+                                                    {{solicitud.status === "17" ?
+                                                    "RECHAZADA: NO ENTREGO DOCUMENTOS" : ''}}
+                                                    {{solicitud.status === "18" ?
+                                                    "RECHAZADA: SIN ACCION EN ENTREVISTA" : ''}}
+                                                    {{solicitud.status === "19" ?
+                                                    "RECHAZADA: NO ENTREGO DOCUMENTOS DE ACEPTACION" : ''}}
+                                                    {{solicitud.status === "20" ?
+                                                    "CANCELADA POR OPERADOR DE FB" : ''}}
+                                                    {{solicitud.status === "21" ?
+                                                    "VALIDADA POR UNIVERSIDAD: EN DOCUMENTOS DE ACEPTACIÓN" : ''}}
+                                                </td-->
+                                                <td>
+
+                                                    <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="verDetalle(event,solicitud)">
+                                                        <md-tooltip md-direction="top">Ver Detalle</md-tooltip>
+                                                        <md-icon md-font-icon="icon-eye" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-clipboard-text" role="img" aria-label="icon-clipboard-text"></md-icon>
+                                                    </md-button>
+                                                    <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="validarDocumentos(solicitud)" ng-hide ="solicitud.status == '0'">
+                                                        <md-tooltip md-direction="top">Ver Documentación</md-tooltip>
+                                                        <md-icon md-font-icon="icon-close_circle" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-document" role="img" aria-label="icon-document"></md-icon>
+                                                    </md-button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </md-tab-body>
+            </md-tab>
+
+        </md-tabs>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

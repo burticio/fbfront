@@ -1,0 +1,84 @@
+<md-dialog aria-label="Calificar Entrevista" style="height: 90% !important; max-height: 100% !important;">
+    <form ng-cloak>
+        <md-toolbar style="background-color: #781f23 !important; color:white !important;">
+            <div class="md-toolbar-tools">
+                <h2>Calificar Entrevista ({{solicitante}})</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-content ng-controller="EntrevistaFechaController as vm" ng-cloak>
+
+                    <div layout-gt-sm="row">
+
+                        <table class="" class="table table-condensed" ms-responsive-table style="width: 100%;">
+                            <thead>
+                                <tr style="padding: 0px 0px !important;">
+                                    <th>CRITERIOS</th>
+                                    <th>CALIFICACIÓN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="padding: 0px 0px !important;">
+                                    <td><label>{{criterialNames.item1}}</label></td>
+                                    <td>
+                                        <md-select ng-model="criterialValues.item1"> 
+                                            <md-option value="0">0</md-option>
+                                            <md-option value="1">1</md-option>
+                                            <md-option value="2">2</md-option>
+                                            <md-option value="3">3</md-option>
+                                        </md-select>
+                                    </td>
+                                </tr>
+                                <tr style="padding: 0px 0px !important;">
+                                    <td><label>{{criterialNames.item2}}</label></td>
+                                    <td>
+                                        <md-select ng-model="criterialValues.item2"> 
+                                            <md-option value="0">0</md-option>
+                                            <md-option value="1">1</md-option>
+                                            <md-option value="2">2</md-option>
+                                            <md-option value="3">3</md-option>
+                                        </md-select>
+                                    </td>
+                                </tr>
+                                <tr style="padding: 0px 0px !important;">
+                                    <td><label>{{criterialNames.item3}}</label></td>
+                                    <td>
+                                        <md-select ng-model="criterialValues.item3"> 
+                                            <md-option value="0">0</md-option>
+                                            <md-option value="1">1</md-option>
+                                            <md-option value="2">2</md-option>
+                                            <md-option value="3">3</md-option>
+                                        </md-select>
+                                    </td>
+                                </tr>
+                                <tr style="padding: 0px 0px !important;">
+                                    <td><label>{{criterialNames.item4}}</label></td>
+                                    <td>
+                                        <md-select ng-model="criterialValues.item4"> 
+                                            <md-option value="0">0</md-option>
+                                            <md-option value="1">1</md-option>
+                                            <md-option value="2">2</md-option>
+                                            <md-option value="3">3</md-option>
+                                        </md-select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </md-content>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="respuestaCalificarEntrevista(false)" style="padding: 0px 20px !important;" class="md-raised">
+                CANCELAR
+            </md-button>
+            <md-button ng-click="respuestaCalificarEntrevista(true)" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-hide = 'uType==7'>
+                CALIFICAR
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

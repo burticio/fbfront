@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<md-dialog aria-label="AGENDAR FECHA DE ENTREVISTA" style="width: 30%;">
+    <form ng-cloak>
+      <md-toolbar style="background-color: #781f23 !important; color:white !important;">
+        <div class="md-toolbar-tools">
+          <h2>AGENDAR FECHA</h2>
+        </div>
+      </md-toolbar>
+  
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <md-content ng-controller="InicioSolicitanteController as vm" ng-cloak>
+            <div flex-gt-xs>
+              <h4><strong>Elige la fecha:</strong></h4>
+              <md-datepicker ng-model="ctrl.myDate" style="height:60px !important;" md-placeholder="Selecciona fecha..." md-min-date="ctrl.minDateActual" required></md-datepicker>
+              <!-- <div layout="row" layout-align="start center" style="border: 1px solid #EEEEEE; padding-left: 15px; padding-right: 15px;">
+                <i class="icon icon-calendar"></i>
+                <input type="text" id="datetimepickermodal" class="datepicker" placeholder="Selecciona fecha..." style="height:40px !important; border:none; padding-left: 20px; z-index: 100000 !important;" required>
+              </div> -->
+              <input id="datetimepickermodal" value="{{ctrl.myDate}}" style="display: none !important;">
+            </div>
+          </md-content>
+          <md-content>
+            <h4><strong>Elige la hora:</strong></h4>
+            <i class="icon icon-timetable" style="display: inline-block;"></i>
+            <md-select id="timepickermodal" ng-model="time" style="width: 80% !important; display: inline-block;">
+                <md-option ng-repeat="item in horario.opciones" value="{{item.value}}">
+                    {{item.value}}
+                </md-option>
+            </md-select>
+          </md-content>
+        </div>
+      </md-dialog-content>
+  
+      <md-dialog-actions layout="row">
+        <md-button id="cancelar" ng-click="respuestaProponerFecha(false)" style="padding: 0px 20px !important;" class="md-raised">
+          CANCELAR
+        </md-button>
+        <md-button ng-click="respuestaProponerFecha(true)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+          GUARDAR
+        </md-button>
+      </md-dialog-actions>
+    </form>
+  </md-dialog>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function() {
+
+        // $("#datetimepickermodal").datepicker({
+        //   showOn: "both",
+        //   beforeShowDay: nonWorkingDates,
+        //   minDate: '{{minFechaEntrevista}}',
+        //   monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        //   monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        //   dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+        //   dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+        //   dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+        // });
+
+        function nonWorkingDates(date){
+            var day = date.getDay(), Sunday = 0, Monday = 1, Tuesday = 2, Wednesday = 3, Thursday = 4, Friday = 5, Saturday = 6;
+            var closedDates = [[7, 29, 2009], [8, 25, 2010]];
+            var closedDays = [[Sunday], [Saturday]];
+            for (var i = 0; i < closedDays.length; i++) {
+                if (day == closedDays[i][0]) {
+                    return [false];
+                }
+            }
+
+            for (i = 0; i < closedDates.length; i++) {
+                if (date.getMonth() == closedDates[i][0] - 1 &&
+                date.getDate() == closedDates[i][1] &&
+                date.getFullYear() == closedDates[i][2]) {
+                    return [false];
+                }
+            }
+
+            return [true];
+        }
+    });
+</script>

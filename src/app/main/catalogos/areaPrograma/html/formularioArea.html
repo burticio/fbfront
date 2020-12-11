@@ -1,0 +1,29 @@
+ <md-dialog style="width: 30%">
+
+     <div id="contenidoModal" name="contenidoModal">
+         <md-toolbar>
+             <div class="md-toolbar-tools">
+                 <h2>Registro de Modalidad</h2>
+             </div>
+         </md-toolbar>
+
+         <md-content layout-padding>
+             <form name="dataForm" novalidate>
+
+                     <md-input-container flex="100">
+                         <label>Area del programa</label>
+                         <input style="width: 417px;" required md-no-asterisk name="name" ng-model="data.Program_Area">
+                         <div ng-messages="data.Program_Area.$error">
+                             <div ng-message="required">Este campo es requerido.</div>
+                         </div>
+                     </md-input-container>
+
+                 <md-dialog-actions class="footerModal">
+                     <md-button ng-disabled="vm.data.$valid" ng-click="enviarInformacion()">Guardar</md-button>
+                     <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                 </md-dialog-actions>
+             </form>
+         </md-content>
+
+     </div>
+ </md-dialog>

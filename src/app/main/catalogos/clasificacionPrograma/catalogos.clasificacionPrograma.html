@@ -1,0 +1,85 @@
+<div id="e-commerce-products" class="page-layout carded fullwidth" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;"  class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" layout="column" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-clipboard-text"></md-icon>
+                    <span>Clasificaciones de Programas</span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span  >Total Clasificaciones de Programas:</span>
+                    <span>{{vm.products.length}}</span>
+                </div>
+            </div>
+
+            <div>
+                <md-button class="md-raised md-background" ng-click="vm.agregarClasificacion()" ng-hide = 'uType==7'>
+                    <span  >Agregar</span>
+                </md-button>
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" layout="column" flex>
+
+            <div class="content fullpage-datatable" layout="column" flex>
+
+                <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                       dt-options="vm.dtOptions">
+                    <thead>
+                    <tr>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">ID</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Descripción</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Acción</span>
+                            </div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="cla in clasificacion">
+                        <td>{{cla.id}}</td>
+                        <td>{{cla.Program_Classification}}</td>
+                        <td>
+                            <md-button class="edit-button md-icon-button" ng-click="vm.editarClasificacion(event,cla)"
+                                       aria-label="Product details" translate translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+
+                            </md-button>
+                            <md-button class="edit-button md-icon-button" ng-click="vm.eliminarClasificacion(cla)" aria-label="Product details"
+                                       translate translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

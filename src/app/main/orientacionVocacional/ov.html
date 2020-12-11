@@ -1,0 +1,203 @@
+<div id="profile" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="space-between end">
+        <div class="user-info" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="start center">
+            <img class="profile-image avatar huge" src="./assets/images/backgrounds/logoFundacionBecaBlanco.png">
+
+            <div class="name">Orientación Vocacional</div>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" flex>
+
+
+        <md-tabs md-dynamic-height>
+            <md-tab>
+                <md-tab-label>
+                    <span>Formulario</span>
+
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout="row" layout-wrap>
+                        <!-- FORM WIZARD -->
+                        <ms-form-wizard flex>
+                            <md-tabs md-dynamic-height md-selected="msWizard.selectedIndex" md-center-tabs="true">
+                                <md-tab>
+                                    <md-tab-label>
+                                        <span class="ms-form-wizard-step-label">
+                                            <span style="background-color: #7d2428;" class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep1.$invalid">1</span>
+                                            <span style="background-color: #7d2428;" class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep1.$valid">
+                                                <i class="icon-check s16"></i>
+                                            </span>
+                                            <span class="ms-form-wizard-step-text">DATOS DEL ESTUDIANTE</span>
+                                        </span>
+                                    </md-tab-label>
+
+                                    <md-tab-body>
+                                        <form name="wizardStep1" class="md-inline-form" ms-form-wizard-form novalidate>
+                                            <div layout="column" layout-gt-xs="row" flex>
+                                                <md-input-container flex="100" flex-gt-xs="50">
+                                                    <input type="text" name="nombre" ng-model="vm.formWizard.Person_Name" placeholder="Nombre" required>
+
+                                                </md-input-container>
+
+                                                <md-input-container flex="100" flex-gt-xs="50">
+                                                    <input type="text" name="paterno" ng-model="vm.formWizard.Person_lastName" placeholder="Apellido Paterno" required>
+
+                                                </md-input-container>
+                                                <md-input-container flex="100" flex-gt-xs="50">
+                                                    <input type="text" name="materno" ng-model="vm.formWizard.Person_mLastName" placeholder="Apellido Materno" required>
+
+                                                </md-input-container>
+                                            </div>
+
+                                            <md-input-container class="md-block">
+                                                <input type="text" name="email" ng-model="vm.formWizard.lastSchool" placeholder="Universidad" required>
+                                            </md-input-container>
+
+                                            <div layout="column" layout-gt-sm="row" flex>
+                                                <md-input-container flex="100" flex-gt-xs="50">
+                                                    <input type="text" name="password" ng-model="vm.formWizard.lastGrade" placeholder="Escolaridad" required>
+                                                </md-input-container>
+
+                                                <md-input-container flex="100" flex-gt-xs="50">
+                                                    <input disabled type="text" name="passwordConfirm" ng-model="vm.formWizard.date_study" placeholder="Fecha de Estudio" required>
+                                                </md-input-container>
+                                            </div>
+                                        </form>
+                                    </md-tab-body>
+                                </md-tab>
+
+                                <md-tab ng-disabled="wizardStep1.$invalid">
+                                    <md-tab-label>
+                                        <span class="ms-form-wizard-step-label">
+                                            <span style="background-color: #7d2428;" class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep2.$invalid">2</span>
+                                            <span style="background-color: #7d2428;" class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep2.$valid">
+                                                <i class="icon-check s16"></i>
+                                            </span>
+                                            <span class="ms-form-wizard-step-text">INFORME DE RESULTADOS</span>
+                                        </span>
+                                    </md-tab-label>
+
+                                    <md-tab-body>
+                                        <form name="wizardStep2" ms-form-wizard-form novalidate>
+
+                                            <md-input-container class="md-block">
+                                                <label>Personalidad</label>
+                                                <textarea ng-model="vm.formWizard.results_personality" max-rows="5" required></textarea>
+
+                                            </md-input-container>
+
+                                            <md-input-container class="md-block">
+                                                <label>Inteligencias</label>
+                                                <textarea ng-model="vm.formWizard.results_inteligence" max-rows="5" required></textarea>
+
+                                            </md-input-container>
+
+                                            <md-input-container class="md-block">
+                                                <label>Estilos de Aprendizaje</label>
+                                                <textarea ng-model="vm.formWizard.results_style_learning" max-rows="5" required></textarea>
+
+                                            </md-input-container>
+
+                                            <md-input-container class="md-block">
+                                                <label>Cualidades</label>
+                                                <textarea ng-model="vm.formWizard.results_qualities" max-rows="5" required></textarea>
+
+                                            </md-input-container>
+
+                                            <md-input-container class="md-block">
+                                                <label>Áreas de Oportunidad</label>
+                                                <textarea ng-model="vm.formWizard.results_areas_oportunity" max-rows="5" required></textarea>
+
+                                            </md-input-container>
+                                        </form>
+                                    </md-tab-body>
+                                </md-tab>
+
+                                <md-tab ng-disabled="wizardStep1.$invalid || wizardStep2.$invalid">
+                                    <md-tab-label>
+                                        <span class="ms-form-wizard-step-label">
+                                            <span style="background-color: #7d2428;" class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep3.$invalid">3</span>
+                                            <span style="background-color: #7d2428;" class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep3.$valid">
+                                                <i class="icon-check s16"></i>
+                                            </span>
+                                            <span class="ms-form-wizard-step-text">RECOMENDACIONES</span>
+                                        </span>
+                                    </md-tab-label>
+                                    <md-tab-body>
+                                        <form name="wizardStep3" ms-form-wizard-form novalidate>
+
+
+
+                                            <md-input-container class="md-block">
+                                                <label>Recomendaciones</label>
+                                                <textarea ng-model="vm.formWizard.results_recommendations" max-rows="5" required></textarea>
+
+                                            </md-input-container>
+                                        </form>
+                                    </md-tab-body>
+                                </md-tab>
+
+                                <md-tab ng-disabled="wizardStep1.$invalid || wizardStep2.$invalid">
+                                    <md-tab-label>
+                                        <span class="ms-form-wizard-step-label">
+                                            <span style="background-color: #7d2428;" class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep3.$invalid">4</span>
+                                            <span style="background-color: #7d2428;" class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep3.$valid">
+                                                <i class="icon-check s16"></i>
+                                            </span>
+                                            <span class="ms-form-wizard-step-text">CONCLUSIONES</span>
+                                        </span>
+                                    </md-tab-label>
+                                    <md-tab-body>
+                                        <form name="wizardStep3" ms-form-wizard-form novalidate>
+
+                                            <md-input-container class="md-block">
+                                                <label>Conclusiones</label>
+                                                <textarea ng-model="vm.formWizard.results_conclusions" max-rows="5" required></textarea>
+
+                                            </md-input-container>
+                                        </form>
+                                    </md-tab-body>
+                                </md-tab>
+                            </md-tabs>
+
+                            <div class="navigation" flex layout="row" layout-align="center center">
+                                <md-button style="background-color: #7d2428;" class="md-raised md-accent" ng-click="msWizard.previousStep()" ng-disabled="msWizard.isFirstStep()">
+                                    Anterior
+                                </md-button>
+                                <div class="steps">
+                                    <span ng-repeat="form in msWizard.forms" ng-class="{'selected md-accent-bg':msWizard.selectedIndex === $index}"></span>
+                                </div>
+                                <md-button style="background-color: #7d2428;" class="md-raised md-accent" ng-click="msWizard.nextStep()" ng-hide="msWizard.isLastStep()"
+                                    ng-disabled="msWizard.currentStepInvalid()">
+                                    Siguiente
+                                </md-button>
+                                <md-button style="background-color: #7d2428;" class="md-raised md-warn" ng-click="vm.sendForm(); msWizard.resetForm();" ng-show="msWizard.isLastStep()"
+                                    ng-disabled="msWizard.formsIncomplete()">
+                                    Guardar Información
+                                </md-button>
+
+                                <md-button ng-show="vm.terminarOv" ng-click="terminarOrientacion()" ng-disabled="msWizard.formsIncomplete()" style="background-color: #7d2428;"
+                                    class="md-raised md-accent">
+                                    TERMINAR ORIENTACIÓN VOCACIONAL
+                                </md-button>
+                            </div>
+
+                        </ms-form-wizard>
+                        <!-- / FORM WIZARD -->
+
+                    </div>
+                </md-tab-body>
+            </md-tab>
+
+        </md-tabs>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

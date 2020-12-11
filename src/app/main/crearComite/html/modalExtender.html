@@ -1,0 +1,30 @@
+s <md-dialog style="width: 40%">
+
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Extender sesión de comité</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+            <form name="dataForm" novalidate>
+ 
+                <md-input-container flex="100">
+                    <label>Fecha:</label>
+                    <md-datepicker id="fechaIni" ng-model="data.date"></md-datepicker>
+                    <div ng-messages="dataProgram.date.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+
+                <md-dialog-actions class="footerModal">
+                    <md-button ng-disabled="vm.data" ng-click="enviarInformacion()">Guardar</md-button>
+                    <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                </md-dialog-actions>
+            </form>
+        </md-content>
+
+    </div>
+</md-dialog>

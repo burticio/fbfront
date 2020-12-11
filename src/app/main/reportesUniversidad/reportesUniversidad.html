@@ -1,0 +1,184 @@
+<div id="profile" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="space-between end">
+        <div class="user-info" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="start center">
+            <img class="profile-image avatar huge" src="./assets/images/backgrounds/logoFundacionBecaBlanco.png">
+
+            <div class="name">¡Bienvenido(a) a Fundación Beca!</div>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" flex>
+
+        <md-tabs md-dynamic-height>
+            <md-tab>
+                <md-tab-label>
+                    <span>Inicio</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout="row" layout-wrap>
+
+                        <div class="about" layout="column" flex="100" flex-gt-sm="100" flex-gt-md="100">
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <header style=" background-color:#781f23; color: white;">
+                                    <div class="title">REPORTES DE OPERACIÓN</div>
+                                </header>
+                            <div layout="row" layout-align="start" style="padding: 10px;" flex>
+                                <md-input-container flex="50">
+                                    <label>País</label>
+                                    <md-select ng-change="vm.cargaUniversidades()" ng-model="paises.modelo">
+                                        <md-option ng-value="0">
+                                            <em>Ninguno</em>
+                                        </md-option>
+                                        <md-option ng-repeat="pai in paises.opciones" ng-value="pai.Country_Id">
+                                            {{pai.Country_Name}}
+                                        </md-option>
+                                    </md-select>
+                                    <md-button class="md-raised md-background" ng-click="">
+                                        Actualizar tablas
+                                    </md-button>
+                                </md-input-container>
+
+                                <md-input-container flex="50">
+                                    <label>Universidad</label>
+                                    <md-select ng-change="vm.cargaReportes()" ng-model="universidades.modelo">
+                                        <md-option ng-value="0">
+                                            <em>Ninguno</em>
+                                        </md-option>
+                                        <md-option ng-repeat="uni in universidades.opciones" ng-value="uni.University_Id">
+                                            {{uni.University_Name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <div> <!-- INICIO DE TABLA -->
+                                    <h2>Documentos de Solicitudes Activas</h2>
+                                    <md-button class="md-raised md-background" ng-click="downloadFileDocsActive()">
+                                        Descargar Tabla
+                                    </md-button>
+                                    <!--md-button class="md-raised md-background" ng-click="downloadFileDocsActive()">
+                                        Documentos Completos
+                                    </md-button>
+                                    <md-button class="md-raised md-background" ng-click="downloadFileDocsActive()">
+                                        Documentos incompletos
+                                    </md-button-->
+                                </div>
+                                <div class="content fullpage-datatable" layout="column" flex>
+                                    <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance1" dt-options="vm.dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Estatus</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Solicitudes</span>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="activadocs in activasdocs">
+                                                <td>{{activadocs.Estatus}}</td>
+                                                <td>{{activadocs.Solicitudes}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> 
+                                <md-divider></md-divider><!-- FIN DE TABLA -->
+                            </div>
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <div> <!-- INICIO DE TABLA -->
+                                    <h2>Solicitudes activas con Documentos Validados</h2>
+                                    <md-button class="md-raised md-background" ng-click="downloadFileValidatedDocs()">
+                                        Descargar Tabla
+                                    </md-button>
+                                </div>
+                                <div class="content fullpage-datatable" layout="column" flex>
+                                    <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance2"
+                                        dt-options="vm.dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Estatus</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Solicitudes</span>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="validadocs in validateddocs">
+                                                <td>{{validadocs.Estatus}}</td>
+                                                <td>{{validadocs.Solicitudes}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> 
+                                <md-divider></md-divider><!-- FIN DE TABLA -->
+                            </div>
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <div> <!-- INICIO DE TABLA -->
+                                    <h2>Entrevistas de Solicitudes Activas</h2>
+                                    <md-button class="md-raised md-background" ng-click="downloadFileInterviewsActive()">
+                                        Descargar Tabla
+                                    </md-button>
+                                </div>
+                                <div class="content fullpage-datatable" layout="column" flex>
+                                    <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance3"
+                                        dt-options="vm.dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Estatus</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Solicitudes</span>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="interviewactive in interviewsactive">
+                                                <td>{{interviewactive.Estatus}}</td>
+                                                <td>{{interviewactive.Solicitudes}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> 
+                                <md-divider></md-divider><!-- FIN DE TABLA -->
+
+
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </md-tab-body>
+            </md-tab>
+
+        </md-tabs>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

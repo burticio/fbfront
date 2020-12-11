@@ -1,0 +1,310 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+
+  <div style="height: auto;min-height: 0px;" class="header md-accent-bg" layout="row" layout-align="space-between">
+    <div layout="column" layout-align="space-between">
+      <md-button ng-click="vm.regresaHome()" style="background-color: #7d2428;" class="md-fab" aria-label="Regresar a Home">
+        <md-tooltip md-direction="top" style="font-size: 15px;">Regresar a Home</md-tooltip>
+        <md-icon style="font-size: 25px;" class="icon-home"></md-icon>
+      </md-button>
+      <h2>1 - Encuentra el programa adecuado para tí.</h2>
+      <h3 ng-show="datosiniciales.lleno==1">Elige la opción deseada en cada uno de los filtros que se adecúen a tu búsqueda. Cuando hayas hecho la selección y estés listo, da clic en <strong>MOSTRAR PROGRAMAS</strong>, para ver los resultados de tu búsqueda.</h3>
+      <!--md-button ng-click="muestraFiltros()" ng-show="mostrarBotonFiltro" style="background-color:white; color: #802428; padding: 0px 20px !important;">{{txtBotonFiltro}}</md-button-->
+      <!--md-button style="background-color: #ffffff;color:#802428;" class="cta-button md-raised md-accent" ng-click="vm.verDetalle(programa)">{{txtBotonFiltro}}</md-button>
+      <h4>Busca por filtros o palabra clave</h4-->
+    </div>
+  </div>
+
+  <div class="content" layout="column">
+    <div layout="row">
+
+      <div class="form-wrapper md-whiteframe-1dp" style="margin: 10px; position: relative;" flex="50" flex-gt-sm="20" ng-show="mostrarFiltro">
+        <section layout="row" layout-sm="column" layout-align="left left" layout-wrap>
+            <!-- <md-button ng-click="vm.borrarFiltros()" style="background-color: #7d2428;" class="md-fab" aria-label="borrar filtros">
+              <md-tooltip md-direction="top" style="font-size: 15px;">Limpiar Filtros</md-tooltip>
+              <md-icon style="font-size: 25px;" class="icon-eraser"></md-icon>
+            </md-button>
+            <h3>Limpiar Filtros</hx3> -->
+            
+            
+        </section>
+
+        <form name="myForm">
+
+          <div layout="row" layout-align="start" flex>
+            <md-input-container flex="100">
+              <label>Deseas buscar por: </label><br><br>
+              <md-radio-group ng-model="modo_busqueda">
+                <md-radio-button style="float: left; clear: none;" ng-value="0"><em>Filtros</em></md-radio-button>
+                <md-radio-button style="float: left; clear: none;" ng-value="1"><em>Palabra Clave</em></md-radio-button>
+              </md-radio-group>
+            </md-input-container>
+          </div>
+
+
+          <div ng-show = "modo_busqueda==0">
+            <div layout="row" layout-align="start" flex>
+              <md-input-container flex="100">
+                <md-button ng-click="vm.borrarFiltros()" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                    LIMPIAR FILTROS
+                </md-button>
+              </md-input-container>
+            </div>
+            <!--div layout="row" layout-align="start" flex>
+              <md-input-container flex="100">
+                <md-button ng-click="buscaProgramafilt()" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-show="mostrarBotonBusqueda>0">
+                  MOSTRAR PROGRAMAS
+              </md-button>
+              </md-input-container>
+            </div-->
+            <div layout="row" layout-align="start" flex>              
+              <md-input-container flex="85">
+                <label>Tipo de Programa</label>
+                <md-select ng-change="vm.buscaPrograma(clasificacion.modelo)" ng-model="clasificacion.modelo">
+                  <md-option ng-value="0"><em>Ninguno</em></md-option>
+                  <md-option ng-repeat="clasifica in clasificacion.opciones" ng-value="clasifica.Classification_Id">
+                    {{clasifica.Program_Classification}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+              <md-input-container flex="15">
+                <md-button style="background-color:#FFF;" class="md-icon-button" ng-click="vm.borraFiltro('clasificacion')" ng-show="clasificacion.modelo>0">
+                    <md-tooltip md-direction="top">Limpiar Filtro</md-tooltip>
+                    <md-icon md-font-icon="icon-close_circle" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-close-circle" role="img" aria-label="icon-close-circle"></md-icon>
+                </md-button>
+              </md-input-container>
+            </div>
+
+            <div layout="row" layout-align="start" flex>
+              <md-input-container flex="85">
+                <label>País</label>
+                <md-select ng-change="vm.buscaPrograma(pais.modelo)" ng-model="pais.modelo">
+                  <md-option ng-value="0"><em>Ninguno</em></md-option>
+                  <md-option ng-repeat="pai in pais.opciones" ng-value="pai.Country_Id">
+                    {{pai.Country_Name}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+              <md-input-container flex="15">
+                <md-button style="background-color:#FFF;" class="md-icon-button" ng-click="vm.borraFiltro('pais')" ng-show="pais.modelo>0">
+                    <md-tooltip md-direction="top">Limpiar Filtro</md-tooltip>
+                    <md-icon md-font-icon="icon-close_circle" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-close-circle" role="img" aria-label="icon-close-circle"></md-icon>
+                </md-button>
+              </md-input-container>
+            </div>
+
+            <div layout="row" layout-align="start" flex>
+              <md-input-container flex="85">
+                <label>Universidad</label>
+                <md-select ng-change="vm.buscaPrograma(universidad.modelo)" ng-model="universidad.modelo">
+                  <md-option ng-value="0" em>Ninguno</em></md-option>
+                  <md-option ng-repeat="uni in universidad.opciones" ng-value="uni.University_Id">
+                    {{uni.University_Name}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+              <md-input-container flex="15">
+                <md-button style="background-color:#FFF;" class="md-icon-button" ng-click="vm.borraFiltro('universidad')" ng-show="universidad.modelo>0">
+                    <md-tooltip md-direction="top">Limpiar Filtro</md-tooltip>
+                    <md-icon md-font-icon="icon-close_circle" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-close-circle" role="img" aria-label="icon-close-circle"></md-icon>
+                </md-button>
+              </md-input-container>
+            </div>
+
+            <div layout="row" layout-align="start" flex>
+              <md-input-container flex="85">
+                <label>Área</label>
+                <md-select ng-change="vm.buscaPrograma(area.modelo)" ng-model="area.modelo">
+                  <md-option ng-value="0"><em>Ninguna</em></md-option>
+                  <md-option ng-repeat="ar in area.opciones" ng-value="ar.Area_Id">
+                    {{ar.Program_Area_Name}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+              <md-input-container flex="15">
+                <md-button style="background-color:#FFF;" class="md-icon-button" ng-click="vm.borraFiltro('area')" ng-show="area.modelo>0">
+                    <md-tooltip md-direction="top">Limpiar Filtro</md-tooltip>
+                    <md-icon md-font-icon="icon-close_circle" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-close-circle" role="img" aria-label="icon-close-circle"></md-icon>
+                </md-button>
+              </md-input-container>
+            </div>
+            
+            <div layout="row" layout-align="start" flex>
+                <md-input-container flex="85">
+                  <label>Modalidad</label>
+                  <md-select ng-change="vm.buscaPrograma(modalidad.modelo)" ng-model="modalidad.modelo">
+                    <md-option ng-value="0"><em>Ninguno</em></md-option>
+                    <md-option ng-repeat="modal in modalidad.opciones" ng-value="modal.Modality_Id">
+                      {{modal.Modality_Name}}
+                    </md-option>
+                  </md-select>
+                </md-input-container>
+                <md-input-container flex="15">
+                <md-button style="background-color:#FFF;" class="md-icon-button" ng-click="vm.borraFiltro('modalidad')" ng-show="modalidad.modelo>0">
+                    <md-tooltip md-direction="top">Limpiar Filtro</md-tooltip>
+                    <md-icon md-font-icon="icon-close_circle" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-close-circle" role="img" aria-label="icon-close-circle"></md-icon>
+                </md-button>
+              </md-input-container>
+              </div>
+            <!--div layout="row" layout-align="start" flex>
+              <md-input-container flex="100">
+                <md-button ng-click="buscaProgramafilt()" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-show="mostrarBotonBusqueda>0">
+                  MOSTRAR PROGRAMAS
+              </md-button>
+              </md-input-container>
+            </div-->
+              <!-- <md-button ng-click="buscaProgramafilt()" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                  MOSTRAR PROGRAMAS
+              </md-button> -->
+
+            <!-- <div layout="row" layout-align="start" flex>
+              <md-input-container flex="100">
+                <label>Tipo de programa</label>
+                <md-select ng-change="vm.buscaPrograma(tipo.modelo)" ng-model="tipo.modelo">
+                  <md-option ng-value="0"><em>Ninguno</em></md-option>
+                  <md-option ng-repeat="tip in tipo.opciones" ng-value="tip.Type_Id">
+                    {{tip.Type_Name}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div> -->
+          </div><!-- BUSQUEDA POR FILTROS  -->
+          <div ng-show = "modo_busqueda==1">
+            <div layout="row" layout-align="start" flex>
+              <md-input-container flex="100">
+                <label>Tipo de programa</label>
+                <input type="text" id="keyword" name="keyword" ng-model="keywords" placeholder="Palabra Clave">
+                <md-checkbox ng-model="pname" ng-true-value="1" ng-false-value="0">Programa</md-checkbox>
+                <md-checkbox ng-model="uname" ng-true-value="1" ng-false-value="0">Universidad</md-checkbox>
+                <md-checkbox ng-model="paname" ng-true-value="1" ng-false-value="0">Area de Conocimiento</md-checkbox>
+                <md-button ng-click="buscaProgramakw()" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                  BUSCAR
+                </md-button>
+              </md-input-container>
+            </div>
+          </div><!-- BUSQUEDA POR PALABRA CLAVE-->
+
+          <h5><strong>IMPORTANTE:</strong> Nuestras becas no son excluyentes, a excepción de becas previamente otorgadas directamente por la universidad.</h5>
+
+        </form>
+      </div>
+
+      <div id="divprogramas" flex="80">
+
+        
+        <div ng-show='datosiniciales.lleno==0' class = "md-whiteframe-1dp"> <!-- DATOS INICIALES-->
+          <div layout="row" layout-align="start" flex>
+            <md-input-container flex="100">
+              <h1>¡Estás a dos sencillos pasos de encontrar la beca para el programa de tus sueños!</h1>
+              <h2>1 - Déjanos tus datos:  </h2>
+            </md-input-container>
+          </div>
+
+          <form name ="frmDatosIniciales" novalidate ng-submit="frmDatosIniciales.$valid && datosinicialesllenos()" >
+            <div layout="row" layout-align="start" flex>
+                <md-input-container flex="30">
+                    <input type="text" id="inic-nombre" name="inic-nombre" ng-model="datosiniciales.nombre" placeholder="Nombre" required>
+                </md-input-container>
+                <md-input-container flex="30">
+                    <input type="text" id="inic-primerap" name="inic-primerap" ng-model="datosiniciales.primerApellido" placeholder="Primer Apellido" required>
+                </md-input-container>
+                <md-input-container flex="30">
+                    <input type="text" id="inic-segundoap" name="inic-segundoap" ng-model="datosiniciales.segundoApellido" placeholder="Segundo Apellido" required>
+                </md-input-container>
+              </div>
+              <div layout="row" layout-align="start" flex>
+                <md-input-container flex="50">
+                    <input type="email" id="inic-email" name="inic-email" ng-model="datosiniciales.email" placeholder="correo electrónico" required>
+                </md-input-container>
+                <md-input-container flex="50">
+                    <input type="telefono" id="inic-telefono" name="inic-telefono" ng-model="datosiniciales.telefono" placeholder="Teléfono" required>
+                </md-input-container>
+              </div>
+              <div layout="row" layout-align="start" flex>
+                <md-input-container flex="100">
+                  <h2>2 - En la siguiente ventana elige la opción deseada en cada uno de los filtros y cuando hayas hecho la selección y estés listo, da clic en <strong>MOSTRAR PROGRAMAS</strong>, para ver los resultados.  </h2>
+                </md-input-container>
+              </div>
+              <div layout="row" layout-align="start" flex>
+                <md-input-container flex="50">
+                  <md-button type= "submit" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                      CONTINUAR
+                  </md-button>
+                </md-input-container>
+              </div>
+            </form>
+        </div>
+        <div  ng-show='datosiniciales.lleno==1'> <!-- RESULTADOS DE BUSQUEDA-->
+          <div ng-show="modo_busqueda==0"><h2><strong>{{numeroProgramas}}</strong> programas cumplen con los filtros seleccionados.<br><span ng-show="mostrarBotonBusqueda==0 && numeroProgramas>0"> Se muestran los primeros <strong>100</strong> programas.</span><span ng-show="mostrarBotonBusqueda==0"> Selecciona al menos un filtro más.</span></h2>
+          <!--md-button ng-click="buscaProgramafilt()" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-show="mostrarBotonBusqueda>0">
+                    MOSTRAR PROGRAMAS
+                </md-button-->
+          </div> 
+          <div class="content">
+            <div class="price-tables" flex layout="row" layout-wrap style="min-height: 49%">
+              <div ng-repeat="programa in programas" class="price-table style-1 md-whiteframe-1dp" layout="column">
+                <div class="package-type md-primary-bg">
+                  <span>
+                    <h3>{{programa.University_Name}}</h3>
+                  </span>
+                </div>
+                <div class="price" layout="row" layout-align="center start">
+                  {{programa.ProgramName}}
+                </div>
+                <md-divider></md-divider>
+                <div class="terms" layout="column">
+                  <div class="term"><span class="text-bold">País: </span> {{programa.Country_Name}}</div>
+                  <div class="term"><span class="text-bold">Modalidad: </span> {{programa.Modality_Name}}</div>
+                  <div class="term"><span class="text-bold">Clasificacion: </span> {{programa.Program_Classification}}</div>
+                  <div class="term"><span class="text-bold">Porcentaje de Beca: </span>
+                    {{programa.Scholarship_Percentage}} %</div>
+                  <div class="term"><span class="text-bold">Notas: </span> {{programa.notes ? programa.notes : '----'}}</div>
+                </div>
+                <md-button style="background-color: #802428;" class="cta-button md-raised md-accent" ng-click="vm.verDetalle(programa)">DETALLES</md-button>
+              </div>
+            </div>
+
+          </div>
+          <div ng-show="mostrarfinal" class= "price-table style-1 md-whiteframe-1dp">
+            <h2>¿Aun no has encontrado tu programa ideal?  Constantemente estamos trabajando para generar alianzas con las mejores instituciones del mundo, para ayudarte a conseguir la beca que siempre has querido. Contáctate con nosotros <a href="https://wa.me/524423723119?text=Estoy interesado en un programa de Beca que no encontré en el sitio web.%0ANombre: {{datosiniciales.nombre}} {{datosiniciales.primerApellido}} {{datosiniciales.segundoApellido}}%0ACorreo Electrónico: {{datosiniciales.email}}%0ATeléfono: {{datosiniciales.telefono}}" target="_blank">aquí</a> y cuéntanos que especialidad y en que institución la estas buscando</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160389227-1"></script>
+
+<script>
+
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+
+ 
+
+  gtag('config', 'UA-160389227-1');
+
+</script>
+
+<!--Clientify Tracking Begins-->
+<script type="text/javascript">
+  if (typeof trackerCode ==='undefined'){
+      (function (d, w, u, o) {
+          w[o] = w[o] || function () {
+              (w[o].q = w[o].q || []).push(arguments)
+          };
+          a = d.createElement('script'),
+              m = d.getElementsByTagName('script')[0];
+          a.async = 1; a.src = u;
+          m.parentNode.insertBefore(a, m)
+      })(document, window, 'https://analytics.clientify.net/tracker.js', 'ana');
+      ana('setTrackerUrl', 'https://analytics.clientify.net');
+      ana('setTrackingCode', 'CF-5265-5265-DCAFJ');
+      ana('trackPageview');
+  }
+</script>
+<!--Clientify Tracking Ends-->

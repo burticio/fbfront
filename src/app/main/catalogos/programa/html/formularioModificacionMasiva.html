@@ -1,0 +1,141 @@
+<md-dialog style="width: 70%">
+
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Modificación masiva de programas</h2>
+            </div>
+        </md-toolbar>
+        Programas seleccionados:
+        <strong>{{programasSeleccionados}}</strong>
+        <md-content layout-padding>
+            <form name="dataProgram" novalidate>
+
+                <md-input-container flex="100">
+                    <label>Costo del programa:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','Program_Cost');" onkeypress="validaSoloNumeros(this.value,'','Program_Cost');"
+                        onkeyup="validaSoloNumeros(this.value,'','Program_Cost');" style="width: 417px;" id="Program_Cost" name="Program_Cost"
+                        ng-model="data.Program_Cost">
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Porcentaje de beca:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','Scholarship_Percentage');" onkeypress="validaSoloNumeros(this.value,'','Scholarship_Percentage');"
+                        onkeyup="validaSoloNumeros(this.value,'','Scholarship_Percentage');" style="width: 417px;" required md-no-asterisk
+                        id="Scholarship_Percentage" name="Scholarship_Percentage" ng-model="data.Scholarship_Percentage">
+
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Apoyo para boleto de Avión:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','TicketSupport');" onkeypress="validaSoloNumeros(this.value,'','TicketSupport');"
+                        onkeyup="validaSoloNumeros(this.value,'','TicketSupport');" style="width: 417px;" required md-no-asterisk
+                        id="TicketSupport" name="TicketSupport" ng-model="data.TicketSupport">
+
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Apoyo para Gastos de Instalación:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','settlement');" onkeypress="validaSoloNumeros(this.value,'','settlement');"
+                        onkeyup="validaSoloNumeros(this.value,'','settlement');" style="width: 417px;" required md-no-asterisk
+                        id="settlement" name="settlement" ng-model="data.settlement">
+
+                </md-input-container>
+
+                <md-input-container flex="100">
+
+                    <md-checkbox ng-model="data.Medical_Expenses" aria-label="Checkbox 1">
+                        Apoyo para gastos Médicos:
+                    </md-checkbox>
+                </md-input-container>
+                
+                <br>
+
+
+                <!--md-input-container flex="100">
+                    <label>Fecha Inicio:</label>
+                    <md-datepicker id="fechaIni" ng-model="data.Start_Date"></md-datepicker>
+
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Fecha fin:</label>
+                    <md-datepicker id="fechaFin" ng-model="data.End_Date"></md-datepicker>
+
+                </md-input-container><br-->
+
+
+                <md-input-container flex="100">
+                    <label>Duración</label>
+                    <input type="number" min="0" max="150" value="0"  md-no-asterisk
+                        id="Duration" name="Duration" ng-model="data.duration" ng-change="mostrarMeses()">
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <md-select ng-model="periodo_duracion.modelo" placeholder="Periodo" ng-change="mostrarMeses()" ng-true-value="1" ng-false-value="0" class="md-no-underline" flex="100">
+                        <md-option value="0">- Periodo -</md-option>
+                        <md-option ng-repeat="p in periodo_duracion.opciones" value="{{p.id}}">{{p.name}}</md-option>
+                    </md-select>                    
+                </md-input-container><br>
+
+                <md-input-container flex="100" ng-show="periodo_duracion.modelo=='H'">
+                    <label>Duración Meses</label>
+                    <input md-no-asterisk type="number" min="0" max="150" value="0"
+                        id="Duration_m" name="Duration_m" ng-model="data.Duration_m" ng-change="mostrarMeses()">
+                </md-input-container><br>
+
+                <md-input-container flex="100">
+                    <span>Inicio del Programa</span><br>
+                    <!--span>{{datesString}}</span-->
+                    <md-checkbox ng-model="data.all_months">
+                        Inicia todos los meses
+                    </md-checkbox>
+                </md-input-container><br>
+                <md-input-container flex="100" ng-repeat="m in meses_inicio" ng-hide="data.duration=='0' || ocultar_meses || data.all_months==true">
+                    <div layout="column" layout-align="center center">{{ m.mes }}
+                    <md-checkbox ng-model="m.selec" ng-click="actualizaFechas(m)" labelPosition="before">
+                        
+                    </md-checkbox>
+                    </div>
+                </md-input-container>
+                <br>
+                <md-input-container flex="100">
+                    <label>Número de Becas:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','Scholarship_Number');" onkeypress="validaSoloNumeros(this.value,'','Scholarship_Number');"
+                        onkeyup="validaSoloNumeros(this.value,'','Scholarship_Number');" style="width: 200px;" required md-no-asterisk
+                        id="Scholarship_Number" name="Scholarship_Number" ng-model="data.Scholarship_Number">
+
+                </md-input-container><br>
+                <md-input-container flex="100">
+                    <label>Notas del programa:</label>
+                    <input style="width: 400%;" required md-no-asterisk
+                        id="notes" name="notes" ng-model="data.notes">
+
+                </md-input-container><br>
+                <md-input-container flex="100">
+                    <label>Porcentaje de comisión:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','fee');" onkeypress="validaSoloNumeros(this.value,'','fee');"
+                        onkeyup="validaSoloNumeros(this.value,'','fee');" style="width: 417px;" required md-no-asterisk
+                        id="fee" name="fee" ng-model="data.fee">
+
+                </md-input-container>
+                <br>
+                <md-input-container flex="100">
+                    <md-checkbox ng-model="data.active" aria-label="Checkbox 1">
+                        Programa Activo:
+                    </md-checkbox>
+                    <span ng-show="data.active==null">Sin Modificación</span>
+                    <span ng-show="data.active==1">Activo</span>
+                    <span ng-show="data.active==0">Inactivo</span>
+                </md-input-container>
+
+
+                <md-dialog-actions class="footerModal">
+                    <md-button ng-disabled="btnModificacionMasiva" ng-click="enviarInformacion()">Guardar Modificación</md-button>
+                    <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                </md-dialog-actions>
+            </form>
+        </md-content>
+
+    </div>
+</md-dialog>

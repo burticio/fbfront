@@ -1,0 +1,540 @@
+<div id="profile" class="page-layout simple tabbed">
+    <a id="descargarArchivo"></a>
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="space-between end">
+        <div class="user-info" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="start center">
+            <img class="profile-image avatar huge" src="./assets/images/backgrounds/logoFundacionBeca.png">
+
+            <div class="name">¡Bienvenido(a) a Fundación Beca!</div>
+        </div>
+        
+    </div> 
+    <div class="content" flex>  
+        <md-tabs md-dynamic-height>
+            <md-tab>
+                <md-tab-label>
+                    <span>Inicio</span>
+                </md-tab-label>
+                <md-tab-body> 
+                    <div ng-show="ocultaPrincipal" layout="row" layout-wrap style="max-height: 500px !important;"> 
+                        <div class="about" layout="column" flex="50" flex-gt-sm="50" flex-gt-md="50">
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <header style=" background-color:#781f23; color: white;">
+                                    <div class="title">SOLICITUD ACTIVA</div>
+                                </header>
+
+                                <div class="content" style="height: 500px !important; max-height: 500px !important;">
+                                    <div class="info-line">
+                                        <div class="title">Nombre del programa</div>
+                                        <div class="info">{{solicitudes[solicitudes.length - 1].Program_Name_1}}</div>
+                                    </div>
+
+                                    <div class="info-line">
+                                        <div class="title">Clasificación</div>
+                                        <div class="info">{{solicitudes[solicitudes.length - 1].Classification_Name}}</div>
+                                    </div>
+
+                                    <div class="info-line">
+                                        <div class="title">Estatus de la solicitud</div>
+                                        <div class="info">
+                                            {{solicitudes[solicitudes.length - 1].status === "0" ? "CREADA" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === "1" ? "CANCELADA SIN DOCUMENTOS" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === "2" ? "CANCELADA POR SOLICITANTE" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === "3" ? "DOCUMENTOS COMPLETOS" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === "4" ? "RECHAZAADA EN ENTREVISTA" : ''}}
+                                            {{solicitudes[solicitudes.length - 1].status === "5" ? "CANALIZAR A ESTUDIA MAS" : ''}}
+                                            {{solicitudes[solicitudes.length - 1].status === "6" ? "ENTREVISTA COMPLETA" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === '7' ? "EN PROCESO" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === "8" ? "RECHAZADA" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === "9" ? "EN PROCESO" : ''}}
+                                            {{solicitudes[solicitudes.length - 1].status === "10" ? "EN PROCESO" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === "11" ? "EN PROCESO" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === "12" ? "DOCOMENTOS COMPLETOS A ORIENTACION VOCACIONAL" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === "13" ? "CANALIZADO A OTRO PROGRAMA EN ORIENTACION VOCACIONAL" : ''}}
+                                            {{solicitudes[solicitudes.length - 1].status === "14" ? "RECHAZADA EN ORIENTACION VOCACIONAL" : ''}} 
+                                            {{solicitudes[solicitudes.length - 1].status === "15" ? "PROCESO COMPLETO" : ''}}
+                                            {{solicitudes[solicitudes.length - 1].status === "16" ? "PROCESO COMPLETO" : ''}}
+                                            {{solicitudes[solicitudes.length - 1].status === "17" ? "RECHAZADA POR NO ENTREGAR DOCUMENTOS" : ''}}
+                                            {{solicitudes[solicitudes.length - 1].status === "18" ? "RECHAZADA SIN ACCION EN ENTREVISTA" : ''}}
+                                            {{solicitudes[solicitudes.length - 1].status === "19" ? "RECHAZADA POR NO ENTREGAR DOCUMENTOS FA" : ''}}
+                                            {{solicitudes[solicitudes.length - 1].status === "21" ? "VALIDADA POR UNIVERSIDAD" : ''}}
+                                        </div>
+                                    </div>
+
+                                    <div class="info-line">
+                                        <div class="title">Acciones</div>
+                                        <div class="info">
+                                            <md-button class="md-raised md-background" ng-click="vm.verDocumentos(solicitudes[solicitudes.length - 1])">
+                                                <span>DOCUMENTOS SOLICITUD</span>
+                                            </md-button>
+                                        </div>
+                                        <div class="success">
+                                            <md-button ng-show="solicitudes[solicitudes.length - 1].status === '21' ? true : solicitudes[solicitudes.length - 1].status === '15' ? true : solicitudes[solicitudes.length - 1].status === '11' ? true : false"
+                                                class="md-raised md-background" ng-click="vm.verDocumentosAceptacion(solicitudes[solicitudes.length - 1])">
+                                                <span>DOCUMENTOS ACEPTACIÓN</span>
+                                            </md-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about" layout="column" flex="50" flex-gt-sm="50" flex-gt-md="50" class="layout-align-center-center">
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <header style=" background-color:#781f23; color: white;">
+                                    <div class="title">CITAS</div>
+                                </header>
+                                <div class="content" layout="row" layout-wrap layout-align="center center" style="height: 500px !important; max-height: 500px !important; text-align: center;">
+                                    <div ng-if="citaLength === 0">
+                                        <h2>Por el momento no te han <br> asignado alguna cita. <i class="icon icon-book-variant"></i></h2>
+                                    </div>
+                                    <div ng-if="cita.status === '0'">
+                                        <h2>Por el momento no te han <br> asignado alguna cita. <i class="icon icon-book-variant"></i></h2>
+                                    </div>
+                                    <div ng-if="cita.status === '1'">
+
+                                        <h2>Se te ha asignado entrevista el día: </h2>
+                                        <div layout="column" layout-align="center center" style="width: 100% !important; margin-bottom: 5%; display: flex; justify-content: center; padding: 0% 25% 0% 25%;">
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 10px 10px 0px 0px; text-align: center;">
+                                                <span style="font-size: 24px; color: #FFF !important;">
+                                                    {{ mesCita }}
+                                                </span>
+                                            </div>
+                                            <div style="font-size: 46px; background-color: #f5f5f5 !important; width: 100%; text-align: center;">
+                                                {{ diaCita }}
+                                            </div>
+                                            <div class="h1" style="background-color: #f5f5f5 !important; width: 100%; font-size: 24px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #781f23 !important;">
+                                                    {{ anioCita }}
+                                                </span>
+                                            </div>
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 0px 0px 10px 10px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #f5f5f5 !important;">
+                                                    {{ horaCita }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <md-button class="md-raised md-background" ng-click="vm.aceptarFecha(cita)">
+                                            <span>ACEPTAR</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="vm.proponerFecha(cita)">
+                                            <span>PROPONER OTRA</span>
+                                        </md-button>
+
+                                    </div>
+                                    <div ng-if="cita.status === '2'">
+
+                                        <h2>Has asignado la entrevista para el día.</h2>
+                                        <div layout="column" layout-align="center center" style="width: 100% !important; margin-bottom: 5%; display: flex; justify-content: center; padding: 0% 25% 0% 25%;">
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 10px 10px 0px 0px; text-align: center;">
+                                                <span style="font-size: 24px; color: #FFF !important;">
+                                                    {{ mesCita }}
+                                                </span>
+                                            </div>
+                                            <div style="font-size: 46px; background-color: #f5f5f5 !important; width: 100%; text-align: center;">
+                                                {{ diaCita }}
+                                            </div>
+                                            <div class="h1" style="background-color: #f5f5f5 !important; width: 100%; font-size: 24px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #781f23 !important;">
+                                                    {{ anioCita }}
+                                                </span>
+                                            </div>
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 0px 0px 10px 10px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #f5f5f5 !important;">
+                                                    {{ horaCita }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <h3>Espera a que confirmen la fecha.</h3>
+
+                                    </div>
+                                    <div ng-if="cita.status === '3'">
+
+                                        <h2>¡Cita Aceptada! La cita se realizará el día: </h2>
+                                        <div layout="column" layout-align="center center" style="width: 100% !important; margin-bottom: 5%; display: flex; justify-content: center; padding: 0% 25% 0% 25%;">
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 10px 10px 0px 0px; text-align: center;">
+                                                <span style="font-size: 24px; color: #FFF !important;">
+                                                    {{ mesCita }}
+                                                </span>
+                                            </div>
+                                            <div style="font-size: 46px; background-color: #f5f5f5 !important; width: 100%; text-align: center;">
+                                                {{ diaCita }}
+                                            </div>
+                                            <div class="h1" style="background-color: #f5f5f5 !important; width: 100%; font-size: 24px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #781f23 !important;">
+                                                    {{ anioCita }}
+                                                </span>
+                                            </div>
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 0px 0px 10px 10px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #f5f5f5 !important;">
+                                                    {{ horaCita }}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div ng-if="cita.status === '4'">
+
+                                        <h2>Tu cita fue cancelada. </h2>
+
+                                    </div>
+                                    <div ng-if="cita.status === '5'">
+
+                                        <h2>¡Cita Finalizada! Se realizó el día: </h2>
+                                        <div layout="column" layout-align="center center" style="width: 100% !important; margin-bottom: 5%; display: flex; justify-content: center; padding: 0% 25% 0% 25%;">
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 10px 10px 0px 0px; text-align: center;">
+                                                <span style="font-size: 24px; color: #FFF !important;">
+                                                    {{ mesCita }}
+                                                </span>
+                                            </div>
+                                            <div style="font-size: 46px; background-color: #f5f5f5 !important; width: 100%; text-align: center;">
+                                                {{ diaCita }}
+                                            </div>
+                                            <div class="h1" style="background-color: #f5f5f5 !important; width: 100%; font-size: 24px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #781f23 !important;">
+                                                    {{ anioCita }}
+                                                </span>
+                                            </div>
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 0px 0px 10px 10px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #f5f5f5 !important;">
+                                                    {{ horaCita }}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div ng-if="cita.status === '6'">
+
+                                        <h2>¡Cita Finalizada! Se realizó el día: </h2>
+                                        <div layout="column" layout-align="center center" style="width: 100% !important; margin-bottom: 5%; display: flex; justify-content: center; padding: 0% 25% 0% 25%;">
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 10px 10px 0px 0px; text-align: center;">
+                                                <span style="font-size: 24px; color: #FFF !important;">
+                                                    {{ mesCita }}
+                                                </span>
+                                            </div>
+                                            <div style="font-size: 46px; background-color: #f5f5f5 !important; width: 100%; text-align: center;">
+                                                {{ diaCita }}
+                                            </div>
+                                            <div class="h1" style="background-color: #f5f5f5 !important; width: 100%; font-size: 24px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #781f23 !important;">
+                                                    {{ anioCita }}
+                                                </span>
+                                            </div>
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 0px 0px 10px 10px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #f5f5f5 !important;">
+                                                    {{ horaCita }}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div ng-if="cita.status === '7'">
+
+                                        <h2>¡Cita Finalizada! Se realizó el día: </h2>
+                                        <div layout="column" layout-align="center center" style="width: 100% !important; margin-bottom: 5%; display: flex; justify-content: center; padding: 0% 25% 0% 25%;">
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 10px 10px 0px 0px; text-align: center;">
+                                                <span style="font-size: 24px; color: #FFF !important;">
+                                                    {{ mesCita }}
+                                                </span>
+                                            </div>
+                                            <div style="font-size: 46px; background-color: #f5f5f5 !important; width: 100%; text-align: center;">
+                                                {{ diaCita }}
+                                            </div>
+                                            <div class="h1" style="background-color: #f5f5f5 !important; width: 100%; font-size: 24px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #781f23 !important;">
+                                                    {{ anioCita }}
+                                                </span>
+                                            </div>
+                                            <div class="h1" style="background-color: #781f23 !important; width: 100%; font-size: 24px; border-radius: 0px 0px 10px 10px; text-align: center; border-top: 1px solid #eeeeee;">
+                                                <span style="font-size: 24px; color: #f5f5f5 !important;">
+                                                    {{ horaCita }}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div ng-show="habilitarDocumentos" layout="row" layout-wrap>
+                        <div class="about" layout="column" flex="100" flex-gt-sm="100" flex-gt-md="100">
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <header style="background-color:#781f23; color: white;" class="md-accent-bg">
+                                    <div class="title">
+                                        <i style="cursor: pointer;" ng-click="habilitarDocumentos = false; ocultaPrincipal = true;"
+                                            class="icon-keyboard-backspace"></i> LISTA DE DOCUMENTOS DE SOLICITUD
+                                    </div>
+                                </header>
+
+                                <div class="content">
+                                    <div class="content fullpage-datatable" layout="column" flex>
+
+                                        <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                                            dt-options="vm.dtOptions">
+                                            <thead>
+                                                <tr>                                                    
+                                                    <th class="secondary-text">
+                                                        <div class="table-header">
+                                                            <span class="column-title">Documento</span>
+                                                        </div>
+                                                    </th>
+                                                    <th class="secondary-text">
+                                                        <div class="table-header">
+                                                            <span class="column-title">Archivo /Acciones</span>
+                                                        </div>
+                                                    </th>
+
+
+                                                    <!--th class="secondary-text">
+                                                        <div class="table-header">
+                                                            <span class="column-title">ACCIONES</span>
+                                                        </div>
+                                                    </th-->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="documento in documentos">
+                                                    
+                                                    <td>
+                                                        {{documento.DocumentName}}<br>
+                                                        <md-button style="background-color: #7d2428;" ng-click="descargarFormato(documento)"
+                                                        ng-show="documento.RequiresTemplateFile === '1'" class="md-fab md-mini">
+                                                            <md-icon style="font-size: 21px; " class="icon-cloud-download"></md-icon>
+                                                            <md-tooltip>Descargar formato</md-tooltip>
+                                                        </md-button><br>
+                                                        {{documento.status === "0" ? "SIN CARGAR" : ''}}
+                                                        {{documento.status === "1" ? "SIN VALIDAR" : ''}}
+                                                        {{documento.status ===
+                                                        "2" ? "VALIDADO" : ''}} {{documento.status === "3" ? "RECHAZO"
+                                                        :
+                                                        ''}}<br>
+                                                        {{documento.notes}}
+                                                    </td>
+                                                    <td>
+                                                        <div ng-show="(documento.status === '0' || documento.status === '3') && (documento.url==='0')"
+                                                            class="upload-button" layout="column" layout-align="center center">
+                                                            <input ng-click="cambiaColorBoton(documento)" class="form-control"
+                                                                type="file" ng-model="file" name="documentFile_{{documento.id}}"
+                                                                id="documentFile_{{documento.id}}">
+                                                            <span class="secondary-text mt-8">PDF - Max 10 MB</span>
+                                                        </div>
+
+                                                        <div ng-show="(documento.status === '0' || documento.status === '3') && (documento.url==='1')" layout="column" layout-align="center center">
+                                                            Pega en este cuadro de texto la URL a subir
+                                                            <input type="text" name="url" ng-model = "documento.name" ng-enabled="documento.status === '0' || documento.status === '3'" style="border: 1px solid #666666; width: 100%; padding 2px;">
+                                                        </div>
+
+                                                        <div ng-show="documento.status > '0'" class="upload-button"
+                                                            layout="column" layout-align="center center">
+                                                            <md-button style="background-color: #7d2428;" ng-click="vm.modalArchivo(event, documento)"
+                                                                ng-disabled="doc.RequiresTemplateFile === '0'" class="md-fab md-mini"
+                                                                aria-label="Eat cake">
+                                                                <md-icon style="font-size: 21px; " class="icon-file-document"></md-icon>
+                                                                <md-tooltip md-direction="top">Ver Documento</md-tooltip>
+                                                            </md-button>
+                                                            <md-button style="background-color: #7d2428;" ng-click="eliminarArchivo(documento)"
+                                                            ng-show="documento.status === '1'" class="md-fab md-mini">
+                                                                <md-icon style="font-size: 21px; " class="icon-close-circle"></md-icon>
+                                                                <md-tooltip>Eliminar Documento</md-tooltip>
+                                                            </md-button>
+                                                        </div>
+                                                        <div ng-show="documento.status === '0' || documento.status === '3'"
+                                                            class="upload-button" layout="column" layout-align="center center">
+                                                            <md-button ng-disabled="documento.status > 0 && documento.status != 3"
+                                                                id="estiloBoton_{{documento.id}}" class="md-raised md-background"
+                                                                ng-click="anexarArchivo(documento)">
+                                                                <span>
+                                                                    {{documento.status === "0" ? "SUBIR DOCUMENTO" : ''}}
+                                                                    {{documento.status === "1" ? "EN REVISIÓN" : ''}}
+                                                                    {{documento.status
+                                                                    === "2" ? "VALIDADO" : ''}} {{documento.status === "3"
+                                                                    ?
+                                                                    "SUBIR DOCUMENTO" : ''}}
+                                                                </span>
+                                                            </md-button>
+                                                        </div>  
+                                                    </td>
+
+                                                    <!--td>
+                                                        <md-button ng-disabled="documento.status > 0 && documento.status != 3"
+                                                            id="estiloBoton_{{documento.id}}" class="md-raised md-background"
+                                                            ng-click="anexarArchivo(documento)">
+                                                            <span>
+                                                                {{documento.status === "0" ? "SUBIR DOCUMENTO" : ''}}
+                                                                {{documento.status === "1" ? "EN REVISIÓN" : ''}}
+                                                                {{documento.status
+                                                                === "2" ? "VALIDADO" : ''}} {{documento.status === "3"
+                                                                ?
+                                                                "SUBIR DOCUMENTO" : ''}}
+                                                            </span>
+                                                        </md-button>
+                                                    </td-->
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-show="habilitarDocumentosAceptacion" layout="row" layout-wrap>
+                        <div class="about" layout="column" flex="100" flex-gt-sm="100" flex-gt-md="100">
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <header style="background-color:#781f23; color: white;" class="md-accent-bg">
+                                    <div class="title">
+                                        <i style="cursor: pointer;" ng-click="habilitarDocumentosAceptacion = false; ocultaPrincipal = true;"
+                                            class="icon-keyboard-backspace"></i> LISTA DE DOCUMENTOS DE ACEPTACIÓN
+                                    </div>
+                                </header>
+
+                                <div class="content">
+                                    <div class="content fullpage-datatable" layout="column" flex>
+
+                                        <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                                            dt-options="vm.dtOptions">
+                                            <thead>
+                                                <tr>
+                                                    <th class="secondary-text">
+                                                        <div class="table-header">
+                                                            <span class="column-title">Documento</span>
+                                                        </div>
+                                                    </th>
+                                                    <th class="secondary-text">
+                                                        <div class="table-header">
+                                                            <span class="column-title">Archivo /Acciones</span>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="documento in documentosAceptacion">
+                                                    <!--td>
+                                                        <md-button style="background-color: #7d2428;" ng-click="descargarFormatoAceptacion(documento)"
+                                                            class="md-fab md-mini">
+                                                                <md-icon style="font-size: 21px; " class="icon-cloud-download"></md-icon>
+                                                                <md-tooltip>Descargar formato</md-tooltip>
+                                                        </md-button>
+                                                        <! -- <span ng-click="descargarFormatoAceptacion(documento)" class="icon-cloud-download"
+                                                            style="font-size: 20px; cursor: pointer;">
+                                                            <md-tooltip>Descargar formato</md-tooltip>
+                                                        </span> ->
+                                                    </td>
+                                                    <td>{{documento.DocumentName}}</td>
+                                                    <td>
+                                                        {{documento.status === "0" ? "SIN CARGAR" : ''}}
+                                                        {{documento.status === "1" ? "SIN VALIDAR" : ''}}
+                                                        {{documento.status ===
+                                                        "2" ? "VALIDADO" : ''}} {{documento.status === "3" ? "RECHAZO"
+                                                        :
+                                                        ''}}
+                                                    </td>
+                                                    <td>{{documento.notes}}</td>
+                                                    <td>
+                                                        <div ng-show="documento.status === '0' || documento.status === '3'"
+                                                            class="upload-button" layout="column" layout-align="center center">
+                                                            <input ng-click="cambiaColorBoton(documento)" class="form-control"
+                                                                type="file" ng-model="fileAceptacion" name="documentFileAceptacion_{{documento.id}}"
+                                                                id="documentFileAceptacion_{{documento.id}}">
+                                                            <span class="secondary-text mt-8">Max 10 MB</span>
+                                                        </div>
+
+                                                        <div ng-show="documento.status > '0'" class="upload-button"
+                                                            layout="column" layout-align="center center">
+                                                            <md-button style="background-color: #7d2428;" ng-click="vm.modalArchivoAceptacion(event, documento)"
+                                                                ng-disabled="doc.RequiresTemplateFile === '0'" class="md-fab md-mini"
+                                                                aria-label="Eat cake">
+                                                                <md-icon style="font-size: 21px; " class="icon-file-document"></md-icon>
+                                                                <md-tooltip md-direction="top">Ver Formato</md-tooltip>
+                                                            </md-button>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <md-button ng-disabled="documento.status > 0 && documento.status != 3"
+                                                            id="estiloBoton_{{documento.id}}" class="md-raised md-background"
+                                                            ng-click="anexarArchivoAceptacion(documento)">
+                                                            <span>
+                                                                {{documento.status === "0" ? "SUBIR DOCUMENTO" : ''}}
+                                                                {{documento.status === "1" ? "EN REVISIÓN" : ''}}
+                                                                {{documento.status
+                                                                === "2" ? "VALIDADO" : ''}} {{documento.status === "3"
+                                                                ?
+                                                                "SUBIR DOCUMENTO" : ''}}
+                                                            </span>
+                                                        </md-button>
+                                                    </td-->
+
+                                                    <td>
+                                                        {{documento.DocumentName}}<br>
+                                                        <md-button style="background-color: #7d2428;" ng-click="descargarFormato(documento)"
+                                                        ng-show="documento.RequiresTemplateFile === '1'" class="md-fab md-mini">
+                                                            <md-icon style="font-size: 21px; " class="icon-cloud-download"></md-icon>
+                                                            <md-tooltip>Descargar formato</md-tooltip>
+                                                        </md-button><br>
+                                                        {{documento.status === "0" ? "SIN CARGAR" : ''}}
+                                                        {{documento.status === "1" ? "SIN VALIDAR" : ''}}
+                                                        {{documento.status ===
+                                                        "2" ? "VALIDADO" : ''}} {{documento.status === "3" ? "RECHAZO"
+                                                        :
+                                                        ''}}<br>
+                                                        {{documento.notes}}
+                                                    </td>
+                                                    <td>
+                                                        <div ng-show="documento.status === '0' || documento.status === '3'"
+                                                            class="upload-button" layout="column" layout-align="center center">
+                                                            <input ng-click="cambiaColorBoton(documento)" class="form-control"
+                                                                type="file" ng-model="file" name="documentFile_{{documento.id}}"
+                                                                id="documentFile_{{documento.id}}">
+                                                            <span class="secondary-text mt-8">PDF - Max 10 MB</span>
+                                                        </div>
+
+                                                        <div ng-show="documento.status > '0'" class="upload-button"
+                                                            layout="column" layout-align="center center">
+                                                            <md-button style="background-color: #7d2428;" ng-click="vm.modalArchivo(event, documento)"
+                                                                ng-disabled="doc.RequiresTemplateFile === '0'" class="md-fab md-mini"
+                                                                aria-label="Eat cake">
+                                                                <md-icon style="font-size: 21px; " class="icon-file-document"></md-icon>
+                                                                <md-tooltip md-direction="top">Ver Formato</md-tooltip>
+                                                            </md-button>
+                                                            <md-button style="background-color: #7d2428;" ng-click="eliminarArchivo(documento)"
+                                                            ng-show="documento.status === '1'" class="md-fab md-mini">
+                                                                <md-icon style="font-size: 21px; " class="icon-close-circle"></md-icon>
+                                                                <md-tooltip>Eliminar Documento</md-tooltip>
+                                                            </md-button>
+                                                        </div>
+                                                        <div ng-show="documento.status === '0' || documento.status === '3'"
+                                                            class="upload-button" layout="column" layout-align="center center">
+                                                            <md-button ng-disabled="documento.status > 0 && documento.status != 3"
+                                                                id="estiloBoton_{{documento.id}}" class="md-raised md-background"
+                                                                ng-click="anexarArchivo(documento)">
+                                                                <span>
+                                                                    {{documento.status === "0" ? "SUBIR DOCUMENTO" : ''}}
+                                                                    {{documento.status === "1" ? "EN REVISIÓN" : ''}}
+                                                                    {{documento.status
+                                                                    === "2" ? "VALIDADO" : ''}} {{documento.status === "3"
+                                                                    ?
+                                                                    "SUBIR DOCUMENTO" : ''}}
+                                                                </span>
+                                                            </md-button>
+                                                        </div>  
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </md-tab-body>
+            </md-tab>
+        </md-tabs> 
+    </div> 
+</div>

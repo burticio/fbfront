@@ -1,0 +1,114 @@
+<div class="page-layout carded fullwidth single-scroll" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-clipboard-text"></md-icon> <span> &nbsp; Solicitudes Canalizadas Estudia Más </span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span>Total de Registros:</span>
+                    <span>{{solicitudes.length}}</span>
+                </div>
+            </div>
+            <div>
+                <md-button ng-click="downloadFile()" style="background-color:white;" class="md-fab md-primary md-hue-2" aria-label="Profile">
+                    <md-tooltip>Exportar Contenido</md-tooltip>
+                    <md-icon style="color: #844648;font-size: 26px;" class="icon-file-excel"></md-icon>
+                </md-button>
+            </div>
+        </div>
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- / CONTENT -->
+            <md-content class="content" ms-scroll>
+
+                <table id="tablaAceptadas" class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance" dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">VER SOLICITUD</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">NOMBRE</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">NACIONALIDAD</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">PAÍS RESIDE.</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">EMAIL</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">UNIV. PROGRAMA</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">CLASIFICACIÓN</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">PROGRAMA</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">PAÍS PROGRAMA</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <tr ng-repeat="solicitudes in solicitudes">
+                            <td style="text-align: center !important;">
+                                <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="mostrarDetalle(solicitudes)">
+                                    <md-tooltip md-direction="top">Ver detalle de solicitud</md-tooltip>
+                                    <md-icon md-font-icon="icon-clipboard-text" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-clipboard-text" role="img" aria-label="icon-clipboard-text"></md-icon>
+                                </md-button>
+                            </td>
+                            <td>{{solicitudes.Person_Name}} {{solicitudes.Person_lastName}} {{solicitudes.Person_mLastName}}</td>
+                            <td>{{solicitudes.nationality}}</td>
+                            <td>{{solicitudes.residenceCountry_name}}</td>
+                            <td>{{solicitudes.email}}</td>
+                            <td>{{solicitudes.Program_University_Name}}</td>
+                            <td>{{solicitudes.Classification_Name}}</td>
+                            <td>{{solicitudes.Program_Name}}</td>
+                            <td>{{solicitudes.Program_Country_Name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

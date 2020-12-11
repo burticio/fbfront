@@ -1,0 +1,195 @@
+<div class="page-layout carded fullwidth single-scroll" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <h1>Entrevistas Asignadas</h1>
+                </div>
+                <div class="product-count secondary-text">
+                    <span>Total de entrevistas asignadas:</span>
+                    <span>{{entrevistas.length>0?entrevistas.length:0}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar" layout="row" layout-align="start center">
+                <span></span>
+            </div>
+            <!-- / CONTENT TOOLBAR -->
+
+            <!-- CONTENT -->
+            <md-content class="content" ms-scroll>
+
+                <!-- DATATABLE -->
+                <div class="content fullpage-datatable" layout="column" flex>
+
+                    <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance" dt-options="vm.dtOptions">
+                        <thead>
+                            <tr>
+                                <th class="secondary-text">
+                                    <div class="table-header">
+                                        <span class="column-title">SOLICITANTE</span>
+                                    </div>
+                                </th>
+                                <th class="secondary-text">
+                                    <div class="table-header">
+                                        <span class="column-title">PROGRAMA</span>
+                                    </div>
+                                </th>
+                                <th class="secondary-text">
+                                    <div class="table-header">
+                                        <span class="column-title">CLASIFICACIÓN</span>
+                                    </div>
+                                </th>
+                                <th class="secondary-text">
+                                    <div class="table-header">
+                                        <span class="column-title">FECHA/HORA</span>
+                                    </div>
+                                </th>
+                                <th class="secondary-text">
+                                    <div class="table-header">
+                                        <span class="column-title">ESTATUS</span>
+                                    </div>
+                                </th>
+                                <th class="secondary-text">
+                                    <div class="table-header">
+                                        <span class="column-title">CALIFICACIÓN</span>
+                                    </div>
+                                </th>
+                                <th class="secondary-text">
+                                    <div class="table-header">
+                                        <span class="column-title">ACCIONES</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="entrevista in entrevistas">
+                                <td>{{entrevista.applicant}}</td>
+                                <td>{{entrevista.ProgramName}}</td>
+                                <td>{{entrevista.Program_Classification}}</td>
+                                <td style="text-align:center;">
+                                    {{entrevista.date === "Invalid date" ? "POR AGENDAR" : entrevista.date}}
+                                </td>
+                                <td>
+                                    {{entrevista.status === "0" ? "POR PROPONER FECHA" : ''}}
+                                    {{entrevista.status === "1" ? "FECHA PROPUESTA AGENTE" : ''}}
+                                    {{entrevista.status === "2" ? "FECHA PROPUESTA SOLICITANTE" : ''}}
+                                    {{entrevista.status === "3" ? "FECHA ACEPTADA" : ''}}
+                                    {{entrevista.status === "4" ? "CANCELADA" : ''}}
+                                    {{entrevista.status === "5" ? "POR CALIFICAR" : ''}}
+                                    {{entrevista.status === "6" ? "CALIFICADA" : ''}}
+                                    {{entrevista.status === "7" ? "TERMINADA" : ''}}
+                                </td>
+                                <td style="text-align:center;">
+                                    {{entrevista.text_Score === "" ? "SIN CALIFICAR" : entrevista.text_Score}}
+                                </td>
+                                <td>
+                                    <div ng-if="entrevista.status == '0'">
+                                        <md-button class="md-raised md-background" ng-click="agendarFecha(entrevista)" ng-hide = 'uType==7'>
+                                            <span>AGENDAR</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="dlgcancelarSolicitud(event,entrevista)" ng-hide = 'uType==7'>
+                                            <span>CANCELA SOLICITUD</span>
+                                        </md-button>
+                                    </div>
+                                    <div ng-if="entrevista.status == '1'">
+                                        <md-button class="md-raised md-background" ng-click="agendarFecha(entrevista)" ng-hide = 'uType==7'>
+                                            <span>CAMBIAR FECHA</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="vm.aceptarFecha(entrevista)" ng-hide = 'uType==7'>
+                                            <span>ACEPTAR FECHA</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="dlgcancelarSolicitud(event,entrevista)" ng-hide = 'uType==7'>
+                                            <span>CANCELA SOLICITUD</span>
+                                        </md-button>
+                                    </div>
+                                    <div ng-if="entrevista.status == '2'">
+                                        <md-button class="md-raised md-background" ng-click="vm.aceptarFecha(entrevista)" ng-hide = 'uType==7'>
+                                            <span>ACEPTAR FECHA</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="agendarFecha(entrevista)" ng-hide = 'uType==7'>
+                                            <span>PROPONER OTRA</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="dlgcancelarSolicitud(event,entrevista)" ng-hide = 'uType==7'>
+                                            <span>CANCELA SOLICITUD</span>
+                                        </md-button>
+                                    </div>
+                                    <div ng-if="entrevista.status == '3'">
+                                        <md-button class="md-raised md-background" ng-click="capturarEntrevista(entrevista)" ng-show = "entrevista.application_details == '0'">
+                                            <span>CAPTURAR</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="capturarEntrevistaV2(entrevista)" ng-hide = "entrevista.application_details == '0'">
+                                            <span>CAPTURAR V2</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="agendarFecha(entrevista)" ng-hide = 'uType==7'>
+                                            <span>CAMBIAR FECHA</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="dlgcancelarSolicitud(event,entrevista)" ng-hide = 'uType==7'>
+                                            <span>CANCELA SOLICITUD</span>
+                                        </md-button>
+                                    </div>
+                                    <div ng-if="entrevista.status == '4'">
+                                        <h1>CANCELADA</h1>
+                                    </div>
+                                    <div ng-if="entrevista.status == '5'">
+                                        <md-button class="md-raised md-background" ng-click="capturarEntrevista(entrevista)" ng-show = "entrevista.application_details == '0'">
+                                            <span>VER ENTREVISTA</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="capturarEntrevistaV2(entrevista)" ng-hide = "entrevista.application_details == '0'">
+                                            <span>VER ENTREVISTA V2</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="calificarEntrevista(entrevista)"ng-hide = 'uType==7'>
+                                            <span>CALIFICAR</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="dlgcancelarSolicitud(event,entrevista)" ng-hide = 'uType==7'>
+                                            <span>CANCELA SOLICITUD</span>
+                                        </md-button>
+                                    </div>
+                                    <div ng-if="entrevista.status == '6'">
+                                        <md-button class="md-raised md-background" ng-click="capturarEntrevista(entrevista)" ng-show = "entrevista.application_details == '0'">
+                                            <span>VER ENTREVISTA</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="capturarEntrevistaV2(entrevista)" ng-hide = "entrevista.application_details == '0'">
+                                            <span>VER ENTREVISTA V2</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="calificarEntrevista(entrevista)">
+                                            <span>VER CALIFICACIÓN</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="finalizarEntrevista(entrevista)" ng-hide = 'uType==7'>
+                                            <span>TERMINAR</span>
+                                        </md-button>
+                                        <md-button class="md-raised md-background" ng-click="dlgcancelarSolicitud(event,entrevista)" ng-hide = 'uType==7'>
+                                            <span>CANCELA SOLICITUD</span>
+                                        </md-button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <!-- / DATATABLE -->
+
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

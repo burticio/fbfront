@@ -1,0 +1,89 @@
+ <md-dialog style="width: 70%">
+
+     <div id="contenidoModal" name="contenidoModal">
+         <md-toolbar>
+             <div class="md-toolbar-tools">
+                 <h2>Registro de Usuarios</h2>
+             </div>
+         </md-toolbar>
+
+         <md-content layout-padding>
+             <form name="dataUser" novalidate>
+
+                     <md-input-container flex="100">
+                         <label>Nombre:</label>
+                         <input style="width: 417px;" required md-no-asterisk name="name" ng-model="data.name">
+                         <div ng-messages="dataUser.name.$error">
+                             <div ng-message="required">Este campo es requerido.</div>
+                         </div>
+                     </md-input-container>
+
+                     <md-input-container flex="100">
+                         <label>A. Paterno:</label>
+                         <input style="width: 417px;" required md-no-asterisk name="name" ng-model="data.lastName">
+                         <div ng-messages="dataUser.name.$error">
+                             <div ng-message="required">Este campo es requerido.</div>
+                         </div>
+                     </md-input-container>
+
+                     <md-input-container flex="100">
+                         <label>A. Materno:</label>
+                         <input style="width: 417px;" required md-no-asterisk name="name" ng-model="data.mLastName">
+                         <div ng-messages="dataUser.name.$error">
+                             <div ng-message="required">Este campo es requerido.</div>
+                         </div>
+                     </md-input-container>
+
+                      <!-- <md-input-container flex="100">
+                         <label>Nacionalidad:</label>
+                         <input style="width: 417px;" required md-no-asterisk name="name" ng-model="data.nationality">
+                         <div ng-messages="dataUser.name.$error">
+                             <div ng-message="required">Este campo es requerido.</div>
+                         </div>
+                     </md-input-container> 
+                      -->
+
+                     <md-input-container flex="100">
+                         <label>Correo electrónico</label>
+                         <input style="width: 300px" required md-no-asterisk name="email" ng-pattern="/^.+@.+\..+$/" ng-model="data.email">
+                         <div ng-messages="dataUser.email.$error">
+                             <div ng-message="required">Este campo es requerido.</div>
+                         <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                             Formato inválido
+                         </div>
+                         </div>
+                     </md-input-container>
+                        <br>
+                        <md-checkbox ng-model="editaPass" aria-label="Checkbox 1">
+                            Editar Contraseña  
+                          </md-checkbox>
+                          <br>
+                     <md-input-container flex="100">
+                        <label>Contraseña</label>
+                        <input ng-disabled="!editaPass" type="password" required md-no-asterisk name="password" ng-model="data.password">
+                        <div ng-messages="dataUser.password.$error">
+                            <div ng-message="required">Este campo es requerido.</div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container flex="100">
+                        <label>Repetir Contraseña</label>
+                        <input ng-disabled="!editaPass" type="password" required md-no-asterisk id="repeatPass" name="repeatPass"> 
+                    </md-input-container>
+                    <br>    
+                    <md-input-container flex="150">
+                        <md-select ng-model="perfil.modelo" placeholder="Perfil" class="md-no-underline" flex="100">
+                            <md-option value="0">- SELECCIONA -</md-option> 
+                            <md-option ng-repeat="per in perfil.opciones" value="{{per.id}}">{{per.name}}</md-option> 
+                        </md-select>
+                        </md-input-container>
+ 
+                 <md-dialog-actions class="footerModal">
+                     <md-button ng-disabled="vm.dataUser" ng-click="enviarInformacion()">Guardar</md-button>
+                     <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                 </md-dialog-actions>
+             </form>
+         </md-content>
+
+     </div>
+ </md-dialog>

@@ -1,0 +1,17 @@
+<md-dialog style="width: 40%;padding: 19px;">
+        <md-input-container class="md-block">
+                <md-select ng-model="rechazo.modelo" ng-change="changeOption()" placeholder="Selecciona un motivo de rechazo" class="md-no-underline" flex="100">
+                        <md-option value="0">- SELECCIONA -</md-option>
+                        <md-option ng-repeat="pa in rechazo.opciones" value="{{pa.id}}">{{pa.name}}</md-option>
+                </md-select>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+                <label>Motivo del rechazo</label>
+                <textarea ng-model="data.comentarioRechazo" md-maxlength="150" max-rows="5"></textarea>
+        </md-input-container>
+
+        <md-dialog-actions class="footerModal">
+                <md-button ng-disabled="vm.data.$valid" ng-click="rechazarDocumento()">Rechazar documento</md-button>
+        </md-dialog-actions>
+</md-dialog>

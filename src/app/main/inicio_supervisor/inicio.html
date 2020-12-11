@@ -1,0 +1,125 @@
+<div id="profile" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="space-between end">
+        <div class="user-info" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="start center">
+            <img class="profile-image avatar huge" src="./assets/images/backgrounds/logoFundacionBecaBlanco.png">
+
+            <div class="name">¡Bienvenido(a) a Fundación Beca!</div>
+        </div>
+
+        <!-- <div class="actions" layout="row" layout-align="end center">
+            <md-button class="md-raised md-accent" aria-label="Follow" translate="PROFILE.FOLLOW"
+                       translate-attr-aria-label="PROFILE.FOLLOW">Follow
+            </md-button>
+            <md-button class="md-raised md-primary" translate="PROFILE.SEND_MESSAGE"
+                       translate-attr-aria-label="PROFILE.SEND_MESSAGE">Send Message
+            </md-button>
+        </div> -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" flex>
+
+        <md-tabs md-dynamic-height>
+            <md-tab>
+                <md-tab-label>
+                    <span>Inicio</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout="row" layout-wrap>
+
+                        <div class="about" layout="column" flex="100" flex-gt-sm="50" flex-gt-md="65">
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <header style=" background-color:#781f23; color: white;">
+                                    <div class="title">TAREAS</div>
+                                </header>
+
+                                <div class="content" ng-repeat="solicitud in solicitudes">
+                                    <!-- <div class="info-line">
+                                        <div class="title">Nombre del programa</div>
+                                        <div class="info">{{solicitud.Program_Name_1}}</div>
+                                    </div>
+
+                                    <div class="info-line">
+                                        <div class="title">Clasificación</div>
+                                        <div class="info">{{solicitud.Classification_Name}}</div>
+                                    </div>
+
+                                    <div class="info-line">
+                                        <div class="title">Estatus de la solicitud</div>
+                                        <div class="info">{{solicitud.status === "0" ? "Creada" : ''}}</div>
+                                    </div>
+
+                                    <div class="info-line">
+                                        <div class="title">Acciones</div>
+                                        <div class="info">
+                                            <md-button class="md-raised md-background" ng-click="vm.verDocumentos(solicitud)">
+                                                <span>Ver documentos</span>
+                                            </md-button>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about-sidebar" layout="column" flex="100" flex-gt-sm="50" flex-gt-md="35">
+                            <!-- <div class="profile-box friends md-whiteframe-1dp" layout="column">
+                                <header class="md-accent-bg" layout="row" layout-align="space-between center">
+                                    <div class="title">CITAS</div>
+                                    <div class="more secondary-text">
+                                        <span translate="PROFILE.SEE">See</span>
+                                        <span>454</span>
+                                        <span translate="PROFILE.MORE">More</span>
+                                    </div>  
+                                 </header>
+                                <div class="content" layout="row" layout-wrap>
+                                    Por el momento no te han asignado alguna cita 
+                               <div class="friend" flex="20" ng-repeat="friend in vm.about.friends">
+                                        <img ng-src="{{friend.avatar}}">
+                                    </div>  
+                             </div>
+                            </div> -->
+
+                            <!-- <div class="profile-box groups md-whiteframe-1dp" layout="column">
+                                <header class="md-accent-bg" layout="row" layout-align="space-between center">
+                                    <div class="title" translate="PROFILE.JOINED_GROUPS">Joined Groups</div>
+                                    <div class="more secondary-text">
+                                        <span translate="PROFILE.SEE">See</span>
+                                        <span>6</span>
+                                        <span translate="PROFILE.MORE">More</span>
+                                    </div>
+                                </header>
+                    
+                                <div class="content">
+                                    <div class="group" ng-repeat="group in vm.about.groups" layout="row"
+                                         layout-align="space-between center">
+                                        <div layout="row" layout-align="start center">
+                                            <img ng-src="{{group.logo}}" class="logo" alt="{{group.name}}"/>
+                    
+                                            <div>
+                                                <div class="name">{{group.name}}</div>
+                                                <div class="category">{{group.category}}</div>
+                                                <div class="members">{{group.members}} people</div>
+                                            </div>
+                                        </div>
+                                        <md-button class="md-icon-button" aria-label="more" translate
+                                                   translate-attr-aria-label="PROFILE.MORE">
+                                            <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+
+                    </div>
+                </md-tab-body>
+            </md-tab>
+             
+        </md-tabs>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

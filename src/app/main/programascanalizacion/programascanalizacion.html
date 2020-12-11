@@ -1,0 +1,94 @@
+<div class="page-layout carded fullwidth single-scroll" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-clipboard-text"></md-icon> <span> &nbsp; Programas para canalización </span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span>Total de Registros:</span>
+                    <span>{{solicitudes.length}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <div layout="row" layout-align="start center">
+                <md-button ng-click="dialogNewProgram()" style="background-color:#781f23; color: white; padding: 0px 20px !important;" ng-hide = 'uType==7'>
+                    Nuevo Programa
+                </md-button>
+            </div>
+
+            <!-- / CONTENT -->
+            <md-content class="content" ms-scroll>
+
+                <table id="tablaProgramasCanalizacion" class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance" dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">ID</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">INSTITUCIÓN</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">NOMBRE CONTACTO</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">EMAIL CONTACTO</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">ACCIONES</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <tr ng-repeat="solicitudes in solicitudes">
+                            <td>{{solicitudes.id}}</td>
+                            <td>{{solicitudes.name}}</td>
+                            <td>{{solicitudes.contact_name}}</td>
+                            <td>{{solicitudes.contact_email}}</td>
+                            <td style="text-align: center !important;">
+                                <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="deleteProgram(solicitudes)" ng-hide = 'uType==7'>
+                                    <md-tooltip md-direction="top">Eliminar Programa</md-tooltip>
+                                    <md-icon md-font-icon="icon-close" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-close" role="img" aria-label="icon-close"></md-icon>
+                                </md-button>
+                                <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="updateProgram(solicitudes)" ng-hide = 'uType==7'>
+                                    <md-tooltip md-direction="top">Modificar Programa</md-tooltip>
+                                    <md-icon md-font-icon="icon-pencil" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-pencil" role="img" aria-label="icon-pencil"></md-icon>
+                                </md-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

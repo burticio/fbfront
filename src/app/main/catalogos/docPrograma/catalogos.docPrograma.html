@@ -1,0 +1,127 @@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<a id="descargarArchivo"></a>
+
+<div class="page-layout carded fullwidth single-scroll" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-account-circle"></md-icon>
+                    <span>Documentos por programa</span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span>Total documentos:</span>
+                    <span>{{documentos.length}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <md-button class="md-raised md-background" ng-click="vm.agregarDocumento()" ng-hide = 'uType==7'>
+                <span>Agregar</span>
+            </md-button>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar" layout="row" layout-align="start center">
+                <span></span>
+            </div>
+            <!-- / CONTENT TOOLBAR -->
+
+            <!-- CONTENT -->
+            <md-content class="content" ms-scroll>
+
+                <table id="tablaUsuarios" class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance" dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <!--<th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">ID</span>
+                            </div>
+                        </th>-->
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Clasificacion</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Documento</span>
+                                </div>
+                            </th>
+
+                            <!--th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Asignación Beca</span>
+                                </div>
+                            </th-->
+
+                            <!--th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Ver Archivo</span>
+                                </div>
+                            </th-->
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Acciones</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="doc in documentos">
+                            <!--<td>{{usuario.id}}</td>-->
+                            <td>{{doc.Program_Classification}}</td>
+                            <td>
+                                <strong>Nombre: </strong>{{doc.DocumentName}}<br>
+                                <strong>Para Asignación: </strong>{{doc.ForScholarshipAssignation === '0' ? 'NO': 'SI'}}<br>
+                                <strong>Tipo de Documento: </strong>{{doc.url === '0' ? 'Archivo': 'URL'}}<br>
+                                <strong>Requiere Formato: </strong>{{doc.RequiresTemplateFile === '0' ? 'NO': 'SI'}}
+                            </td>
+                            <!--td> 
+                                <md-button style="background-color: #7d2428;" ng-click="vm.modalArchivo(event, doc)" ng-disabled="doc.RequiresTemplateFile === '0'"
+                                    class="md-fab md-mini" aria-label="Eat cake">
+                                    <md-icon style="font-size: 21px; " class="icon-file-document"></md-icon>
+                                    <md-tooltip md-direction="top">Ver Formato</md-tooltip>
+                                </md-button>
+                            </td-->
+                            <td>
+                                <md-button class="edit-button md-icon-button" ng-click="vm.modalArchivo(event, doc)" ng-hide="doc.RequiresTemplateFile === '0'" aria-label="Ver documento">
+                                <md-icon md-font-icon="icon-file-document" class="s16"></md-icon>
+                                </md-button>
+
+                                <md-button class="edit-button md-icon-button" ng-click="vm.editarDocumento(event,doc)" aria-label="Ver documento" ng-hide = 'uType==7'>
+                                    <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+                                </md-button>
+
+                                <md-button class="edit-button md-icon-button" ng-click="vm.eliminarDocumento(doc)" aria-label="Product details" translate
+                                    translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                    <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                                </md-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+</div>

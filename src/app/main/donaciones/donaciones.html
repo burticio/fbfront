@@ -1,0 +1,161 @@
+<div id="profile" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="space-between end">
+        <div class="user-info" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="start center">
+            <img class="profile-image avatar huge" src="./assets/images/backgrounds/logoFundacionBecaBlanco.png">
+
+            <div class="name">¡Bienvenido(a) a Fundación Beca!</div>
+        </div>
+
+        <!-- <div class="actions" layout="row" layout-align="end center">
+            <md-button class="md-raised md-accent" aria-label="Follow" translate="PROFILE.FOLLOW"
+                       translate-attr-aria-label="PROFILE.FOLLOW">Follow
+            </md-button>
+            <md-button class="md-raised md-primary" translate="PROFILE.SEND_MESSAGE"
+                       translate-attr-aria-label="PROFILE.SEND_MESSAGE">Send Message
+            </md-button>
+        </div> -->
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" flex>
+
+        <md-tabs md-dynamic-height>
+            <md-tab>
+                <md-tab-label>
+                    <span>Inicio</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout="row" layout-wrap>
+                        <div>
+                            <md-button ng-click="downloadFile()" style="background-color:white;" class="md-fab md-primary md-hue-2" aria-label="Profile">
+                                <md-tooltip>Exportar Contenido</md-tooltip>
+                                <md-icon style="color: #844648;font-size: 26px;" class="icon-file-excel"></md-icon>
+                            </md-button>
+                        </div>
+                        <div class="about" layout="column" flex="100" flex-gt-sm="100" flex-gt-md="100">
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <header style=" background-color:#781f23; color: white;">
+                                    <div class="title">DONACIONES</div>
+                                </header>
+                                <div class="content fullpage-datatable" layout="column" flex>
+
+                                    <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                                        dt-options="vm.dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Donante</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Donación</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Tarjeta / Cuenta</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Datos Recibo</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Fecha Autorización</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Estatus</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">ACCIONES</span>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="donacion in donaciones">
+                                                
+                                                <td><!-- DONANTE -->
+                                                    <strong>Nombre: </strong>{{donacion.name}} {{donacion.lastname}}<br>
+                                                    <strong>Email: </strong>{{donacion.email}}<br>
+                                                    <strong>WhatsApp: </strong>{{donacion.phone}}
+                                                </td>
+                                                <td><!-- DONACION -->
+                                                    <strong>Monto: </strong>{{donacion.amount|currency}}<br>
+                                                    <strong>Periodicidad: </strong>{{donacion.donationType}}
+                                                </td>
+                                                <td><!-- TARJETA -->
+                                                    <strong>Titular: </strong>{{donacion.cardHolderName}}<br>
+                                                    <strong>Tipo: </strong>{{donacion.cardType}}<br>
+                                                    <strong>Banco: </strong>{{donacion.cardIssuerBank}}
+                                                </td>
+                                                <td><!-- RECIBO -->
+                                                    <strong>Recibo:</strong>{{donacion.rfc=='none'?'Si':'No'}}<br>
+                                                    <strong>{{donacion.rfc=='none'?'RFC: ':''}}</strong>{{donacion.rfc=='none'?donacion.rfc:''}}<br>
+                                                    <strong>{{donacion.rfc=='none'?'Nombre: ':''}}</strong>{{donacion.rfc=='none'?donacion.namereceipt:''}}<br>
+                                                    <strong>{{donacion.rfc=='none'?'Email: ':''}}</strong>{{donacion.rfc=='none'?donacion.emailreceipt:''}}<br>
+                                                </td>
+                                                <td><!-- AUTORIZACION -->
+                                                    {{donacion.authDate}} - {{donacion.authTime}}
+                                                </td>
+                                                <td><!-- ESTATUS -->
+                                                    
+                                                </td>
+                                                <td><!-- ACCIONES -->
+                                                    <!--md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="dlgcancelarSolicitud(event,solicitud)" ng-hide ="donacion.status == '7' || donacion.status=='15' || donacion.status=='16' || uType==7">
+                                                        <md-tooltip md-direction="top">Cancelar Solicitud</md-tooltip>
+                                                        <md-icon md-font-icon="icon-close_circle" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-close-circle" role="img" aria-label="icon-close-circle"></md-icon>
+                                                    </md-button>
+
+                                                    <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="verDetalle(event,solicitud)">
+                                                        <md-tooltip md-direction="top">Ver Detalle</md-tooltip>
+                                                        <md-icon md-font-icon="icon-eye" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-clipboard-text" role="img" aria-label="icon-clipboard-text"></md-icon>
+                                                    </md-button>
+
+                                                    <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="validarDocumentos(solicitud)" ng-hide ="donacion.status == '0'">
+                                                        <md-tooltip md-direction="top">Ver Documentación</md-tooltip>
+                                                        <md-icon md-font-icon="icon-document" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-document" role="img" aria-label="icon-document"></md-icon>
+                                                    </md-button>
+
+                                                    <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="verEntrevista(solicitud)" ng-hide ="donacion.status == '0' || donacion.status == '1' || donacion.status == '3' || donacion.status=='4'">
+                                                        <md-tooltip md-direction="top">Ver Entrevista</md-tooltip>
+                                                        <md-icon md-font-icon="icon-clipboard-check" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-clipboard-list" role="img" aria-label="icon-clipboard-list"></md-icon>
+                                                    </md-button>
+                                                    <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="dlgcambiarPrograma(event,solicitud)" ng-hide ="donacion.status == '7' || donacion.status == '10' || donacion.status == '11' || donacion.status=='21'">
+                                                        <md-tooltip md-direction="top">Cambiar Programa</md-tooltip>
+                                                        <md-icon md-font-icon="icon-heart" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-heart" role="img" aria-label="icon-heart"></md-icon>
+                                                    </md-button-->
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </md-tab-body>
+            </md-tab>
+
+        </md-tabs>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

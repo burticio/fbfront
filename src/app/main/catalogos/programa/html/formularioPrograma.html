@@ -1,0 +1,245 @@
+<md-dialog style="width: 70%">
+
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Registro de programas</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+            <form name="dataProgram" novalidate>
+
+                <md-input-container flex="100">
+                    <md-select ng-model="pais.modelo" placeholder="País" ng-change="buscaEscuela();" class="md-no-underline" flex="100">
+                        <md-option value="0">- Pais -</md-option>
+                        <md-option ng-repeat="pais in pais.opciones" value="{{pais.id}}">{{pais.name}}</md-option>
+
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <md-select ng-model="universidad.modelo" placeholder="universidad" class="md-no-underline" flex="100">
+                        <md-option value="0">- Universidad -</md-option>
+                        <md-option ng-repeat="uni in universidad.opciones" value="{{uni.id}}">{{uni.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <br>
+                <md-input-container flex="100">
+                    <label>Nombre del programa:</label>
+                    <input style="width: 417px;" required md-no-asterisk name="ProgramName" ng-model="data.ProgramName">
+                    <div ng-messages="dataProgram.ProgramName.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Número de becas:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','Scholarship_Number');" onkeypress="validaSoloNumeros(this.value,'','Scholarship_Number');"
+                        onkeyup="validaSoloNumeros(this.value,'','Scholarship_Number');" style="width: 417px;" required md-no-asterisk
+                        id="Scholarship_Number" name="Scholarship_Number" ng-model="data.Scholarship_Number">
+                    <div ng-messages="dataProgram.Scholarship_Number.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Costo del programa:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','Program_Cost');" onkeypress="validaSoloNumeros(this.value,'','Program_Cost');"
+                        onkeyup="validaSoloNumeros(this.value,'','Program_Cost');" style="width: 417px;" required md-no-asterisk
+                        id="Program_Cost" name="Program_Cost" ng-model="data.Program_Cost">
+                    <div ng-messages="dataProgram.Program_Cost.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Porcentaje de beca:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','Scholarship_Percentage');" onkeypress="validaSoloNumeros(this.value,'','Scholarship_Percentage');"
+                        onkeyup="validaSoloNumeros(this.value,'','Scholarship_Percentage');" style="width: 417px;" required md-no-asterisk
+                        id="Scholarship_Percentage" name="Scholarship_Percentage" ng-model="data.Scholarship_Percentage">
+                    <div ng-messages="dataProgram.Scholarship_Percentage.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Apoyo para boleto de Avión:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','TicketSupport');" onkeypress="validaSoloNumeros(this.value,'','TicketSupport');"
+                        onkeyup="validaSoloNumeros(this.value,'','TicketSupport');" style="width: 417px;" required md-no-asterisk
+                        id="TicketSupport" name="TicketSupport" ng-model="data.TicketSupport">
+                    <div ng-messages="dataProgram.TicketSupport.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Apoyo para Gastos de Instalación:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','settlement');" onkeypress="validaSoloNumeros(this.value,'','settlement');"
+                        onkeyup="validaSoloNumeros(this.value,'','settlement');" style="width: 417px;" required md-no-asterisk
+                        id="settlement" name="settlement" ng-model="data.settlement">
+                    <div ng-messages="dataProgram.settlement.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+
+                <md-input-container flex="100">
+
+                    <md-checkbox ng-model="data.Medical_Expenses" aria-label="Checkbox 1">
+                        Apoyo para gastos Médicos:
+                    </md-checkbox>
+                </md-input-container>
+                <br>
+                <md-input-container flex="100">
+                    <label>Duración</label>
+                    <input type="number" min="0" max="150" value="0" required md-no-asterisk
+                        id="Duration" name="Duration" ng-model="data.duration" ng-change="mostrarMeses()">
+                    <div ng-messages="dataProgram.duration.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <md-select ng-model="periodo_duracion.modelo" placeholder="Periodo" ng-change="mostrarMeses()" ng-true-value="1" ng-false-value="0" class="md-no-underline" flex="100">
+                        <md-option value="0">- Periodo -</md-option>
+                        <md-option ng-repeat="p in periodo_duracion.opciones" value="{{p.id}}">{{p.name}}</md-option>
+                    </md-select>                    
+                </md-input-container><br>
+
+                <md-input-container flex="100" ng-show="periodo_duracion.modelo=='H'">
+                    <label>Duración Meses</label>
+                    <input md-no-asterisk type="number" min="0" max="150" value="0"
+                        id="Duration_m" name="Duration_m" ng-model="data.Duration_m" ng-change="mostrarMeses()">
+                </md-input-container><br>
+
+                <md-input-container flex="100">
+                    <span>Inicio del Programa</span><br>
+                    <!--span>{{datesString}}</span-->
+                    <md-checkbox ng-model="data.all_months">
+                        Inicia todos los meses
+                    </md-checkbox>
+                </md-input-container><br>
+
+                <md-input-container flex="100" ng-repeat="m in meses_inicio" ng-hide="data.duration=='0' || ocultar_meses || data.all_months==true">
+                    <div layout="column" layout-align="center center">{{ m.mes }}
+                    <md-checkbox ng-model="m.selec" ng-click="actualizaFechas(m)">
+                        
+                    </md-checkbox>
+                    </div>
+                </md-input-container>
+
+
+                <!--md-input-container flex="100">
+                    <label>Fecha Inicio:</label>
+                    <md-datepicker id="fechaIni" ng-model="data.Start_Date"></md-datepicker>
+                    <div ng-messages="dataProgram.Start_Date.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Fecha fin:</label>
+                    <md-datepicker id="fechaFin" ng-model="data.End_Date"></md-datepicker>
+                    <div ng-messages="dataProgram.End_Date.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container-->
+                <br>
+                <label>Folleto</label>
+                <br>
+                <md-input-container flex="100">
+                    <input type="file" id="documentFile" class="form-control">
+                </md-input-container>
+
+                <br>
+                <md-container>
+                    <md-input-container flex="100">
+                        <md-select ng-model="monedas.modelo" placeholder="Moneda" class="md-no-underline" flex="100">
+                            <md-option value="0">- Moneda -</md-option>
+                            <md-option ng-repeat=" mon in monedas.opciones" value="{{mon.id}}">{{mon.coin_name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="100">
+                        <md-select ng-model="areas.modelo" placeholder="Area" class="md-no-underline" flex="100">
+                            <md-option value="0">- Areas -</md-option>
+                            <md-option ng-repeat=" ar in areas.opciones" value="{{ar.id}}">{{ar.Program_Area}}</md-option>
+
+                        </md-select>
+                    </md-input-container>
+
+                    <!-- <md-input-container flex="100">
+                        <md-select ng-model="subAreas.modelo" placeholder="Sub Area" class="md-no-underline" flex="100">
+                            <md-option value="0">- Sub Area -</md-option>
+                            <md-option ng-repeat="sub in subAreas.opciones" value="{{sub.id}}">{{sub.Program_Subarea}}</md-option>
+
+                        </md-select>
+                    </md-input-container> -->
+
+
+
+
+
+                    <!-- <md-input-container flex="100"> 
+                            <md-select ng-model="estado.modelo" placeholder="Estado" class="md-no-underline" flex="100">
+                              <md-option value="0">- Estado -</md-option> 
+                              <md-option ng-repeat="estado in estado.opciones" value="{{estado.id}}">{{estado.name}}</md-option>                              
+                            </md-select>
+                       </md-input-container> -->
+
+
+
+                       <md-input-container flex="100">
+                        <md-select ng-model="clasificacion.modelo" ng-change="buscaTipoPrograma()" placeholder="Clasificacion" class="md-no-underline" flex="100">
+                            <md-option value="0">- Clasificacion -</md-option>
+                            <md-option ng-repeat="ti in clasificacion.opciones" value="{{ti.id}}">{{ti.Program_Classification}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="100">
+                        <md-select ng-model="tipo.modelo" placeholder="Tipo" class="md-no-underline" flex="100">
+                            <md-option value="0">- Tipo -</md-option>
+                            <md-option ng-repeat="ti in tipo.opciones" value="{{ti.id}}">{{ti.Program_Type}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="100">
+                        <md-select ng-model="modalidad.modelo" placeholder="Modalidad" class="md-no-underline" flex="100">
+                            <md-option value="0">- Modalidad -</md-option>
+                            <md-option ng-repeat="mod in modalidad.opciones" value="{{mod.id}}">{{mod.Program_Modality}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container flex="100">
+                        <md-checkbox ng-init="data.active=false" ng-model="data.active" aria-label="Checkbox 1">
+                            Programa activo
+                        </md-checkbox>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Notas del programa</label>
+                        <textarea ng-model="data.notes" md-maxlength="500" max-rows="5"></textarea>
+                    </md-input-container><br>
+                    <md-input-container flex="100">
+                    <label>Porcentaje de comisión:</label>
+                    <input onkeydown="validaSoloNumeros(this.value,'','fee');" onkeypress="validaSoloNumeros(this.value,'','fee');"
+                        onkeyup="validaSoloNumeros(this.value,'','fee');" style="width: 417px;" required md-no-asterisk
+                        id="fee" name="fee" ng-model="data.fee">
+                    <div ng-messages="dataProgram.fee.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                </md-container>
+
+
+                <md-dialog-actions class="footerModal">
+                    <md-button ng-disabled="vm.dataProgram" ng-click="enviarInformacion()">Guardar</md-button>
+                    <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                </md-dialog-actions>
+            </form>
+        </md-content>
+
+    </div>
+</md-dialog>

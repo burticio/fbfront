@@ -1,0 +1,33 @@
+<md-dialog style="width: 40%">
+
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Finaliza la orientación vocacional</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+            <form name="dataForm" novalidate>
+
+                <md-input-container flex="50">
+                    <label>Resultado de la orientación vocacional</label>
+                    <md-select ng-model="estatus.modelo">
+                        <md-option>
+                            <em>Ninguno</em>
+                        </md-option>
+                        <md-option ng-repeat="est in estatus.opciones" ng-value="est.id">
+                            {{est.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-dialog-actions class="footerModal">
+                    <md-button ng-disabled="vm.data" ng-click="enviarInformacion()">Guardar</md-button>
+                    <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                </md-dialog-actions>
+            </form>
+        </md-content>
+
+    </div>
+</md-dialog>

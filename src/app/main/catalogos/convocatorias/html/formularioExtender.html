@@ -1,0 +1,27 @@
+<md-dialog style="width: 40%">
+
+        <div id="contenidoModal" name="contenidoModal">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>Extender Convocatoria</h2>
+                </div>
+            </md-toolbar>
+    
+            <md-content layout-padding>
+                <form name="dataProgram" novalidate> 
+                    <div layout="column" layout-gt-xs="row"> 
+                        <md-input-container flex>
+                            Fecha Fin
+                            <md-datepicker id="fechaFin" ng-model="data.End_Date"></md-datepicker>
+                        </md-input-container> 
+                    </div> 
+                
+                    <md-dialog-actions class="footerModal">
+                        <md-button ng-disabled="disabledBoton" ng-click="enviarInformacion()">Guardar</md-button>
+                        <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                    </md-dialog-actions>
+                </form>
+            </md-content>
+    
+        </div>
+    </md-dialog>

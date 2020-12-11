@@ -1,0 +1,50 @@
+<md-dialog style="width: 50%">
+
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>¡Ya casi terminamos!</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+            <form name="dataForm" novalidate>
+                <label>Para realizar seguimiento a esta solicitud te crearemos una cuenta con el correo electrónico que nos proporcionaste</label>
+                <br>
+
+                <strong>{{data.email}}</strong>
+
+                <br> Proporciona una contraseña y tu usuario quedará listo
+
+                <md-input-container flex="100">
+                    <label>Contraseña</label>
+                    <input style="width: 447px;" type="password" required md-no-asterisk name="name" ng-model="data.password" ng-hide="ocultar">
+                    <div ng-messages="data.password.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Repetir contraseña</label>
+                    <input style="width: 447px;"  type="password" required md-no-asterisk id="repeatPassword" ng-model="data.repeatPass" name="repeatPassword" ng-hide="ocultar">
+                    <div ng-messages="data.password.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container flex="100">
+                    <md-checkbox ng-model="acepta">Acepto <a href="http://fundacionbeca.net/avisoprivacidad.php" target = "_blank">Términos y condiciones</a></md-checkbox>
+                </md-input-container>
+                <md-input-container flex="100">
+                    <label><strong>{{mensaje_envio}}</strong></label>
+                </md-input-container>
+
+                <md-dialog-actions class="footerModal">
+                    <md-button ng-disabled="vm.data.$valid" ng-click="enviarInformacion(data)" ng-show="acepta">Guardar</md-button>
+                    <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                </md-dialog-actions>
+            </form>
+        </md-content>
+
+    </div>
+</md-dialog>

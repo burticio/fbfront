@@ -1,0 +1,117 @@
+<md-dialog aria-label="Finalizar Entrevista" style="width: 50%;">
+    <!--form ng-cloak-->
+    <form ng-cloak>
+        <md-toolbar style="background-color: #781f23 !important;">
+            <div class="md-toolbar-tools">
+                <h2>Cambio de Programa en Solicitud</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <!--md-content ng-controller="solicitudesActivasController as vm" ng-cloak-->
+                <md-content>
+                    <!-- <md-input-container style="width: 100% !important;">
+                        <md-select ng-model="canalize_to" style="color: #000 !important;">
+                            <md-option value="0">Ninguna</md-option>
+                            <md-option value="1">Estudia Más</md-option>
+                            <md-option value="2">Otro programa</md-option>
+                        </md-select>
+                    </md-input-container> -->
+
+                    <md-input-container class="md-block" flex="100">
+                            <span style="cursor: pointer;" ng-click="borrarFiltros()" class="icon-eraser">Borrar Filtros 
+                                <md-tooltip >Borrar filtros</md-tooltip>
+                            </span>
+                            <div layout="row" layout-align="start" flex="100">
+                                <md-input-container flex="100">
+                                    <label>Clasificación</label>
+                                    <md-select ng-disabled="false" ng-change="buscaPrograma()" ng-model="clasificacion.modelo">
+                                        <md-option>
+                                            <em>Ninguno</em>
+                                        </md-option>
+                                        <md-option ng-repeat="clasifica in clasificacion.opciones" ng-value="clasifica.Classification_Id">
+                                            {{clasifica.Program_Classification}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div layout="row" layout-align="start" flex ="100">
+                                <md-input-container flex="100">
+                                    <label>País</label>
+                                    <md-select ng-change="buscaPrograma()" ng-model="pais.modelo">
+                                        <md-option>
+                                            <em>Ninguno</em>
+                                        </md-option>
+                                        <md-option ng-repeat="pai in pais.opciones" ng-value="pai.Country_Id">
+                                            {{pai.Country_Name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            
+                                <md-input-container flex="100">
+                                    <label>Universidad</label>
+                                    <md-select ng-change="buscaPrograma()" ng-model="universidad2.modelo">
+                                        <md-option>
+                                            <em>Ninguno</em>
+                                        </md-option>
+                                        <md-option ng-repeat="uni in universidad.opciones" ng-value="uni.University_Id">
+                                            {{uni.University_Name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            
+                            <div layout="row" layout-align="start" flex = "100">
+                                <md-input-container flex="100">
+                                    <label>Modalidad</label>
+                                    <md-select ng-change="buscaPrograma()" ng-model="modalidad.modelo">
+                                        <md-option>
+                                            <em>Ninguno</em>
+                                        </md-option>
+                                        <md-option ng-repeat="modal in modalidad.opciones" ng-value="modal.Modality_Id">
+                                            {{modal.Modality_Name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+
+                                <md-input-container flex="100">
+                                    <label>Area de Conocimiento</label>
+                                    <md-select ng-change="buscaPrograma()" ng-model="area.modelo">
+                                        <md-option>
+                                            <em>Ninguno</em>
+                                        </md-option>
+                                        <md-option ng-repeat="ar in area.opciones" ng-value="ar.Area_Id">
+                                            {{ar.Program_Area_Name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            
+
+                            <div layout="row" layout-align="start" flex="100">
+                                <md-input-container flex="100">
+                                    <label>Programa</label>
+                                    <md-select ng-model="programas.modelo">
+                                        <md-option ng-repeat="pro in programas.opciones" value="{{pro.id}}">
+                                            {{pro.ProgramName}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                    </md-input-container>
+
+                </md-content>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button class="md-raised" ng-click="respuestaCambiarPrograma(false, programas.modelo)" style="padding: 0px 20px !important;">
+                CANCELAR
+            </md-button>
+            <md-button ng-click="respuestaCambiarPrograma(true, programas.modelo)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                ACEPTAR
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

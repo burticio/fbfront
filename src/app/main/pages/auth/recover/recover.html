@@ -1,0 +1,54 @@
+ 
+<div id="recover" class="flex-scrollable" layout="column" ms-scroll>
+    <div id="reset-password-form-wrapper" layout="column" layout-align="center center">
+        <div id="reset-password-form" class="md-whiteframe-8dp">
+            <div class="logo">
+                <img src="./assets/images/backgrounds/logoFundacionBeca.png">
+            </div>
+
+            <div class="title">Crea una nueva contraseña</div>
+
+            <form name="resetPasswordForm" novalidate>
+                <md-input-container class="md-block" md-no-float>
+                    <input type="email" name="email" ng-model="email" placeholder="Correo electrónico"
+                           ng-pattern="/^.+@.+\..+$/" required>
+                    <div ng-messages="resetPasswordForm.email.$error" role="alert" multiple>
+                        <div ng-message="required">
+                            <span>Campo Requerido</span>
+                        </div>
+                        <div ng-message="pattern">
+                            <span>El formato del correo es inválido</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" md-no-float>
+                    <input type="password" name="password" ng-model="password" placeholder="Nueva contraseña"
+                           required>
+                    <div ng-messages="registerForm.password.$error" role="alert">
+                        <div ng-message="required">
+                            <span>Campo requerido</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" md-no-float>
+                    <input type="password" name="passwordConfirm" ng-model="passwordConfirm"
+                           placeholder="Confirma tu nueva contraseña"
+                           required>
+                    <div ng-messages="resetPasswordForm.passwordConfirm.$error" role="alert">
+                        <div ng-message="required">
+                            <span>Campo requerido</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-button ng-click="vm.cambiarPassword()" type="submit" class="md-raised md-accent submit-button" aria-label="UPDATE MY PASSWORD"
+                           ng-disabled="resetPasswordForm.$invalid || resetPasswordForm.$pristine"
+                           translate-attr-aria-label="RESETPASSWORD.UPDATE_PASSWORD">
+                    Reestablecer contraseña
+                </md-button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<md-dialog style="width: 50%">
+
+        <div id="contenidoModal" name="contenidoModal">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>¡Ya casi terminamos!</h2>
+                </div>
+            </md-toolbar>
+    
+            <md-content layout-padding>
+                <form name="dataForm" novalidate>
+                    <p><label>Ya haz utilizado tu correo electrónico: <strong>{{data.email}}</strong> con anterioridad.
+                    Si no recuerdas tus contraseñas te invitamos a reestablecer tus credenciales.</label></p>
+                    <br>
+                    <p>De lo contrario haz click en enviar para completar tu registro</p>
+                    <md-dialog-actions class="footerModal">
+                        <md-button ng-disabled="vm.data.$valid" ng-click="enviarInformacion(data)">Enviar</md-button>
+                        <md-button class="btnRojo" ng-click="closeDialog()">Deseo cambiar mi correo</md-button>
+                    </md-dialog-actions>
+                </form>
+            </md-content>
+    
+        </div>
+    </md-dialog>

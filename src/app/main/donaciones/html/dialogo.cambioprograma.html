@@ -1,0 +1,52 @@
+<md-dialog aria-label="Finalizar Entrevista" style="width: 30%;">
+    <!--form ng-cloak-->
+    <form ng-cloak>
+        <md-toolbar style="background-color: #781f23 !important;">
+            <div class="md-toolbar-tools">
+                <h2>Cancelación de Solicitudes</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <!--md-content ng-controller="solicitudesActivasController as vm" ng-cloak-->
+                <md-content>
+                    <h3>Motivo de Cancelación</h3>
+                    <!-- <md-input-container style="width: 100% !important;">
+                        <md-select ng-model="canalize_to" style="color: #000 !important;">
+                            <md-option value="0">Ninguna</md-option>
+                            <md-option value="1">Estudia Más</md-option>
+                            <md-option value="2">Otro programa</md-option>
+                        </md-select>
+                    </md-input-container> -->
+
+                    <md-input-container style="width: 100% !important;">
+                        <textarea id="id_motivocancelacion" ng-model="motivocancelacion" md-maxlength="250" rows="2" md-select-on-focus></textarea>
+                    </md-input-container>
+
+                    <!--div style="display: flex !important; margin-top: 10px !important;">
+                        <md-button class="md-raised" ng-click="respuestaCancelarSolicitud(false, motivocancelacion)" style="padding: 0px 20px !important;">
+                            CANCELAR
+                        </md-button>
+                        <div ng-show="motivocancelacion != null">
+                            <md-button ng-click="respuestaCancelarSolicitud(true, motivocancelacion)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                                ACEPTAR
+                            </md-button>
+                        </div>
+                    </div-->
+
+
+                </md-content>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button class="md-raised" ng-click="respuestaCancelarSolicitud(false, motivocancelacion)" style="padding: 0px 20px !important;">
+                CANCELAR
+            </md-button>
+            <md-button ng-click="respuestaCancelarSolicitud(true, motivocancelacion)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                ACEPTAR
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

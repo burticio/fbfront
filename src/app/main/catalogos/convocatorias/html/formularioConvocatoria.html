@@ -1,0 +1,76 @@
+<md-dialog style="width: 70%">
+
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Registro de convocatorias</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+            <form name="dataProgram" novalidate>
+
+                    <md-input-container flex="100">
+                            <md-select ng-model="clasificacion.modelo" placeholder="Clasificación" class="md-no-underline" flex="100">
+                                <md-option value="0">- -SELECCIONA -</md-option>
+                                <md-option ng-repeat="pais in clasificacion.opciones" value="{{pais.id}}">{{pais.Program_Classification}}</md-option>
+        
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container flex="100">
+                                <md-select ng-model="modalidad.modelo" placeholder="Modalidad" class="md-no-underline" flex="100">
+                                    <md-option value="0">- -SELECCIONA -</md-option>
+                                    <md-option ng-repeat="pais in modalidad.opciones" value="{{pais.id}}">{{pais.Program_Modality}}</md-option>
+            
+                                </md-select>
+                            </md-input-container>
+
+                <md-input-container flex="100">
+                    <label>Nombre de la convocatoria:</label>
+                    <input style="width: 417px;" required md-no-asterisk name="name" ng-model="data.name">
+                    <div ng-messages="dataProgram.name.$error">
+                        <div ng-message="required">Este campo es requerido.</div>
+                    </div>
+                </md-input-container>
+
+                <div layout="column" layout-gt-xs="row">
+
+                    <md-input-container flex>
+                        Fecha Inicio
+                        <md-datepicker id="fechaFin" ng-model="data.Start_Date"></md-datepicker>
+                    </md-input-container>
+
+                    <md-input-container flex>
+                        Fecha Fin
+                        <md-datepicker id="fechaFin" ng-model="data.End_Date"></md-datepicker>
+                    </md-input-container>
+
+                </div>
+
+
+                <!-- <div layout="column" layout-gt-xs="row">
+                    <md-input-container flex>
+                        <md-checkbox ng-model="data.extended" aria-label="Checkbox 1">
+                            Extender convocatoria
+                        </md-checkbox>
+                    </md-input-container>
+                </div> -->
+
+                <div layout="column" layout-gt-xs="row">
+                    <md-input-container flex>
+                        <md-checkbox ng-model="data.active" aria-label="Checkbox 1">
+                            Activo
+                        </md-checkbox>
+                    </md-input-container>
+                </div>
+
+                <md-dialog-actions class="footerModal">
+                    <md-button ng-disabled="disabledBoton" ng-click="enviarInformacion()">Guardar</md-button>
+                    <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                </md-dialog-actions>
+            </form>
+        </md-content>
+
+    </div>
+</md-dialog>

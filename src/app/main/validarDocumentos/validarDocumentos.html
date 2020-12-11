@@ -1,0 +1,131 @@
+<div class="page-layout carded left-sidenav single-scroll" layout="row">
+    <a id="descargarArchivo"></a>
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+    <!-- SIDENAV -->
+    <md-sidenav class="sidenav" md-is-locked-open="$mdMedia('gt-md')" md-component-id="sidenav" ms-scroll
+        ms-sidenav-helper>
+        <!-- SIDENAV HEADER -->
+        <div class="header">
+            <p>&nbsp;</p>
+        </div>
+        <!-- / SIDENAV HEADER -->
+        <!-- SIDENAV CONTENT -->
+        <md-content class="content" ms-scroll>
+            <div class="demo-sidenav">
+                <md-list>
+                    <md-subheader class="md-no-sticky">Documentos</md-subheader>
+                    <div ng-repeat=" solicitud in solicitudes">
+                        <md-list-item ng-show="solicitud.status ==='3'" style="padding: 0px 0px; border-left-color: red;border-left-style: solid; border-left-width: thick">
+                            <md-button style="font-size:10px;" ng-click="verDocumento(event,solicitud)" class="md-primary">{{solicitud.DocumentName}}
+                                <md-tooltip md-direction="top">{{solicitud.DocumentName}}
+                                </md-tooltip>
+                            </md-button>
+                        </md-list-item>
+
+                        <md-list-item ng-show="solicitud.status ==='2'" style="padding: 0px 0px; border-left-color: green;border-left-style: solid; border-left-width: thick">
+                            <md-button style="font-size:10px;" ng-click="verDocumento(event,solicitud)" class="md-primary">{{solicitud.DocumentName}}
+                                <md-tooltip md-direction="top">{{solicitud.DocumentName}}
+                                </md-tooltip>
+                            </md-button>
+                        </md-list-item>
+
+                        <md-list-item ng-show="solicitud.status ==='1'" style="padding: 0px 0px; border-left-color: yellow;border-left-style: solid; border-left-width: thick">
+                            <md-button style="font-size:10px;" ng-click="verDocumento(event,solicitud)" class="md-primary">{{solicitud.DocumentName}}
+                                <md-tooltip md-direction="top">{{solicitud.DocumentName}}
+                                </md-tooltip>
+                            </md-button>
+                        </md-list-item>
+                        <md-list-item ng-show="solicitud.status ==='0'" style="padding: 0px 0px; border-left-color: gray;border-left-style: solid; border-left-width: thick">
+                            <md-button style="font-size:10px;" ng-click="verDocumento(event,solicitud)" class="md-primary">{{solicitud.DocumentName}}
+                                <md-tooltip md-direction="top">{{solicitud.DocumentName}}
+                                </md-tooltip>
+                            </md-button>
+                        </md-list-item>
+                        <md-divider></md-divider>
+                    </div>
+                </md-list>
+            </div>
+        </md-content>
+        <!-- / SIDENAV CONTENT -->
+    </md-sidenav>
+    <!-- / SIDENAV -->
+    <!-- CENTER -->
+    <div class="center" flex>
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row">
+            <div>
+                <span class="h2 white-fg"> 
+                    <i style="cursor: pointer;" ng-click="volver()" class="icon-keyboard-backspace" ng-show="solicitud.status=='0'">
+                        <md-tooltip>
+                            Volver</md-tooltip>
+                    </i> 
+                    Validación de documentos</span>
+            </div>
+            <br>
+        </div>
+
+        <!-- / CONTENT HEADER -->
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <md-list flex>
+                <md-list-item class="md-3-line" ng-click="null">
+                    <img style="border-radius: 0%;" src="./assets/images/backgrounds/logoFundacionBeca.png" class="md-avatar"
+                        alt="" />
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{solicitud.Person_Name}} {{solicitud.Person_lastName}} {{solicitud.Person_mLastName}}</h3>
+                        <h4>{{solicitud.Program1_University_Name}}</h4>
+                        <p>{{solicitud.Program_Name_1}}</p>
+                    </div>
+                </md-list-item>
+                <md-divider></md-divider>
+            </md-list>
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar" layout="row" layout-align="start center">
+                <md-button class="md-icon-button sidenav-toggle" ng-click="vm.toggleSidenav('sidenav')" hide-gt-md
+                    aria-label="Toggle left sidenav">
+                    <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+                </md-button>
+                <p>Visualizador de archivos</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <md-button ng-show="mostrarBotonValidar && uType!=7" ng-click="validarDocumento();" class="md-success md-hue-1"
+                    style="background-color: green;color: white">Validar</md-button>
+                <md-button ng-show="mostrarBotonValidar && uType!=7" ng-click="rechazarDocumento();" class="md-warn md-raised md-hue-2">Rechazar</md-button>
+                <!--AGREGAR BOTON DE DESCARGAR ARCHIVO-->
+                <md-button ng-show="mostrarBotonDescargar" ng-click="descargarPDF();" class="md-success md-raised md-hue-1" style="background-color: blue;color: white">Descargar</md-button>
+                <div ng-show="subeDocumentoOperador && uType!=7" class="upload-button" layout="column" layout-align="center center">
+                    <table width="100%">
+                        <tr>
+                            <th>
+                                <input class="form-control" type="file" ng-model="file" id="documentFile" name="documentFile">
+                            </th>
+                            <th>
+                                <md-button ng-click="subirArchivo();" class="md-success md-raised md-hue-2">Subir</md-button>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- / CONTENT TOOLBAR -->
+        <!-- CONTENT -->
+        <md-content class="content" ms-scroll>
+            <div class="demo-content">
+                <div class="embed-container">
+                    <!--iframe ng-src="{{trustSrc(file)}}" id="framePDF" name="framePDF" width="830" height="800"
+                        frameborder="0" allowfullscreen></iframe-->
+                    <iframe ng-src="{{trustSrc(file)}}" id="framePDF" name="framePDF" width="830" height="800"
+                        frameborder="0" allowfullscreen ng-show="formato != 'youtube'"></iframe>
+                    <iframe width="560" height="315" ng-src="{{trustSrc(file)}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ng-show="formato == 'youtube'"></iframe>
+                </div>
+            </div>
+        </md-content>
+        <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+</div>
+<!-- / CENTER -->
+
+</div>

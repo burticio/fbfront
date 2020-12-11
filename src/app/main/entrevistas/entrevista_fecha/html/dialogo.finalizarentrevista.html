@@ -1,0 +1,44 @@
+<md-dialog aria-label="Finalizar Entrevista" style="width: 30%;">
+    <form ng-cloak>
+        <md-toolbar style="background-color: #781f23 !important;">
+            <div class="md-toolbar-tools">
+                <h2>Canalización de Entrevista</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-content ng-controller="EntrevistaFechaController as vm" ng-cloak>
+                    <h3>Selecciona un tipo de canalización</h3>
+                    <!-- <md-input-container style="width: 100% !important;">
+                        <md-select ng-model="canalize_to" style="color: #000 !important;">
+                            <md-option value="0">Ninguna</md-option>
+                            <md-option value="1">Estudia Más</md-option>
+                            <md-option value="2">Otro programa</md-option>
+                        </md-select>
+                    </md-input-container> -->
+
+                    <md-input-container style="width: 100% !important;">
+                        <md-select ng-model="canalize_to" style="color: #000 !important;">
+                            <md-option ng-repeat="rows in array_programs" value="{{rows.id}}">
+                                {{rows.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <div style="display: flex !important; margin-top: 10px !important;">
+                        <md-button class="md-raised" ng-click="respuestaFinalizarEntrevista(false, canalize_to)" style="padding: 0px 20px !important;">
+                            CANCELAR
+                        </md-button>
+                        <div ng-show="canalize_to != null">
+                            <md-button ng-click="respuestaFinalizarEntrevista(true, canalize_to)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                                FINALIZAR
+                            </md-button>
+                        </div>
+                    </div>
+
+                </md-content>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

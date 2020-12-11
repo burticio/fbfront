@@ -1,0 +1,109 @@
+<md-dialog style="width: 70%">
+    <a id="descargarArchivo"></a>
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Datos de la solicitud</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+            <form id="detallesolicitud" name="dataProgram" novalidate>
+                <md-list flex>
+                    <md-list-item class="md-3-line">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{data.Person_Name}} {{data.Person_lastName}} {{data.Person_mLastName}}</h3>
+                            <h4>{{data.Classification_Name}}</h4>
+                            <h4>{{data.Program1_Country_Name}}</h4>
+                            <h4>{{data.Program1_University_Name}}</h4>
+                            <p>{{data.Program_Name_1}}</p>
+                        </div>
+                    </md-list-item>
+                    <md-divider></md-divider>
+
+                    <md-list-item class="md-3-line">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>Datos de Contacto</h3>
+                            <h4>
+                                <b>Correo:</b> {{data.email}}
+                            </h4>
+                            <h4>
+                                <b>Teléfono principal:</b> {{data.cellphone}}
+                            </h4>
+                            <h4>
+                                <b>Teléfono de casa:</b> {{data.phoneHome}}
+                            </h4>
+                            <h4>
+                                <b>Teléfono de oficina:</b> {{data.phoneOffice}}
+                            </h4>
+                        </div>
+                    </md-list-item>
+                    <md-divider></md-divider>
+
+                    <md-list-item class="md-3-line">
+                        <div class="md-list-item-text" layout="column">
+                            <h3><b>Segunda opción de programa:</b></h3>
+                            
+                            <h4>{{data.Program2_Country_Name}}</h4>
+                            <h4>{{data.Program2_University_Name}}</h4>
+                            <p>{{data.Program_Name_2}}</p>
+                        </div>
+                    </md-list-item>
+
+                    <md-list-item class="md-3-line">
+                        <div class="md-list-item-text" layout="column">
+                            <h3><b>Datos del solicitante</b></h3>
+                            <h4>
+                                <b>Nacionalidad:</b> {{data.nationality}}
+                            </h4>
+                            <h4>
+                                <b>Estado civil:</b> {{data.civilStatus_Name}}
+                            </h4>
+                            <h4>
+                                <b>Fecha de Nacimiento:</b> {{data.birthdate}}
+                            </h4>
+                        </div>
+                    </md-list-item>
+                    <md-divider></md-divider>
+
+                    
+                    <md-list-item class="md-3-line">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>
+                                <b>Domicilio:</b>
+                            </h3>
+                            <h4>
+                                <b>Calle:</b> {{data.street}}
+                            </h4>
+                            <h4>
+                                <b>Número exterior:</b> {{data.outdoorNumber}}
+                            </h4>
+                            <h4>
+                                <b>Número interior:</b> {{data.indoorNumber}}
+                            </h4>
+                            <h4>
+                                <b>Colonia:</b> {{data.neighborhood}}
+                            </h4>
+                            <h4>
+                                <b>Código Postal:</b> {{data.zipCode}}
+                            </h4>
+                            <h4>
+                                <b>Estado:</b> {{data.state_Name}}
+                            </h4>
+                            <h4>
+                                <b>País de residencia:</b> {{data.residenceCountry_name}}
+                            </h4>
+                        </div>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                </md-list>
+ 
+                <md-dialog-actions class="footerModal">
+                    <span>{{texto}}</span>
+                    <md-button class="btnAzul" ng-click="copiartexto()">Copiar</md-button>
+                    <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+                </md-dialog-actions>
+            </form>
+        </md-content>
+    </div>
+</md-dialog>

@@ -1,0 +1,43 @@
+<md-dialog style="width: 40%">
+
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Detalle de los votos</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+            <md-list-item class="md-3-line md-long-text" ng-repeat="voto in votos">
+                <img ng-src="./assets/images/backgrounds/logoFundacionBeca.png" class="md-avatar" style="border-radius: 19%;" alt="" />
+                <div class="md-list-item-text">
+                    <strong>{{voto.member_name}} {{voto.member_lastName}} {{voto.member_mLastName}}</strong>
+                    <br>
+                    <label>
+                        {{voto.status ==='0' ? 'Sin votar':''}} {{voto.status ==='1' ? 'A Favor':''}} {{voto.status ==='2' ? 'En contra':''}} {{voto.status
+                        ==='3' ? 'Aplazado':''}}
+                    </label>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+
+            <div ng-show="votos.length == '0'">
+                <md-list-item class="md-3-line md-long-text">
+                    <img ng-src="./assets/images/backgrounds/logoFundacionBeca.png" class="md-avatar" style="border-radius: 19%;" alt="" />
+                    <div class="md-list-item-text">
+                        <strong>Sin votos</strong>
+                        <br>
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </div>
+        </md-content>
+
+    </div>
+</md-dialog>
+
+
+
+<!-- <md-option value="1">- A Favor -</md-option>
+                                    <md-option value="2">- En Contra -</md-option>
+                                    <md-option value="3">- Aplazar -</md-option> -->

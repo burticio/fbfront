@@ -1,0 +1,198 @@
+<style>
+  .tam{
+    font-size: 1.6rem;
+  }
+</style>
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column" style="font-size: 13px;">
+  <div style="height: auto;min-height: 0px;" class="header md-accent-bg" layout="row" layout-align="space-between">
+    <div layout="column" layout-align="space-between">
+      
+      <div class="title"><h1>Paso 2: Revisa los detalles del programa y Llena la Solicitud</h1></div><br>
+       <a ng-click="vm.regresar();"><h4 style="color: white; cursor: pointer;">Regresar</h4></a>
+    </div>
+  </div>
+
+  <div class="title" style="padding: 24px 18px;font-size: 20px;">
+    Nombre del programa:
+    <span style="color: #802428;">{{detallePrograma.ProgramName}}</span><br>
+    Universidad:
+    <span style="color: #802428;">{{detallePrograma.University_Name}}</span>
+    <md-button ng-disabled="!puedeCapturar" ng-click="vm.enviarSolicitudv2()" type="submit" style="float: right; background-color: #802428; margin: auto;margin-top: 20px; color: white;"
+    class="md-raised md-accent" aria-label="Submit" onClick ="gtag('event', 'llenarsolicitud', {'event_category': 'solicitud', 'event_label': 'llenar solicitud', 'value': '0'});">
+    Llenar solicitud
+    </md-button>
+
+    <!--md-button ng-disabled="!puedeCapturar" ng-click="vm.enviarSolicitudv2()" type="submit" style="float: right; background-color: #802428; margin: auto;margin-top: 20px; color: white;"
+    class="md-raised md-accent" aria-label="Submit">
+    Llenar solicitudV2
+    </md-button-->
+
+    <!--span style="padding: 24px 18px;font-size: 15px;">Compartir el Programa: </span>
+    <span style="color: #802428;padding: 24px 18px;font-size: 15px;">{{urlCompartir}}</span-->
+  </div>
+ 
+
+  <div class="content" layout="column" style="padding: 0px;">
+    <div layout="row">
+      <div class="form-wrapper md-whiteframe-1dp" style="margin: 10px;background-color: #e6e6e6;" flex="50">
+        <form name="basicForm" class="md-inline-form" novalidate>
+
+            <md-input-container class="tam" flex>
+                <b>Moneda:</b> <span>{{detallePrograma.coin_Name}}</span>
+              </md-input-container>
+          <md-divider></md-divider>
+
+          <md-input-container class="tam" flex>
+              <b>Número de becas:</b> {{detallePrograma.Scholarship_Number}}
+            </md-input-container>
+          <md-divider></md-divider>
+          <md-input-container class="tam" flex>
+              <b>Porcentaje de Beca:</b> {{detallePrograma.Scholarship_Percentage}} %
+            </md-input-container>
+  
+            <md-divider></md-divider>
+          <md-input-container class="tam" flex>
+            <b>Costo del programa:</b> {{detallePrograma.Program_Cost|number:2}}
+          </md-input-container>
+          <md-divider></md-divider>
+          
+          <md-input-container class="tam" flex>
+            <b>Apoyo para Boleto de Avión:</b> {{detallePrograma.TicketSupport|number:2}} MXN
+          </md-input-container>
+          <md-divider></md-divider>
+
+          <md-input-container class="tam" flex>
+            <b>Apoyo para Gastos de Instalación:</b> {{detallePrograma.settlement|number:2}} MXN<br>
+            <b>NOTA: Es apoyo único al inicio de la beca</b>
+          </md-input-container>
+          <md-divider></md-divider>
+
+          <md-input-container class="tam" flex>
+            <b>Apoyo Gastos Médicos:</b> <span ng-show = "detallePrograma.Medical_Expenses==1">Si</span><span ng-show = "detallePrograma.Medical_Expenses==0">No</span>
+          </md-input-container>
+          <md-divider></md-divider>
+          <md-input-container class="tam" flex>
+            <b>NOTA: <span>La Institución puede variar sin previo aviso los costos y fechas del programa</span></b>
+          </md-input-container>
+          <md-input-container class="tam" flex>
+            <b><span>IMPORTANTE: Para poder aplicar a nuestros programas, es necesario que realices el trámite correspondiente con la Universidad. Puedes hacer ambos trámites de manera simultánea.</span></b>
+          </md-input-container>
+          <md-input-container class="tam" flex>
+            <b><span>Nuestras becas no son excluyentes, a excepción de becas previamente otorgadas directamente por la universidad.</span></b>
+          </md-input-container>
+        </form>
+      </div>
+
+      <div class="form-wrapper md-whiteframe-1dp" style="margin: 10px;background-color: #e6e6e6;" flex="50">
+
+        <md-input-container class="tam" flex>
+              <b>Duración: </b> {{detallePrograma.duration}} {{periodo}}
+              <div ng-repeat = "f in fechas_guardadas" ng-show="detallePrograma.all_months==null||detallePrograma.all_months=='0'">
+                <b>Fecha Comienzo:</b> {{f.start_t}} <b>Fecha Fin:</b> {{f.finish_t}}
+              </div>
+              <div ng-show="detallePrograma.all_months=='1'">
+                <b>Este programa incia todos los meses</b>
+              </div>
+        </md-input-container>
+        <md-divider></md-divider>
+    
+        <md-input-container class="tam" flex>
+          <b>País:</b> {{detallePrograma.Country_Name }}
+        </md-input-container>
+        <md-divider></md-divider>
+        <div layout="column" layout-gt-sm="row">
+            <md-input-container class="tam" flex>
+              <b>Tipo de Programa:</b> {{detallePrograma.Type_Name }}
+            </md-input-container>
+          </div>
+          <md-divider></md-divider>
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container class="tam" flex>
+            <b>Nombre de la Institución:</b> {{detallePrograma.University_Name }}
+          </md-input-container>
+        </div>
+        <md-divider></md-divider>
+
+        
+
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container class="tam" flex>
+            <b>Modalidad:</b> {{detallePrograma.Modality_Name }}
+          </md-input-container>
+        </div>
+        <md-divider></md-divider>
+
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container class="tam" flex>
+            <b>Area:</b> {{detallePrograma.Area_Name}}
+          </md-input-container>
+        </div>
+        <md-divider></md-divider>
+
+        <div layout="column" layout-gt-sm="row">
+          <md-input-container class="tam" flex>
+            <b>Clasificación:</b> {{detallePrograma.Program_Classification}}
+          </md-input-container>
+        </div>
+        <md-divider></md-divider>
+
+        <div layout="column" layout-gt-sm="row" ng-show="detallePrograma.notes!=''">
+          <md-input-container class="tam" flex>
+            <b>Notas del programa:</b> {{detallePrograma.notes}}
+          </md-input-container>
+        </div> 
+        <div layout="column" layout-gt-sm="row" ng-show="mostrarhttp">
+          <md-input-container class="tam" flex>
+            <b>Sitio web de la universidad:</b> <a href="{{detallePrograma.website}}" target="_blank">{{detallePrograma.website}}</a>
+          </md-input-container>
+        </div> 
+        <div layout="column" layout-gt-sm="row" ng-show="!mostrarhttp">
+          <md-input-container class="tam" flex>
+            <b>Sitio web de la universidad:</b> <a href="http://{{detallePrograma.website}}" target="_blank">{{detallePrograma.website}}</a>
+          </md-input-container>
+        </div>
+        
+
+       
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160389227-1"></script>
+
+<script>
+
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+
+ 
+
+  gtag('config', 'UA-160389227-1');
+
+</script>
+
+<!--Clientify Tracking Begins-->
+<script type="text/javascript">
+  if (typeof trackerCode ==='undefined'){
+      (function (d, w, u, o) {
+          w[o] = w[o] || function () {
+              (w[o].q = w[o].q || []).push(arguments)
+          };
+          a = d.createElement('script'),
+              m = d.getElementsByTagName('script')[0];
+          a.async = 1; a.src = u;
+          m.parentNode.insertBefore(a, m)
+      })(document, window, 'https://analytics.clientify.net/tracker.js', 'ana');
+      ana('setTrackerUrl', 'https://analytics.clientify.net');
+      ana('setTrackingCode', 'CF-5265-5265-DCAFJ');
+      ana('trackPageview');
+  }
+</script>
+<!--Clientify Tracking Ends-->

@@ -1,0 +1,44 @@
+<md-dialog aria-label="Nuevo Programa" style="width: 50%;">
+    <form ng-cloak>
+        <md-toolbar style="background-color: #781f23 !important;">
+            <div class="md-toolbar-tools">
+                <h2>NUEVO PROGRAMA</h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-content ng-controller="ProgramasCanalizacionController as vm" ng-cloak>
+                    <div layout="row">
+                        <md-input-container>
+                            <label>Nombre Institución</label>
+                            <input type="text" id="nombreinstitucion" ng-model="programa.nombreinstitucion" required>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Nombre Contacto</label>
+                            <input type="text" id="nombrecontacto" ng-model="programa.nombrecontacto" required>
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Email Contacto</label>
+                            <input id="emailcontacto" ng-model="programa.emailcontacto" ng-pattern="/^.+@.+\..+$/" required>
+                        </md-input-container>
+                    </div>
+                </md-content>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <div ng-show="programa.nombreinstitucion == null || programa.nombrecontacto == null || programa.emailcontacto == null">
+                (Debes llenar todos los campos)*
+            </div>
+            <div ng-show="programa.nombreinstitucion != null && programa.nombrecontacto != null && programa.emailcontacto != null">
+                <md-button ng-click="respuestaProgramaNuevo(true)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                    GUARDAR
+                </md-button>
+            </div>
+            <md-button class="md-raised" ng-click="respuestaProgramaNuevo(false)" style="padding: 0px 20px !important;">
+                CANCELAR
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

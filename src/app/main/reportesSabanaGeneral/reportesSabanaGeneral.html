@@ -1,0 +1,116 @@
+<div id="profile" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="space-between end">
+        <div class="user-info" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="start center">
+            <img class="profile-image avatar huge" src="./assets/images/backgrounds/logoFundacionBecaBlanco.png">
+
+            <div class="name">¡Bienvenido(a) a Fundación Beca!</div>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" flex>
+
+        <md-tabs md-dynamic-height>
+            <md-tab>
+                <md-tab-label>
+                    <span>Inicio</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout="row" layout-wrap>
+
+                        <div class="about" layout="column" flex="100" flex-gt-sm="100" flex-gt-md="100">
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <header style=" background-color:#781f23; color: white;">
+                                    <div class="title">REPORTES DE OPERACIÓN</div>
+                                </header>
+                                <div> <!-- INICIO DE TABLA -->
+                                    <h2>Listado General de Solicitudes</h2>
+                                    <!--md-button class="md-raised md-background" ng-click="">
+                                        Mostrar listado en pantalla
+                                    </md-button-->
+                                    <md-button class="md-raised md-background" ng-click="downloadFileGeneral()" ng-show="uType!=4">
+                                        TABLA COSTOS
+                                    </md-button>
+                                    <md-button class="md-raised md-background" ng-click="downloadFileGeneralAgencia()">
+                                        TABLA AGENCIA
+                                    </md-button>
+                                    <!--md-button class="md-raised md-background" ng-click="downloadFileDocsActive()">
+                                        Documentos Completos
+                                    </md-button>
+                                    <md-button class="md-raised md-background" ng-click="downloadFileDocsActive()">
+                                        Documentos incompletos
+                                    </md-button-->
+                                </div>
+                                <div class="content fullpage-datatable" layout="column" flex>
+                                    <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance1" dt-options="vm.dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Solicitante</span>
+                                                    </div>
+                                                </th>
+
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Pais Residencia</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Email</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Teléfono Movil</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Programa</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Universidad</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Estatus</span>
+                                                    </div>
+                                                </th>                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="sol in solicitudes">
+                                                <td>{{sol.primer_apellido + ' ' + sol.segundo_apellido + ' ' + sol.nombre}}</td>
+                                                <td>{{sol.pais_residencia}}</td>
+                                                <td>{{sol.email}}</td>
+                                                <td>{{sol.telefono_movil}}</td>
+                                                <td>{{sol.programa}}</td>
+                                                <td>{{sol.universidad}}</td>
+                                                <td>{{sol.estatus}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> 
+                                <md-divider></md-divider><!-- FIN DE TABLA -->
+                            </div>
+                        </div>
+
+                    </div>
+                </md-tab-body>
+            </md-tab>
+
+        </md-tabs>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

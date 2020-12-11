@@ -1,0 +1,105 @@
+<div id="profile" class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="space-between end">
+        <div class="user-info" layout="column" layout-align="center center" layout-gt-sm="row" layout-align-gt-sm="start center">
+            
+            <div class="name">Orientación Vocacional</div>
+        </div> 
+        
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content" flex>
+
+        <md-tabs md-dynamic-height>
+            <md-tab>
+                <md-tab-label>
+                    <span>Inicio</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout="row" layout-wrap>
+
+                        <div class="about" layout="column" flex="100" flex-gt-sm="100" flex-gt-md="100">
+                            <div class="profile-box info-box general md-whiteframe-1dp" layout="column">
+                                <header style=" background-color:#781f23; color: white;">
+                                    <div class="title"></div>
+                                </header>
+                                <div class="content fullpage-datatable" layout="column" flex>
+
+                                    <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance" dt-options="vm.dtOptions">
+                                        <thead>
+                                            <tr>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Aspirante</span>
+                                                    </div>
+                                                </th>
+  
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Programa</span>
+                                                    </div>
+                                                </th>
+                                                <th class="secondary-text">
+                                                        <div class="table-header">
+                                                            <span class="column-title">Clasificación</span>
+                                                        </div>
+                                                    </th>
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Estatus</span>
+                                                    </div>
+                                                </th>
+ 
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">ACCIONES</span>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="solicitud in solicitudes">
+                                                <td>{{solicitud.Person_Name}} {{solicitud.Person_lastName}} {{solicitud.Person_mLastName}}</td>
+                                                <td>{{solicitud.Program_Name_1}}</td>
+                                                <td>{{solicitud.Classification_Name}}</td>                                                
+                                                <td>
+                                                    
+                                                    {{solicitud.status === "0" ? "CREADA" : ''}} {{solicitud.status === "1" ? "CANCELADA SIN DOCUMENTOS" : ''}} {{solicitud.status
+                                                    === "2" ? "CANCELADA POR SOLICITANTE" : ''}} {{solicitud.status === "3"
+                                                    ? "DOCUMENTOS COMPLETOS" : ''}} {{solicitud.status === "4" ? "RECHAZAADA
+                                                    EN ENTREVISTA" : ''}} {{solicitud.status === "5" ? "CANALIZAR A ESTUDIA
+                                                    MAS" : ''}} {{solicitud.status === "6" ? "ENTREVISTA COMPLETA" : ''}}
+                                                    {{solicitud.status === "7" ? "ASIGNADA A SESIÓN DE COMITÉ" : ''}} {{solicitud.status
+                                                    === "8" ? "RECHAZADA EN COMITÉ" : ''}} {{solicitud.status === "9" ? "APLAZADA
+                                                    EN COMITÉ" : ''}} {{documento.status === "10" ? "ACEPTADA EN COMITÉ"
+                                                    : ''}} {{solicitud.status === "11" ? "ACEPTADA Y EXPORTADA" : ''}}
+                                                    {{solicitud.status === "12" ? "EN ORIENTACIÓN VOCACIONAL" : ''}}
+                                                    {{solicitud.status === "13" ? "CANALIZADO A OTRO PROGRAMA" : ''}}
+                                                </td>
+                                                <td>
+                                                    <md-button ng-click="irOrientacionVocacional(solicitud)" class="md-icon-button md-primary" aria-label="More">
+                                                        <md-tooltip md-direction="top">Orientacion Vocacional</md-tooltip>
+                                                        <md-icon style="font-size: 27px;" class="icon-content-paste"></md-icon>
+                                                    </md-button>
+ 
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+
+        </md-tabs>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

@@ -1,0 +1,95 @@
+<div class="page-layout carded fullwidth single-scroll" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-account-circle"></md-icon> <span> Solicitantes</span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span>Total de Solicitantes:</span>
+                    <span>{{solicitantes.length}}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar" layout="row" layout-align="center"></div>
+            <!-- / CONTENT TOOLBAR -->
+
+            <!-- CONTENT -->
+            <md-content class="content" ms-scroll>
+
+                <div layout="row" layout-align="center center">
+                    <md-select placeholder="Selecciona un agente..." ng-model="vm.user" style="min-width: 200px; color: black !important;">
+                        <md-option class="selected-operator" ng-value="user" ng-repeat="user in users" ng-value="user.email" ng-click="prepareOperator(vm.user)">{{user.email}}</md-option>
+                    </md-select>
+                    <md-button class="md-raised" style="background-color:#88080f; color: white; padding: 0px 20px !important; margin-left: 20px !important;" ng-click="asignarOperador(vm.user)" ng-hide = 'uType==7'>ASIGNAR AGENTE</md-button><br>
+                </div>
+
+                <table id="tablaUsuarios" class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                       dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">
+                                        <md-checkbox ng-click="seleccionarTodos()" aria-label="Seleccionar todo">
+                                    </span>                                
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">SOLICITANTE</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">CLASIFICACIÓN</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">PROGRAMA</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">AGENTE</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <tr ng-repeat="solicitantes in solicitantes">
+                            <td>
+                    <md-checkbox aria-label="editar" id="chk_{{solicitantes.id}}" ng-model="solicitantes.chkEdicion"></md-checkbox>
+                    </td>
+                    <td>{{solicitantes.applicant}}</td>
+                    <td>{{solicitantes.Program_Classification}}</td>
+                    <td>{{solicitantes.ProgramName}}</td>
+                    <td>{{solicitantes.agent}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

@@ -1,0 +1,25 @@
+<md-dialog style="width: 90%">
+
+    <div id="contenidoModal" name="contenidoModal">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Ver documento</h2>
+            </div>
+        </md-toolbar>
+
+        <md-content layout-padding>
+            <md-dialog-actions class="footerModal">
+                <!-- <md-button ng-disabled="vm.dataProgram" ng-click="enviarInformacion()">Guardar</md-button> -->
+                <md-button class="btnRojo" ng-click="closeDialog()">Cerrar</md-button>
+            </md-dialog-actions>
+            <form name="dataProgram" novalidate>
+                <div class="embed-container">
+                    <iframe ng-src="{{trustSrc(file)}}" id="framePDF" name="framePDF" width="1300" height="800"
+                        frameborder="0" allowfullscreen ng-show="data.url=='0'"></iframe>
+                    <iframe width="560" height="315" ng-src="{{trustSrc(file)}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ng-show="data.url=='1'"></iframe>
+                </div>
+            </form>
+        </md-content>
+
+    </div>
+</md-dialog>

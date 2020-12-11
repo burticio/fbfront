@@ -1,0 +1,107 @@
+<div class="page-layout carded fullwidth single-scroll" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div  style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-account-circle"></md-icon>
+                    <span>Usuarios</span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span  >Total Usuarios:</span>
+                    <span>{{usuarios.length}}</span>
+                </div>
+            </div>
+        </div>
+
+            <div>
+                <md-button class="md-raised md-background" ng-click="vm.agregarUsuario()" ng-hide = 'uType==7'>
+                    <span >Agregar</span>
+                </md-button>
+            </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar" layout="row" layout-align="start center">
+                <span></span>
+            </div>
+            <!-- / CONTENT TOOLBAR -->
+
+            <!-- CONTENT -->
+            <md-content class="content" ms-scroll>
+
+                <table id="tablaUsuarios" class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                       dt-options="vm.dtOptions">
+                    <thead>
+                    <tr>
+                        <!--<th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">ID</span>
+                            </div>
+                        </th>-->
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Nombre</span>
+                            </div>
+                        </th>
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Correo</span>
+                            </div>
+                        </th>
+
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Perfil</span>
+                            </div>
+                        </th>
+
+                        <th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">Acciones</span>
+                            </div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody> 
+                    <tr ng-repeat="usuario in usuarios">
+                        <!--<td>{{usuario.id}}</td>-->
+                        <td>{{usuario.name}} {{usuario.lastName}} {{usuario.mLastName}}</td>
+                        <td>{{usuario.email}}</td>
+                        <td>{{usuario.Type_Name}}</td>
+                        <td>
+                            <md-button class="edit-button md-icon-button" ng-click="vm.editarUsuario(event,usuario)"
+                                        aria-label="Product details" translate translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+
+                            </md-button>
+
+                            <md-button class="edit-button md-icon-button" ng-click="vm.eliminarUsuario(usuario)" aria-label="Product details"
+                                       translate translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

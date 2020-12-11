@@ -1,0 +1,156 @@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div class="page-layout carded fullwidth single-scroll" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-account-circle"></md-icon>
+                    <span>Convocatorias</span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span>Total convocatorias:</span>
+                    <span>{{convocatorias.length}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <md-button class="md-raised md-background" ng-click="vm.agregarConvocatoria()" ng-hide = 'uType==7'>
+                <span>Agregar</span>
+            </md-button>
+        </div>
+
+        <div class="content-card">
+
+            <div class="toolbar" layout="row" layout-align="start center">
+                <span></span>
+            </div>
+
+            <md-content class="content" ms-scroll>
+
+                <table id="tablaConvocatorias" class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
+                    dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <!--<th class="secondary-text">
+                            <div class="table-header">
+                                <span class="column-title">ID</span>
+                            </div>
+                        </th>-->
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Clasificacion</span>
+                                </div>
+                            </th>
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Modalidad</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Nombre</span>
+                                </div>
+                            </th>
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Fecha Comienzo</span>
+                                </div>
+                            </th>
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Fecha Fin</span>
+                                </div>
+                            </th>
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Extendida</span>
+                                </div>
+                            </th>
+
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Estatus</span>
+                                </div>
+                            </th>
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Acciones</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="convocatoria in convocatorias">
+                            <td>{{convocatoria.Program_Classification}}</td>
+                            <td>{{convocatoria.Program_Modality}}</td>
+                            <td>{{convocatoria.name}}</td>
+                            <td>{{convocatoria.Start_Date}}</td>
+                            <td>{{convocatoria.End_Date}}</td>
+                            <td>{{convocatoria.extended === "0" ? 'NO' : ' ' }}
+                                {{convocatoria.extended === "1" ? 'si' : ' ' }}
+                            </td>
+                            <td>{{convocatoria.active === "1" ? 'ACTIVA' : ' '}}
+                                {{convocatoria.active === "0" ? 'NO ACTIVA' : ' '}}
+                            </td>
+
+                            <td>
+                                <md-button ng-show="convocatoria.active === '0'" class="edit-button md-icon-button"
+                                    ng-click="vm.activarConvocatoria(convocatoria)" ng-hide = 'uType==7'>
+                                    <md-tooltip md-direction="top">Activar convocatoria</md-tooltip>
+                                    <md-icon style="color:green;" md-font-icon="icon-check" class="s16"></md-icon>
+                                </md-button>
+
+                                <md-button ng-show="convocatoria.active === '1'" class="edit-button md-icon-button"
+                                    ng-click="vm.desactivarConvocatoria(convocatoria)" aria-label="Product details"
+                                    translate translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                    <md-tooltip md-direction="top">Desactivar convocatoria</md-tooltip>
+                                    <md-icon style="color:red;" md-font-icon="icon-no" class="s16"></md-icon>
+                                </md-button>
+
+                                <md-button class="edit-button md-icon-button" ng-click="vm.extenderConvocatoria(event,convocatoria)"
+                                    aria-label="Product details" translate translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                    <md-tooltip md-direction="top">Extender convocatoria</md-tooltip>
+                                    <md-icon md-font-icon="icon-arrow-expand" class="s16"></md-icon>
+                                </md-button>
+
+                                <md-button class="edit-button md-icon-button" ng-click="vm.editarConvocatoria(event,convocatoria)"
+                                    aria-label="Product details" translate translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                    <md-tooltip md-direction="top">Editar convocatoria</md-tooltip>
+                                    <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+                                </md-button>
+
+                                <md-button class="edit-button md-icon-button" ng-click="vm.eliminarConvocatoria(convocatoria)"
+                                    aria-label="Product details" translate translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                    <md-tooltip md-direction="top">Eliminar convocatoria</md-tooltip>
+                                    <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                                </md-button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+</div>

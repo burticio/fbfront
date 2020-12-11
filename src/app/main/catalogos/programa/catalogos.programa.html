@@ -1,0 +1,242 @@
+<div class="page-layout carded fullwidth single-scroll" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div style="background-color:#88080f;" class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center" flex>
+
+        <!-- CONTENT HEADER -->
+
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="white-fg" layout="column" layout-align="start start">
+                <div class="h1" layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-account-circle"></md-icon>
+                    <span>Programas</span>
+                </div>
+                <div class="product-count secondary-text">
+                    <span>Total programas:</span>
+                    <span>{{programas.length}}</span>
+                </div>
+            </div>
+
+            <div>
+                <md-button class="md-raised md-background" ng-click="vm.agregarPrograma()" ng-hide = 'uType==7'>
+                    <span>Agregar</span>
+                </md-button>
+
+                <md-button class="md-raised md-background" ng-click="vm.modificacionMasiva(event, null)" ng-hide = 'uType==7'>
+                    <span>Modificación Masiva</span>
+                </md-button>
+            </div>
+        </div>
+
+
+
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card">
+            <div layout="row" layout-align="start" style="padding: 10px;" flex>
+                <label>Críterios de búsqueda:</label>
+            </div>
+
+            <div layout="row" layout-align="start" style="padding: 10px;" flex>
+
+
+                <md-input-container flex="50">
+                    <label>País</label>
+                    <md-select ng-change="vm.buscarPrograma()" ng-model="pais.modelo">
+                        <md-option ng-value="0">
+                            <em>Ninguno</em>
+                        </md-option>
+                        <md-option ng-repeat="pai in pais.opciones" ng-value="pai.Country_Id">
+                            {{pai.Country_Name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex="50">
+                    <label>Universidad</label>
+                    <md-select ng-change="vm.buscarPrograma()" ng-model="universidad.modelo">
+                        <md-option ng-value="0">
+                            <em>Ninguno</em>
+                        </md-option>
+                        <md-option ng-repeat="uni in universidad.opciones" ng-value="uni.University_Id">
+                            {{uni.University_Name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex="50">
+                    <label>Tipo de programa</label>
+                    <md-select ng-change="vm.buscarPrograma()" ng-model="tipo.modelo">
+                        <md-option ng-value="0">
+                            <em>Ninguno</em>
+                        </md-option>
+                        <md-option ng-repeat="tip in tipo.opciones" ng-value="tip.Type_Id">
+                            {{tip.Type_Name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex="50">
+                    <label>Modalidad</label>
+                    <md-select ng-change="vm.buscarPrograma()" ng-model="modalidad.modelo">
+                        <md-option ng-value="0">
+                            <em>Ninguno</em>
+                        </md-option>
+                        <md-option ng-repeat="modal in modalidad.opciones" ng-value="modal.Modality_Id">
+                            {{modal.Modality_Name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex="50">
+                    <label>Clasificación</label>
+                    <md-select ng-change="vm.buscarPrograma()" ng-model="clasificacion.modelo">
+                        <md-option ng-value="0">
+                            <em>Ninguno</em>
+                        </md-option>
+                        <md-option ng-repeat="clasifica in clasificacion.opciones" ng-value="clasifica.Classification_Id">
+                            {{clasifica.Program_Classification}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex="50">
+                    <label>Estatus</label>
+                    <md-select ng-change="vm.buscarPrograma()" ng-model="activo">
+                        <md-option ng-value="99">
+                            <em>Todos</em>
+                        </md-option>
+                        <md-option ng-value="0">
+                            <em>Inactivo</em>
+                        </md-option>
+                        <md-option ng-value="1">
+                            <em>Activo</em>
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                    <md-button ng-click="vm.borrarFiltros()" style="background-color: #7d2428;" class="md-fab" aria-label="borrar filtros">
+                        <md-tooltip md-direction="top" style="font-size: 15px;">Borrar Filtros</md-tooltip>
+                        <md-icon style="font-size: 26px;" class="icon-eraser"></md-icon>
+                    </md-button>
+                </section>
+            </div>
+
+            <!-- CONTENT -->
+            <md-content class="content" ms-scroll>
+                <table id="tablaUsuarios" class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance" dt-options="vm.dtOptions">
+                    <thead>
+                        <tr>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">
+                                        <md-checkbox ng-click="seleccionarTodos()" aria-label="Seleccionar todo">
+                                    </span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Clasificación</span>
+                                </div>
+                            </th>
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Nombre</span>
+                                </div>
+                            </th>
+
+                            <th class="secondary-text">
+                                    <div class="table-header">
+                                        <span class="column-title">Universidad</span>
+                                    </div>
+                                </th>
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Costo</span>
+                                </div>
+                            </th>
+                            <th class="secondary-text">
+                                    <div class="table-header">
+                                        <span class="column-title">Moneda</span>
+                                    </div>
+                                </th>
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">% beca</span>
+                                </div>
+                            </th>
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Modalidad</span>
+                                </div>
+                            </th>
+
+                          
+
+                            <th class="secondary-text">
+                                <div class="table-header">
+                                    <span class="column-title">Acciones</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="programa in programas">
+                            <td>
+                                <md-checkbox aria-label="editar" id="chk_{{programa.id}}" ng-model="programa.chkEdicion">
+                                </md-checkbox>
+                            </td>
+
+                            <td>{{programa.Program_Classification}}</td>
+                            <td>{{programa.ProgramName}}</td>
+                            <td>{{programa.University_Name}}</td>
+
+                            <td>{{programa.Program_Cost }}</td>
+                            <td>{{programa.coin_Name}}</td>
+
+                            <td>{{programa.Scholarship_Percentage}}</td>
+                            <td>{{programa.Modality_Name}}</td>
+
+                            <td>
+
+                                <md-button class="edit-button md-icon-button" ng-click="vm.editarPrograma(event,programa)" aria-label="Product details" translate
+                                    translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                    <md-icon md-font-icon="icon-pencil" class="s16"></md-icon>
+
+                                </md-button>
+
+                                <md-button class="edit-button md-icon-button" ng-click="vm.eliminarPrograma(programa)" aria-label="Product details" translate
+                                    translate-attr-aria-label="EC.PRODUCT_DETAILS" ng-hide = 'uType==7'>
+                                    <md-icon md-font-icon="icon-close" class="s16"></md-icon>
+                                </md-button>
+
+                                <span ng-show="programa.active==0">
+                                    <md-icon md-font-icon="icon-close_circle" style="color:red;" class="s16 ng-scope md-default-theme md-font material-icons icon-label" role="img" aria-label="icon-label"></md-icon></span>
+
+                                <span ng-show="programa.active==1">
+                                    <md-icon md-font-icon="icon-close_circle" style="color:darkgreen;" class="s16 ng-scope md-default-theme md-font material-icons icon-label" role="img" aria-label="icon-label"></md-icon></span>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </md-content>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARD -->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>
