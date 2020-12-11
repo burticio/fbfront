@@ -271,6 +271,9 @@
 
                                 <div class="content">
                                     <div class="content fullpage-datatable" layout="column" flex>
+                                        <H2 style="color: #781f23;" ng-show="documentosFaltantes==0 && documentosRechazados==0">TODOS LOS DOCUMENTOS HAN SIDO CARGADOS CORRECTAMENTE. EN BREVE RECIBIRÁS NOTIFICACIONES AL EMAIL.</H2>
+                                        <H2 style="color: #781f23;" ng-show="documentosRechazados>0">TIENES DOCUMENTOS RECHAZADOS. POR FAVOR REVISA EL LISTADO.</H2>
+                                        <md-button ng-show="documentosFaltantes==0 && documentosRechazados==0" style="background-color: #802428; color: white" class="md-raised md-primary" ng-click="habilitarDocumentos = false; ocultaPrincipal = true;">REGRESAR</md-button>
 
                                         <table class="dataTable row-border hover" datatable="ng" dt-instance="vm.dtInstance"
                                             dt-options="vm.dtOptions">

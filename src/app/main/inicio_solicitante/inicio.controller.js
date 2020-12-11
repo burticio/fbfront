@@ -36,6 +36,8 @@
         $scope.citaLength = {};
         $scope.date = {};
         $scope.documentos = {};
+        $scope.documentosFaltantes = 0;
+        $scope.documentosRechazados = 0;
         $scope.documentosAceptacion = {};
         $scope.solicitudes = {};
         $scope.solicitudesAceptacion = {};
@@ -223,10 +225,18 @@
                 }
 
                 $scope.$apply(function () {
+                    //debugger;
                     $scope.documentos = response.datos;
                     $scope.habilitarDocumentos = true;
                     $scope.ocultaPrincipal = false;
-
+                    var noCargados = $scope.documentos.filter(function(o){
+                        return o.status == 0;
+                        });
+                    var rechazados = $scope.documentos.filter(function(o){
+                        return o.status == 3;
+                        });
+                    $scope.documentosFaltantes = noCargados.length;
+                    $scope.documentosRechazados = rechazados.length;
                 });
 
             }, function () {
