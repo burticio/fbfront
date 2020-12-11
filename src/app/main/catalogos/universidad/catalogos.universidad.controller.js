@@ -98,6 +98,7 @@
  
         vm.agregarUniversidad = agregarUniversidad;
         vm.editarUniversidad = editarUniversidad;
+        vm.calificarUniversidad = calificarUniversidad;
         vm.eliminarUniverisdad = eliminarUniverisdad;
         vm.irSitioWeb = irSitioWeb;
 
@@ -316,6 +317,48 @@
                 clickOutsideToClose: true
             });
         }
+
+        /*CALIFICACION DE LA UNIVERSIDAD*/
+        function calificarUniversidad(ev, data)
+        { 
+            $mdDialog.show({
+                controller: function ($scope, $mdDialog, formWizardData)
+                {
+                    $scope.data = formWizardData;
+                    $scope.calificacionUni = $scope.data.operational_score;
+
+                    
+
+                    $scope.enviarInformacion= function ()
+                    {
+                        //debugger;
+                        var datos = {
+                            operational_score: $scope.calificacionUni
+                        }
+
+                        AjaxCall("POST",URL_SERVIDOR+ '/University/updatescore/'+$scope.data.id,
+                            datos,function(response){
+                                StateMessage("Atención","Modificación exitosa", "success");
+                                $scope.closeDialog();
+                                vm.init();     
+                        });
+                    };
+
+                    $scope.closeDialog = function ()
+                    { 
+                        $mdDialog.hide();
+                    };
+                },
+                templateUrl : 'app/main/catalogos/universidad/html/formularioCalificacion.html',
+                parent             : angular.element('body'),
+                targetEvent        : ev,
+                locals             : {
+                    formWizardData: data
+                },
+                clickOutsideToClose: true
+            });
+        }
+        /*FIN DE CALIFICACION DE LA UNIVERSIDAD*/
 
         $scope.downloadFile = function(){
             vm.mostrarCargando();

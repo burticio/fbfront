@@ -296,12 +296,15 @@
                 modelo: null,
                 opciones: []
             };
+            $scope.opcionPrograma = 1;
 
             $scope.solicitud = localSolicitud;
 
-            $scope.respuestaCambiarPrograma = function (respuesta, programanuevo) {
+            $scope.respuestaCambiarPrograma = function (respuesta, programanuevo, opcionPrograma) {
                 if (respuesta) {
+                    //debugger;
                     localStorageService.set("programanuevo", programanuevo);
+                    localStorageService.set("opcionprogramanuevo", opcionPrograma);
                     //localStorageService.set("clasifnueva",clasificacion.modelo);
                     $mdDialog.hide();
                 } else {
@@ -353,12 +356,20 @@
 
         $scope.cambiarPrograma = function (solicitud) {
             //console.log(solicitud);
+            //debugger;
             var id = solicitud.id;
             var programanuevo = localStorageService.get("programanuevo");
+            var opcionPrograma = localStorageService.get("opcionprogramanuevo");
             //var clasifnueva = localStorageService.get("clasifnueva");
-            var data = {
-                "Program1_Id": programanuevo
-            };
+            if(opcionPrograma==1){
+                var data = {
+                    "Program1_Id": programanuevo
+                };
+            }else{
+                var data = {
+                    "Program2_Id": programanuevo
+                };
+            }
             AjaxCall("POST", URL_SERVIDOR + "/Application/updateProgram/" + id, data, function (response) {
                 $scope.$apply(function () {
                     if (response.Codigo >= 200 && response.Codigo <= 299) {
