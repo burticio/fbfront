@@ -9,6 +9,10 @@
     function solicitudv2Controller($scope, $mdDialog, $cookies, localStorageService, $state) {
         var vm = this;
         $scope.programaSeleccionado = localStorageService.get("detallePrograma");
+        if ($scope.programaSeleccionado == null) {
+            //console.log("NINGUN LOGIN");
+            location.replace("https://fundacionbeca.net");
+        }
         $scope.disabledComoTeEnteraste = true;
         
         $scope.programaSegundaOpcion = {
