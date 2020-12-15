@@ -48,11 +48,11 @@
                                                 </th>
                                                 <th class="secondary-text">
                                                     <div class="table-header">
-                                                        <span class="column-title">Aspirante</span>
+                                                        <span class="column-title">Solicitud</span>
                                                     </div>
                                                 </th>
 
-                                                <th class="secondary-text">
+                                                <!--th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Programa</span>
                                                     </div>
@@ -65,7 +65,7 @@
                                                 <th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Universidad</span>
-                                                    </div>
+                                                    </div-->
                                                 </th>
                                                 <th class="secondary-text">
                                                     <div class="table-header">
@@ -77,11 +77,11 @@
                                                         <span class="column-title">D. Validados</span>
                                                     </div>
                                                 </th>
-                                                <th class="secondary-text">
+                                                <!--th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Solicitud</span>
                                                     </div>
-                                                </th>
+                                                </th-->
                                                 <th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Estatus</span>
@@ -103,14 +103,20 @@
                                                     <span ng-show="solicitud.ValidatedDocs<solicitud.RequiredDocs && solicitud.ValidatedDocs>0"><md-icon md-font-icon="icon-close_circle" style="color:yellow;" class="s16 ng-scope md-default-theme md-font material-icons icon-label" role="img" aria-label="icon-label"></md-icon></span>
                                                     <span ng-show="solicitud.ValidatedDocs==solicitud.RequiredDocs"><md-icon md-font-icon="icon-close_circle" style="color:darkgreen;" class="s16 ng-scope md-default-theme md-font material-icons icon-label" role="img" aria-label="icon-label"></md-icon></span>
                                                 </td>
-                                                <td>{{solicitud.Person_Name}} {{solicitud.Person_lastName}}
-                                                    {{solicitud.Person_mLastName}}</td>
-                                                <td>{{solicitud.Program_Name_1}}</td>
+                                                <td>
+                                                    <strong>Solicitante:</strong> {{solicitud.Person_Name}} {{solicitud.Person_lastName}}
+                                                    {{solicitud.Person_mLastName}}<br>
+                                                    <strong>Programa:</strong> {{solicitud.Program_Name_1}}<br>
+                                                    <strong>Clasificación:</strong> {{solicitud.Classification_Name}}<br>
+                                                    <strong>Universidad:</strong>  {{solicitud.Program1_University_Name}}<br>
+                                                    <strong>Fecha de Solicitud:</strong> {{solicitud.created_at.split(' ')[0]}}
+                                                </td>
+                                                <!--td>{{solicitud.Program_Name_1}}</td>
                                                 <td>{{solicitud.Classification_Name}}</td>
-                                                <td class="text-center">{{solicitud.Program1_University_Name}}</td>
+                                                <td class="text-center">{{solicitud.Program1_University_Name}}</td-->
                                                 <td class="text-center">{{solicitud.UploadedDocs}} / {{solicitud.RequiredDocs}}</td>
                                                 <td class="text-center">{{solicitud.ValidatedDocs}}</td>
-                                                <td>{{solicitud.created_at.split(' ')[0]}}</td>
+                                                <!--td>{{solicitud.created_at.split(' ')[0]}}</td-->
                                                 <td>
                                                     {{solicitud.status === "0" ? "CREADA" : ''}} {{solicitud.status ===
                                                     "1" ? "CANCELADA SIN DOCUMENTOS" : ''}} {{solicitud.status

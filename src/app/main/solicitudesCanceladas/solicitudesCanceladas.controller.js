@@ -47,7 +47,7 @@
             pagingType: 'full_numbers',
             autoWidth: false,
             pageLength: 10,
-            order: [[ 6, "asc" ]],
+            order: [[ 1, "asc" ]],
             dom: 'Bfrtip',
             buttons: [
                 'print',

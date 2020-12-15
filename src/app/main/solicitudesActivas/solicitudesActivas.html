@@ -48,13 +48,18 @@
                                             <tr>
                                                 <th class="secondary-text">
                                                     <div class="table-header">
-                                                        <span class="column-title">Aspirante</span>
+                                                        <span class="column-title">Solicitud</span>
                                                     </div>
                                                 </th>
 
-                                                <th class="secondary-text">
+                                                <!--th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Email</span>
+                                                    </div>
+                                                </th-->
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Fecha de Solicitud</span>
                                                     </div>
                                                 </th>
 
@@ -63,21 +68,24 @@
                                                         <span class="column-title">Programa</span>
                                                     </div>
                                                 </th>
-                                                <th class="secondary-text">
+
+                                                <!--th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Universidad</span>
                                                     </div>
-                                                </th>
-                                                <th class="secondary-text">
+                                                </th-->
+                                                <!--th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Email</span>
+                                                    </div>
+                                                </th-->
+
+                                                <!--th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Clasificación</span>
                                                     </div>
-                                                </th>
-                                                <th class="secondary-text">
-                                                    <div class="table-header">
-                                                        <span class="column-title">Fecha de Solicitud</span>
-                                                    </div>
-                                                </th>
+                                                </th-->
+                                                
                                                 <th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Estatus</span>
@@ -93,16 +101,26 @@
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="solicitud in solicitudes">
-                                                <td>{{solicitud.Person_Name}} {{solicitud.Person_lastName}}
-                                                    {{solicitud.Person_mLastName}}</td>
-                                                <td>{{solicitud.email}}</td>
-                                                <td>{{solicitud.Program_Name_1}}</td>
-                                                <td>{{solicitud.Program1_University_Name}}</td>
-                                                <td>{{solicitud.Classification_Name}}</td>
-                                                <!--td class="text-center">{{solicitud.RequiredDocs}}</td>
-                                                <td class="text-center">{{solicitud.UploadedDocs}}</td>
-                                                <td class="text-center">{{solicitud.ValidatedDocs}}</td-->
+                                                <td>
+                                                    <strong>Nombre:</strong> {{solicitud.Person_Name}} {{solicitud.Person_lastName}}
+                                                    {{solicitud.Person_mLastName}}<br>
+                                                    <strong>Email:</strong> {{solicitud.email}}<br>
+                                                </td>
                                                 <td>{{solicitud.created_at.split(' ')[0]}}</td>
+                                                <!--td>{{solicitud.email}}</td-->
+                                                <td>
+                                                    <strong>Programa:</strong> {{solicitud.Program_Name_1}}<br>
+                                                    <strong>Universidad:</strong> {{solicitud.Program1_University_Name}}<br>
+                                                    <strong>Clasificación: </strong> {{solicitud.Classification_Name}}
+                                                </td>
+                                                <!--td>
+                                                    {{solicitud.Program1_University_Name}}
+                                                </td-->
+                                                <!--td>{{solicitud.email}}</td-->
+                                                <!--td>
+                                                    {{solicitud.Classification_Name}}
+                                                </td-->
+                                                
                                                 <td>
                                                     {{solicitud.status === "0" ? "CREADA: EN VALIDACION DE DOCUMENTOS" : ''}} {{solicitud.status ===
                                                     "1" ? "CANCELADA SIN DOCUMENTOS" : ''}} {{solicitud.status
@@ -167,7 +185,7 @@
                                                     </md-button>
                                                     <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="dlgcambiarPrograma(event,solicitud)" ng-hide ="solicitud.status == '7' || solicitud.status == '10' || solicitud.status == '11' || solicitud.status=='21'">
                                                         <md-tooltip md-direction="top">Cambiar Programa</md-tooltip>
-                                                        <md-icon md-font-icon="icon-heart" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-heart" role="img" aria-label="icon-heart"></md-icon>
+                                                        <md-icon md-font-icon="icon-dns" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons" role="img"></md-icon>
                                                     </md-button>
                                                 </td>
                                             </tr>
