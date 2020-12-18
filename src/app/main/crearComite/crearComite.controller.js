@@ -32,6 +32,9 @@
         }else if (localStorageService.get("session_typeId") == 8) {//OPERADOR VISTA
             //console.log("ACCESO CORRECTO");
             $state.go('app.inicio_operador_vista');
+        }else if (localStorageService.get("session_typeId") == 9) {//OPERADOR VISTA
+            //console.log("ACCESO CORRECTO");
+            $state.go('app.inicio_operador_universidad');
         }
         $scope.uType = localStorageService.get("session_typeId");
 

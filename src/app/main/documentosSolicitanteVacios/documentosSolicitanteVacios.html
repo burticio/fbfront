@@ -48,6 +48,12 @@
                                                     </div>
                                                 </th>
 
+                                                <th class="secondary-text">
+                                                    <div class="table-header">
+                                                        <span class="column-title">Fecha</span>
+                                                    </div>
+                                                </th>
+
                                                 <!--th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Programa</span>
@@ -73,11 +79,7 @@
                                                         <span class="column-title">D. Validados</span>
                                                     </div>
                                                 </th>
-                                                <!--th class="secondary-text">
-                                                    <div class="table-header">
-                                                        <span class="column-title">Solicitud</span>
-                                                    </div>
-                                                </th-->
+                                                
                                                 <th class="secondary-text">
                                                     <div class="table-header">
                                                         <span class="column-title">Estatus</span>
@@ -99,9 +101,9 @@
                                                     {{solicitud.Person_mLastName}}<br>
                                                     <strong>Programa:</strong> {{solicitud.Program_Name_1}}<br>
                                                     <strong>Clasificación:</strong> {{solicitud.Classification_Name}}<br>
-                                                    <strong>Universidad:</strong>  {{solicitud.Program1_University_Name}}<br>
-                                                    <strong>Fecha de Solicitud:</strong> {{solicitud.created_at.split(' ')[0]}}
+                                                    <strong>Universidad:</strong>  {{solicitud.Program1_University_Name}}
                                                 </td>
+                                                <td>{{solicitud.created_at.split(' ')[0]}}</td>
                                                 <!--td>{{solicitud.Program_Name_1}}</td>
                                                 <td>{{solicitud.Classification_Name}}</td>
                                                 <td class="text-center">{{solicitud.Program1_University_Name}}</td-->

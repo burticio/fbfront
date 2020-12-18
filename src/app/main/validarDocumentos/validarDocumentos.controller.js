@@ -33,6 +33,10 @@
             console.log("ACCESO CORRECTO");
             //$state.go('app.inicio_operador_vista');
         }
+        else if (localStorageService.get("session_typeId") == 9) {//OPERADOR VISTA
+            console.log("ACCESO CORRECTO");
+            //$state.go('app.inicio_operador_universidad');
+        }
         $scope.isDocumentosAceptacion = localStorageService.get("isDocumentosAceptacion");
         $scope.solicitud = localStorageService.get("validarDocumentos");
         
@@ -679,15 +683,19 @@
         }
 
         $scope.volver = function(){
-            if($scope.isDocumentosAceptacion){
-                $state.go("app.documentosSolicitanteAsignacion");
+            if($scope.uType==9){
+                $state.go("app.documentoSolicitanteUni");
             }else{
-                $state.go("app.documentoSolicitante");
+                if($scope.isDocumentosAceptacion){
+                    $state.go("app.documentosSolicitanteAsignacion");
+                }else{
+                    $state.go("app.documentoSolicitante");
+                }
             }
         }
 
         function init() {
-            
+            //debugger;
             if ($scope.isDocumentosAceptacion) {
                 var objData = {
                     "id": $scope.solicitud.id,
@@ -697,12 +705,13 @@
                 AjaxCall("POST", URL_SERVIDOR + "/ApplicationDocumentFA/showPerApplication", objData, function (response) {
                     $scope.$apply(function () {
                         $scope.solicitudes = response.datos;
+                        if ($scope.solicitudes.length == 0) {
+                            swal("Atención", "El solicitante no tiene documentos por validar", "error");
+                            $state.go("app.inicio_operador");
+                        }
                     });
                 }, function () {
-                    if ($scope.solicitudes.length == 0) {
-                        swal("Atención", "El solicitante no tiene documentos por validar", "error");
-                        $state.go("app.inicio_operador");
-                    }
+                    
                 });
             } else {
                 var objData = {
@@ -713,6 +722,11 @@
                 AjaxCall("POST", URL_SERVIDOR + "/ApplicationDocument/showPerApplication", objData, function (response) {
                     $scope.$apply(function () {
                         $scope.solicitudes = response.datos;
+                        if ($scope.solicitudes.length == 0) {
+                            swal("Atención", "El solicitante no tiene documentos por validar", "error");
+                            $state.go("app.inicio_operador");
+
+                        }
                         // angular.forEach(response.datos, function (value) {
                         //     console.log(value);
                         //     if (value.status == 1)
@@ -720,11 +734,7 @@
                         // });
                     });
                 }, function () {
-                    if ($scope.solicitudes.length == 0) {
-                        swal("Atención", "El solicitante no tiene documentos por validar", "error");
-                        $state.go("app.inicio_operador");
-
-                    }
+                    
                 });
             }
 

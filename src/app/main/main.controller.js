@@ -23,10 +23,11 @@
             msNavigationService.deleteItem("inicio_operador");
             msNavigationService.deleteItem("inicio_super");
             msNavigationService.deleteItem("inicio_operador_vista");
+            msNavigationService.deleteItem("inicio_operador_universidad");
             msNavigationService.deleteItem('apps.docsSol');
             msNavigationService.deleteItem('apps.documentosSolicitanteAsignacion');
             msNavigationService.deleteItem('apps.documentosSolicitanteAsignacion');
-            msNavigationService.deleteItem('apps.documentoSolicitante');
+            //msNavigationService.deleteItem('apps.documentoSolicitante');
 
             msNavigationService.deleteItem('apps.entrevistas');
             msNavigationService.deleteItem('apps.entrevista_fecha');
@@ -38,6 +39,7 @@
             msNavigationService.deleteItem("inicio_super");
             msNavigationService.deleteItem("inicio_solicitante");
             msNavigationService.deleteItem("inicio_operador_vista");
+            msNavigationService.deleteItem("inicio_operador_universidad");
             msNavigationService.deleteItem('apps.catalogos');
             msNavigationService.deleteItem('busquedaPrograma');
             msNavigationService.deleteItem('apps.docsSol');
@@ -61,6 +63,7 @@
             msNavigationService.deleteItem("inicio_super");
             msNavigationService.deleteItem("inicio_solicitante");
             msNavigationService.deleteItem("inicio_operador_vista");
+            msNavigationService.deleteItem("inicio_operador_universidad");
             msNavigationService.deleteItem('apps.catalogos');
             msNavigationService.deleteItem('busquedaPrograma');
             
@@ -70,6 +73,7 @@
             msNavigationService.deleteItem('apps.asignacion_entrevista');
             msNavigationService.deleteItem("apps.programascanalizacion");
             msNavigationService.deleteItem('apps.validacionUniversidad');
+            msNavigationService.deleteItem('apps.docsSol.documentoSolicitanteUni');
             
         } //else 
         if (localStorageService.get("session_typeId") == 5) { // MENU SOLICITANTE
@@ -78,6 +82,7 @@
             msNavigationService.deleteItem("cita_solicitante");
             msNavigationService.deleteItem("entrevista_fecha");
             msNavigationService.deleteItem("inicio_supervisor");
+            msNavigationService.deleteItem("inicio_operador_universidad");
             msNavigationService.deleteItem("inicio_comite");
             msNavigationService.deleteItem("inicio_operador");
             msNavigationService.deleteItem("inicio_super");
@@ -108,12 +113,14 @@
             msNavigationService.deleteItem("inicio_operador");
             msNavigationService.deleteItem("inicio_supervisor");
             msNavigationService.deleteItem("inicio_operador_vista");
+            msNavigationService.deleteItem("inicio_operador_universidad");
             //msNavigationService.deleteItem('app.documentoSolicitante');
             //msNavigationService.deleteItem('documentosSolicitanteAsignacion');
             //msNavigationService.deleteItem('app.documentosSolicitanteAsignacion');
             //msNavigationService.deleteItem('documentoSolicitante');
 
             msNavigationService.deleteItem('apps.entrevistas');
+            msNavigationService.deleteItem('apps.docsSol.documentoSolicitanteUni');
             //msNavigationService.deleteItem('apps.entrevista_fecha');
         } //else 
         if (localStorageService.get("session_typeId") == 7) { //MENU SUPERVISTA
@@ -125,6 +132,8 @@
             msNavigationService.deleteItem("inicio_operador");
             msNavigationService.deleteItem("inicio_supervisor");
             msNavigationService.deleteItem("inicio_operador_vista");
+            msNavigationService.deleteItem("inicio_operador_universidad");
+            msNavigationService.deleteItem('apps.docsSol.documentoSolicitanteUni');
             //msNavigationService.deleteItem('app.documentoSolicitante');
             //msNavigationService.deleteItem('documentosSolicitanteAsignacion');
             //msNavigationService.deleteItem('app.documentosSolicitanteAsignacion');
@@ -142,6 +151,8 @@
             msNavigationService.deleteItem("inicio_operador");
             msNavigationService.deleteItem("inicio_supervisor");
             msNavigationService.deleteItem("inicio_super");
+            msNavigationService.deleteItem("inicio_operador_universidad");
+            msNavigationService.deleteItem('apps.docsSol.documentoSolicitanteUni');
             //msNavigationService.deleteItem("inicio_operador_vista");
             //msNavigationService.deleteItem('app.documentoSolicitante');
             //msNavigationService.deleteItem('documentosSolicitanteAsignacion');
@@ -150,6 +161,39 @@
 
             msNavigationService.deleteItem('apps.entrevistas');
             //msNavigationService.deleteItem('apps.entrevista_fecha');
+        }
+        if (localStorageService.get("session_typeId") == 9) { //MENU OPERADOR UNIVERSIDAD
+           //console.log("5");
+            msNavigationService.deleteItem('ver_orientacionV');                    
+            msNavigationService.deleteItem("cita_solicitante");
+            msNavigationService.deleteItem("entrevista_fecha");
+            msNavigationService.deleteItem("inicio_supervisor");
+            msNavigationService.deleteItem("inicio_solicitante");
+            msNavigationService.deleteItem("inicio_comite");
+            msNavigationService.deleteItem("inicio_operador");
+            msNavigationService.deleteItem("inicio_super");
+            msNavigationService.deleteItem("inicio_operador_vista");
+            msNavigationService.deleteItem('busquedaPrograma');
+            //msNavigationService.deleteItem('apps');            
+            msNavigationService.deleteItem('apps.documentosSolicitanteAsignacion'); 
+            //msNavigationService.deleteItem('apps.docsSol');
+            msNavigationService.deleteItem('apps.crearComite');
+            //msNavigationService.deleteItem('crearComite');
+
+            msNavigationService.deleteItem('apps.reportes');
+            msNavigationService.deleteItem('apps.informes');
+            msNavigationService.deleteItem("apps.entrevistas");
+            msNavigationService.deleteItem('apps.entrevista_fecha');
+            msNavigationService.deleteItem('apps.asignacion_entrevista');
+            msNavigationService.deleteItem("apps.programascanalizacion");
+            msNavigationService.deleteItem('apps.solicitudes');
+            msNavigationService.deleteItem('apps.donaciones');
+            msNavigationService.deleteItem('apps.validacionUniversidad');
+            msNavigationService.deleteItem('apps.docsSol.documentoSolicitante');
+            msNavigationService.deleteItem('apps.docsSol.documentoSolicitanteCompletos');
+            msNavigationService.deleteItem('apps.docsSol.documentoSolicitanteIncompletos');
+            msNavigationService.deleteItem('apps.docsSol.documentoSolicitanteVacios');
+            msNavigationService.deleteItem('apps.catalogos');
         }
         if (localStorageService.get("session_typeId") == null) {
             console.log("NINGUN LOGIN");

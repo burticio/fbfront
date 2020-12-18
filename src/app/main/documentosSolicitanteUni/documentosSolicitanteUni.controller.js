@@ -2,34 +2,37 @@
     'use strict';
 
     angular
-        .module('app.documentoSolicitante')
-        .controller('DocumentoSolicitanteController', DocumentoSolicitanteController);
+        .module('app.documentoSolicitanteUni')
+        .controller('DocumentoSolicitanteUniController', DocumentoSolicitanteUniController);
 
     /** @ngInject */
-    function DocumentoSolicitanteController($scope, localStorageService, msNavigationService, $state, $mdDialog) {
+    function DocumentoSolicitanteUniController($scope, localStorageService, msNavigationService, $state, $mdDialog) {
         var vm = this;
         if (localStorageService.get("session_typeId") == null) {
             //console.log("NINGUN LOGIN");
             location.replace("/pages/auth/login");
         }else if (localStorageService.get("session_typeId") == 2) {//SUPERVISOR
-            console.log("ACCESO CORRECTO");
-            //$state.go('app.inicio_supervisor');
+            //console.log("ACCESO CORRECTO");
+            $state.go('app.inicio_supervisor');
         }else if (localStorageService.get("session_typeId") == 3) {//COMITE
             //console.log("ACCESO CORRECTO");
             $state.go('app.inicio_comite');
         }else if (localStorageService.get("session_typeId") == 4) {//OPERADOR
-            console.log("ACCESO CORRECTO");
-            //$state.go('app.inicio_operador');
+            //console.log("ACCESO CORRECTO");
+            $state.go('app.inicio_operador');
         }else if (localStorageService.get("session_typeId") == 5) {//SOLICITANTE
             //console.log("ACCESO CORRECTO");
             $state.go('app.inicio_solicitante');
         }else if (localStorageService.get("session_typeId") == 6) {//SUPERUSUARIO
-            console.log("ACCESO CORRECTO");
-            //$state.go('app.inicio_super');
+            //console.log("ACCESO CORRECTO");
+            $state.go('app.inicio_super');
         }else if (localStorageService.get("session_typeId") == 7) {//SUPERVISTA
-            console.log("ACCESO CORRECTO");
-            //$state.go('app.inicio_super');
+            //console.log("ACCESO CORRECTO");
+            $state.go('app.inicio_super');
         }else if (localStorageService.get("session_typeId") == 8) {//OPERADOR VISTA
+            //console.log("ACCESO CORRECTO");
+            $state.go('app.inicio_operador_vista');
+        }else if (localStorageService.get("session_typeId") == 9) {//OPERADOR UNI
             console.log("ACCESO CORRECTO");
             //$state.go('app.inicio_operador_vista');
         }
@@ -214,7 +217,7 @@
                         $scope.texto = "Copiado a Portapapeles";
                     }
                 },
-                templateUrl : 'app/main/documentosSolicitante/html/modalDetalle.html',
+                templateUrl : 'app/main/documentosSolicitanteUni/html/modalDetalle.html',
                 parent             : angular.element('body'),
                 targetEvent        : ev,
                 locals             : {
@@ -227,7 +230,8 @@
         function init() {
             vm.mostrarCargando();
             $scope.aux = [];
-            AjaxCall("GET", URL_SERVIDOR + "/Application", null, function (response) {
+            //var university_id=
+            AjaxCall("GET", URL_SERVIDOR + "/Application/"+localStorageService.get("session_universityId"), null, function (response) {
                 //response.datos.forEach(function(e){
                 //    if(e.status == 0 || e.status == 3){
                 //        $scope.aux.push(e);

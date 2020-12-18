@@ -16,6 +16,7 @@
             'app.quick-panel',
             'app.inicio_solicitante',
             'app.inicio_operador',
+            'app.inicio_operador_universidad',
             'app.inicio_supervisor',
             'app.inicio_comite',
             'app.inicio_super',
@@ -26,6 +27,7 @@
             'LocalStorageModule',
             'app.catalogos',
             'app.documentoSolicitante',
+            'app.documentoSolicitanteUni',
             'app.documentoSolicitanteCompletos',
             'app.documentoSolicitanteIncompletos',
             'app.documentoSolicitanteVacios',
@@ -211,6 +213,11 @@
             msNavigationServiceProvider.saveItem('apps.docsSol.documentoSolicitante', {
                 title: 'General',
                 state: 'app.documentoSolicitante',
+                icon: 'icon-file-document'
+            });
+            msNavigationServiceProvider.saveItem('apps.docsSol.documentoSolicitanteUni', {
+                title: 'General',
+                state: 'app.documentoSolicitanteUni',
                 icon: 'icon-file-document'
             });
             msNavigationServiceProvider.saveItem('apps.docsSol.documentoSolicitanteCompletos', {

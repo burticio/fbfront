@@ -73,6 +73,7 @@
                             localStorageService.set("session_lastName", response.Person.lastName);
                             localStorageService.set("session_mLastName", response.Person.mLastName);
                             localStorageService.set("session_typeId", response.User.Type_Id);
+                            localStorageService.set("session_universityId", response.User.university_id);
                             
                             if (response.User.Type_Id == 2) {
                                 $state.go('app.inicio_supervisor');
@@ -88,6 +89,8 @@
                                 $state.go('app.inicio_super');
                             }else if (response.User.Type_Id == 8) {
                                 $state.go('app.inicio_operador_vista');
+                            }else if (response.User.Type_Id == 9) {
+                                $state.go('app.inicio_operador_universidad');
                             }
 
                         }
