@@ -231,7 +231,7 @@
             vm.mostrarCargando();
             $scope.aux = [];
             //var university_id=
-            AjaxCall("GET", URL_SERVIDOR + "/Application/"+localStorageService.get("session_universityId"), null, function (response) {
+            AjaxCall("GET", URL_SERVIDOR + "/Application/showUniversityApplications/"+localStorageService.get("session_universityId"), null, function (response) {
                 //response.datos.forEach(function(e){
                 //    if(e.status == 0 || e.status == 3){
                 //        $scope.aux.push(e);

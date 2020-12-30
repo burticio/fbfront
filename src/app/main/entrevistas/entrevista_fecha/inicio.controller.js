@@ -992,6 +992,8 @@
         // <========== CAPTURAR ENTREVISTA V2 ==========>
         $scope.capturarEntrevistaV2 = function (entrevista) {
 
+            //debugger;
+
             localStorageService.set("entrevista_id", entrevista.interview_Id);
 
             vm.mostrarCargando();

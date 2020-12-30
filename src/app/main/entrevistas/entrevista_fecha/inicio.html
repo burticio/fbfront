@@ -43,7 +43,7 @@
                                         <span class="column-title">SOLICITANTE</span>
                                     </div>
                                 </th>
-                                <th class="secondary-text">
+                                <!--th class="secondary-text">
                                     <div class="table-header">
                                         <span class="column-title">PROGRAMA</span>
                                     </div>
@@ -52,7 +52,7 @@
                                     <div class="table-header">
                                         <span class="column-title">CLASIFICACIÓN</span>
                                     </div>
-                                </th>
+                                </th-->
                                 <th class="secondary-text">
                                     <div class="table-header">
                                         <span class="column-title">FECHA/HORA</span>
@@ -77,9 +77,13 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="entrevista in entrevistas">
-                                <td>{{entrevista.applicant}}</td>
-                                <td>{{entrevista.ProgramName}}</td>
-                                <td>{{entrevista.Program_Classification}}</td>
+                                <td>
+                                    <strong>Solicitante:</strong> {{entrevista.applicant}}<br>
+                                
+                                    <strong>Programa:</strong> {{entrevista.ProgramName}}<br>
+                                
+                                    <strong>Clasificación: </strong>{{entrevista.Program_Classification}}<br>
+                                </td>
                                 <td style="text-align:center;">
                                     {{entrevista.date === "Invalid date" ? "POR AGENDAR" : entrevista.date}}
                                 </td>
