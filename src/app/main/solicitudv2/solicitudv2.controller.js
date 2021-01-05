@@ -1435,7 +1435,7 @@
                 $scope.boleto=0;
             }
 
-            $scope.totalGastos = $scope.programaSeleccionado.Program_Cost + ($scope.programaSeleccionado.duration * $scope.gastosManutencion) + $scope.boleto;
+            $scope.totalGastos = ($scope.programaSeleccionado.Program_Cost*(1-($scope.programaSeleccionado.Scholarship_Percentage/100))) + ($scope.programaSeleccionado.duration * $scope.gastosManutencion) + $scope.boleto;
             // $scope.buscarProgramasSegundaOpcion()
             //console.log($scope.minDate);
             //console.log($scope.maxDate);

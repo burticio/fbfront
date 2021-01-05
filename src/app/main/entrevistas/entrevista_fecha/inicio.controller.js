@@ -2198,7 +2198,10 @@
                 $scope.$apply(function () {
                     array_programs = response.datos;
                     $mdDialog.show({
-                        locals: { array_programs: array_programs },
+                        locals: { 
+                            array_programs: array_programs,
+                            entrevista: entrevista
+                        },
                         controller: FinalizarEntrevistaController,
                         templateUrl: 'app/main/entrevistas/entrevista_fecha/html/dialogo.finalizarentrevista.html',
                         parent: angular.element(document.body),
@@ -2214,11 +2217,23 @@
         // <========== FINALIZAR ENTREVISTA ==========>
 
         // <========== CONTROLLLER FINALIZAR ENTREVISTA ==========>
-        function FinalizarEntrevistaController($scope, $mdDialog, array_programs) {
+        function FinalizarEntrevistaController($scope, $mdDialog, array_programs, entrevista) {
             $scope.array_programs = array_programs;
-            $scope.respuestaFinalizarEntrevista = function (respuesta, canalize_to) {
+            $scope.entrevista = entrevista;
+
+            $scope.recomendacion = "INDEFINIDO";
+
+            if(entrevista.text_Score=='C'){
+                $scope.recomendacion = "RECHAZADO";
+            }else if(entrevista.text_Score=='A+'){
+                $scope.recomendacion = "ACEPTADO";
+            }
+
+            $scope.respuestaFinalizarEntrevista = function (respuesta, canalize_to, estatusSolicitud) {
+                //debugger;
                 if (respuesta) {
                     localStorageService.set("canalize_to", canalize_to);
+                    localStorageService.set("estatusSolicitud", estatusSolicitud);
                     $mdDialog.hide();
                 } else {
                     $mdDialog.cancel();
@@ -2229,10 +2244,13 @@
 
         // <========== FINALIZAR ENTREVISTA ==========>
         $scope.finalizarEntrevistaCanalizacion = function (entrevista) {
+            //debugger;
             var id = entrevista.interview_Id;
             var canalizeId = localStorageService.get("canalize_to");
+            var estatusSolicitud = localStorageService.get("estatusSolicitud");
             var data = {
-                "canalize_to": canalizeId
+                "canalize_to": canalizeId,
+                "status_application":estatusSolicitud
             };
             AjaxCall("POST", URL_SERVIDOR + "/Interview/finish/" + id, data, function (response) {
                 $scope.$apply(function () {

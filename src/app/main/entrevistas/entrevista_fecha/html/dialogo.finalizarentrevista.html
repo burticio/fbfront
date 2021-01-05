@@ -1,4 +1,4 @@
-<md-dialog aria-label="Finalizar Entrevista" style="width: 30%;">
+<md-dialog aria-label="Finalizar Entrevista" style="width: 50%;">
     <form ng-cloak>
         <md-toolbar style="background-color: #781f23 !important;">
             <div class="md-toolbar-tools">
@@ -9,29 +9,40 @@
         <md-dialog-content>
             <div class="md-dialog-content">
                 <md-content ng-controller="EntrevistaFechaController as vm" ng-cloak>
-                    <h3>Selecciona un tipo de canalización</h3>
-                    <!-- <md-input-container style="width: 100% !important;">
-                        <md-select ng-model="canalize_to" style="color: #000 !important;">
-                            <md-option value="0">Ninguna</md-option>
-                            <md-option value="1">Estudia Más</md-option>
-                            <md-option value="2">Otro programa</md-option>
-                        </md-select>
-                    </md-input-container> -->
-
-                    <md-input-container style="width: 100% !important;">
-                        <md-select ng-model="canalize_to" style="color: #000 !important;">
-                            <md-option ng-repeat="rows in array_programs" value="{{rows.id}}">
-                                {{rows.name}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <h3><strong>Calificación de la Entrevista:</strong> {{entrevista.text_Score}}</h3>
+                            <h3><strong>Resultado Recomendado:</strong> {{recomendacion}}</h3>
+                        <!--/md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <md-input-container class="md-block" flex-gt-sm-->
+                            <h2>Resultado de la Entrevista</h2>
+                            <md-radio-group ng-model="estatusSolicitud" layout="row">
+                                <md-radio-button ng-value="7" class="md-primary">Aceptada</md-radio-button>
+                                <md-radio-button ng-value="23">Rechazada</md-radio-button>
+                                <md-radio-button ng-value="24">Cancelada</md-radio-button>
+                            </md-radio-group>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row">
+                        <h3>Canalización a otro programa</h3>
+                        <md-input-container style="width: 100% !important;">
+                            <md-select ng-model="canalize_to" style="color: #000 !important;">
+                                <md-option value="0">- NINGUNO</md-option>
+                                <md-option ng-repeat="rows in array_programs" value="{{rows.id}}">
+                                    {{rows.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
 
                     <div style="display: flex !important; margin-top: 10px !important;">
-                        <md-button class="md-raised" ng-click="respuestaFinalizarEntrevista(false, canalize_to)" style="padding: 0px 20px !important;">
+                        <md-button class="md-raised" ng-click="respuestaFinalizarEntrevista(false, canalize_to, estatusSolicitud)" style="padding: 0px 20px !important;">
                             CANCELAR
                         </md-button>
                         <div ng-show="canalize_to != null">
-                            <md-button ng-click="respuestaFinalizarEntrevista(true, canalize_to)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                            <md-button ng-click="respuestaFinalizarEntrevista(true, canalize_to, estatusSolicitud)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
                                 FINALIZAR
                             </md-button>
                         </div>
