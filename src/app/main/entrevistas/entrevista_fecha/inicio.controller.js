@@ -2221,6 +2221,10 @@
             $scope.array_programs = array_programs;
             $scope.entrevista = entrevista;
 
+            $scope.canalize_to_array = [];
+            $scope.canalize_to = null;
+            //$scope.canalize_aux = null;
+            
             $scope.recomendacion = "INDEFINIDO";
 
             if(entrevista.text_Score=='C'){
@@ -2229,16 +2233,46 @@
                 $scope.recomendacion = "ACEPTADO";
             }
 
-            $scope.respuestaFinalizarEntrevista = function (respuesta, canalize_to, estatusSolicitud) {
+            $scope.agregarCanalizacion = function(canalize_aux){
                 //debugger;
+                //console.log(canalize_aux);
+                var objCanalizeAux = JSON.parse(canalize_aux);
+                var i= $scope.canalize_to_array.find(function(x){return x.id == objCanalizeAux.id});
+                if(!i){
+                    $scope.canalize_to_array.push(objCanalizeAux);
+                }
+            }
+
+            $scope.respuestaFinalizarEntrevista = function (respuesta, estatusSolicitud) {
+                //debugger;
+
+                //i=-1;
+                var c =[];
+
+                $scope.canalize_to_array.forEach(function(e){
+                    c.push({program:e.id});
+                })
+                if(c.length>0){
+                    $scope.canalize_to=JSON.stringify(c);
+                }
+
                 if (respuesta) {
-                    localStorageService.set("canalize_to", canalize_to);
+                    localStorageService.set("canalize_to", $scope.canalize_to);
                     localStorageService.set("estatusSolicitud", estatusSolicitud);
                     $mdDialog.hide();
                 } else {
                     $mdDialog.cancel();
                 }
             };
+
+            $scope.eliminarCanalizacion = function(canalize_aux){
+                //debugger;
+                //var objCanalizeAux = JSON.parse(canalize_aux);
+                var i = $scope.canalize_to_array.findIndex(function(x){return x.id == canalize_aux.id});
+                if(i > -1){
+                    $scope.canalize_to_array.splice(i,1);
+                }
+            }
         }
         // <========== CONTROLLLER FINALIZAR ENTREVISTA ==========>
 

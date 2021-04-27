@@ -45,6 +45,7 @@
             'app.detallePrograma',
             'app.solicitud',
             'app.solicitudv2',
+            'app.validacionUni',
             'app.validarDocumentos',
             'app.asignacion_entrevista',
             'app.orientacionVocacional',

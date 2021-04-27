@@ -701,6 +701,14 @@
                 case 2:
                     break;
                 case 3:
+                    if($scope.datosDetalleSolicitud.lastgrade_general_average){
+                        $scope.datosDetalleSolicitud.lastgrade_general_average=parseFloat($scope.datosDetalleSolicitud.lastgrade_general_average);
+                        if(isNaN($scope.datosDetalleSolicitud.lastgrade_general_average)){
+                            $scope.datosDetalleSolicitud.lastgrade_general_average=0;
+                        }
+                    }else{
+                        $scope.datosDetalleSolicitud.lastgrade_general_average=0;
+                    }
                     if($scope.datosDetalleSolicitud.lastgrade==""){
                         valido=false;
                         campo="Último grado de estudios";
@@ -710,9 +718,9 @@
                     }else if($scope.datosDetalleSolicitud.lastgrade_country==0){
                         valido=false;
                         campo="País de últimos Estudios";
-                    }else if($scope.datosDetalleSolicitud.lastgrade_general_average==0){
+                    }else if($scope.datosDetalleSolicitud.lastgrade_general_average/1<=0){
                         valido=false;
-                        campo="Promedio General";
+                        campo="Promedio General.";
                     }else if($scope.programaSeleccionado.Country_Id!=28 && $scope.programaSeleccionado.Country_Id!=42&& $scope.idiomas.length==0){
                         valido=false;
                         campo="Por el programa Seleccionado debes elegir al menos Inglés. Asegúrate de presionar el boton Agregar";

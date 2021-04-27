@@ -2,12 +2,12 @@
 
     'use strict';
 
-    angular.module('app.busquedaPrograma').
-        controller("BusquedaProgramaController",BusquedaProgramaController);
+    angular.module('app.validacionUni').
+        controller("validacionUniController",validacionUniController);
 
     /** @ngInject */
-    function BusquedaProgramaController($scope,$state, localStorageService, $cookies, $mdDialog){
-        //debugger;
+    function validacionUniController($scope,$state, localStorageService, $cookies, $mdDialog){
+        debugger;
         if($cookies.get("layoutStyle")!="contentWithToolbar"){
             $cookies.put('layoutStyle', 'contentWithToolbar');
             location.reload();
@@ -316,7 +316,7 @@
             var univ = "none";
             var areaId = "none";
             var modality = "none";
-            var referrer = "web";
+            var referrer = "none";
             var busqueda = false;
 
             var query = window.location.search.substr(1);

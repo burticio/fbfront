@@ -162,6 +162,8 @@
                                                     "CANCELADA POR OPERADOR DE FB" : ''}}
                                                     {{solicitud.status === "21" ?
                                                     "VALIDADA POR UNIVERSIDAD: EN DOCUMENTOS DE ACEPTACIÓN" : ''}}
+                                                    <br>
+                                                    Referrer: {{solicitud.referrer}}
                                                 </td>
                                                 <td>
                                                     <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="dlgcancelarSolicitud(event,solicitud)" ng-hide ="solicitud.status == '7' || solicitud.status=='15' || solicitud.status=='16' || uType==7">

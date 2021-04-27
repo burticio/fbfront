@@ -28,24 +28,38 @@
                     <div layout-gt-sm="row">
                         <h3>Canalización a otro programa</h3>
                         <md-input-container style="width: 100% !important;">
-                            <md-select ng-model="canalize_to" style="color: #000 !important;">
-                                <md-option value="0">- NINGUNO</md-option>
-                                <md-option ng-repeat="rows in array_programs" value="{{rows.id}}">
+                            <md-select ng-model="canalize_aux" style="color: #000 !important;">
+                                <!--md-option value="0">- NINGUNO</md-option-->
+                                <md-option ng-repeat="rows in array_programs" value="{{rows}}">
                                     {{rows.name}}
                                 </md-option>
                             </md-select>
+                            <md-button class="md-raised md-primary" ng-click="agregarCanalizacion(canalize_aux)">AGREGAR</md-button>
+                        </md-input-container>
+                    </div>
+                    <div layout-gt-sm="row" ng-repeat="can_to_arr in canalize_to_array">
+                        <h3>Canalizar a:</h3>
+                        <md-input-container style="width: 100% !important;">
+                            <span>
+                                {{can_to_arr.name}}
+                            </span>
+                            <md-button style="background-color:#FFF;" class="md-icon-button" ng-click="eliminarCanalizacion(can_to_arr)">
+                                <md-tooltip md-direction="top">Eliminar</md-tooltip>
+                                <md-icon md-font-icon="icon-close_circle" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons icon-close-circle" role="img" aria-label="icon-close-circle"></md-icon>
+                            </md-button>
                         </md-input-container>
                     </div>
 
                     <div style="display: flex !important; margin-top: 10px !important;">
-                        <md-button class="md-raised" ng-click="respuestaFinalizarEntrevista(false, canalize_to, estatusSolicitud)" style="padding: 0px 20px !important;">
+                        <md-button class="md-raised" ng-click="respuestaFinalizarEntrevista(false, estatusSolicitud)" style="padding: 0px 20px !important;">
                             CANCELAR
                         </md-button>
-                        <div ng-show="canalize_to != null">
-                            <md-button ng-click="respuestaFinalizarEntrevista(true, canalize_to, estatusSolicitud)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
-                                FINALIZAR
-                            </md-button>
-                        </div>
+                        <!--div ng-show="canalize_to != null"-->
+
+                        <md-button ng-click="respuestaFinalizarEntrevista(true, estatusSolicitud)" style="background-color:#781f23; color: white; padding: 0px 20px !important;">
+                            FINALIZAR
+                        </md-button>
+                        
                     </div>
 
                 </md-content>
