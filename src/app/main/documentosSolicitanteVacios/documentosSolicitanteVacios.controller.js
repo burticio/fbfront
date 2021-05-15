@@ -131,7 +131,16 @@
                 $scope.cancelarSolicitud(solicitud)
             }, function() {});
         };
+        // <========== EXPORTAR CONTENIDO ==========>
         // <==========  ==========>
+        $scope.downloadFile = function(){
+            vm.mostrarCargando();
+            window.location.href = URL_SERVIDOR + "/Reports/exportdocumentsempty";
+            setTimeout(function(){
+                vm.cerrarCargando();
+            }, 500);
+        }
+        // <========== EXPORTAR CONTENIDO ==========>
 
         // <========== CONTROLLER  ==========>
         function CancelarSolicitudController($scope, $mdDialog,localSolicitud) {

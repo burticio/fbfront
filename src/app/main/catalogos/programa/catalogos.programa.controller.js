@@ -768,14 +768,14 @@
                         }
                         $scope.templateBro = "";
                         $scope.templateBroForm = "";
-                        var file = document.getElementById('documentFile').files;
+                        //var file = document.getElementById('documentFile').files;
                         var inputid = 'documentFile';
                         var idProceso = 4000;
-                        var files = file;
-                        var nombreArchivo = "";
+                        //var files = file;
+                        //var nombreArchivo = "";
                         var archivos = new Array();
 
-                        if (files.length > 0) {
+                        /*if (files.length > 0) {
                             for (var i = 0; i < files.length; i++) {
                                 if (files[i].type === "application/msword" ||
                                     files[i].type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
@@ -813,7 +813,7 @@
                                     picReader.readAsDataURL(_file);
                                 }
                             }
-                        }
+                        }*/
 
                         var objData = {
                             "ProgramName": $scope.data.ProgramName,
@@ -835,8 +835,8 @@
                             "Subarea_Id": $scope.subAreas.modelo,
                             "state": 0,
                             "active": $scope.data.active,
-                            "Brochure": $scope.templateBro ? $scope.templateBro : " ",
-                            "file_format": $scope.templateBroForm ? $scope.templateBroForm : " ",
+                            "Brochure":$scope.data.Brochure,
+                            "file_format": " ",
                             "notes":$scope.data.notes,
                             "duration":$scope.data.duration,
                             "duration_period":$scope.periodo_duracion.modelo,
@@ -1202,7 +1202,7 @@
                             "Subarea_Id": $scope.subAreas.modelo,
                             "state": 0,
                             "active": $scope.data.active,
-                            "Brochure": "        ",
+                            "Brochure": $scope.data.Brochure,
                             "notes":$scope.data.notes,
                             "duration":$scope.data.duration,
                             "duration_period":$scope.periodo_duracion.modelo,

@@ -31,7 +31,7 @@
                         <div layout-gt-sm="row">
                             <md-input-container flex="100">
                                 <label>Clave para Buscador</label>
-                                <input style="width: 300px" md-no-asterisk name="leads" ng-model="data.leads">
+                                <input style="width: 300px" md-no-asterisk name="leads" ng-model="data.leads" maxlength="15">
                             </md-input-container>
                             <md-input-container flex="100">
                                 <label>Logotipo (URL)</label>
@@ -64,6 +64,17 @@
                                 <div ng-messages="dataUser.name.$error">
                                     <div ng-message="required">Este campo es requerido.</div>
                                 </div>
+                            </md-input-container>
+                        </div>
+                    </md-content>
+                    <md-content  layout-padding>
+                        <div layout-gt-sm="row">
+                            <md-input-container flex="100">
+                                <label>Pagos:</label><br>
+                                <md-radio-group ng-model="data.paytofb" layout="row">
+                                    <md-radio-button value="1">Fundacion Beca</md-radio-button>
+                                    <md-radio-button  value="0">Universidad</md-radio-button>
+                                </md-radio-group>
                             </md-input-container>
                         </div>
                     </md-content>
