@@ -189,6 +189,10 @@
                                                         <md-tooltip md-direction="top">Cambiar Programa</md-tooltip>
                                                         <md-icon md-font-icon="icon-dns" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons" role="img"></md-icon>
                                                     </md-button>
+                                                    <md-button style="background-color:#FFF;" class="md-fab md-mini md-primary md-hue-3" ng-click="enviarNotificacion(solicitud)" ng-show ="solicitud.status == '0' || solicitud.status == '3' || solicitud.status == '10'">
+                                                        <md-tooltip md-direction="top">Enviar Ultima Notificación</md-tooltip>
+                                                        <md-icon md-font-icon="icon-send" style="color:#844648;" class="s16 ng-scope md-default-theme md-font material-icons" role="img"></md-icon>
+                                                    </md-button>
                                                 </td>
                                             </tr>
                                         </tbody>

@@ -154,6 +154,38 @@
             $state.go("app.verEntrevista");
         }
 
+        $scope.enviarNotificacion = function (solicitud) {
+            //debugger;
+            mostrarCargando();
+            AjaxCall("GET", URL_SERVIDOR + "/Application/sendLastNotification/" + solicitud.id, null, function (response) {
+                $scope.$apply(function () {
+                    if (response.Codigo >= 200 && response.Codigo <= 299) {
+                        cerrarCargando();
+                        swal({
+                            title: "¡Éxito!",
+                            text: response.mensaje,
+                            icon: "success",
+                            buttons: false,
+                            timer: 2000,
+                            dangerMode: false
+                        }).then(function() {});
+                        vm.init();
+                    } else {
+                        cerrarCargando();
+                        swal({
+                            title: "¡Atención!",
+                            text: response.mensaje,
+                            icon: "error",
+                            buttons: false,
+                            timer: 2000,
+                            dangerMode: false
+                        }).then(function() {});
+                        vm.init();
+                    }
+                });
+            }, function () {});            
+        }
+
         /******************************************************************/
         /*                 MODAL PARA CANCELAR SOLICITUD                  */
         /******************************************************************/
