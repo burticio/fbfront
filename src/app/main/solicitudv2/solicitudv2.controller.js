@@ -63,7 +63,8 @@
             Other_How_Did_You_Find: "",
             status: 0,
             lead_id:$scope.programaSeleccionado.lead_id,
-            leads:$scope.programaSeleccionado.leads
+            leads:$scope.programaSeleccionado.leads,
+            secondary_email:""
         };
         $scope.mensajeEmail ="";
         $scope.salaryUSD = false;
@@ -472,6 +473,7 @@
                                                         $scope.datosPersona.birth_country= response.Person.birth_country;
                                                         $scope.datosPersona.birth_state= response.Person.birth_state;
                                                         $scope.datosPersona.city= response.Person.city;
+                                                        $scope.datosPersona.secondary_email= response.secondary_email;
 
                                                         $scope.llenarComboEstado();
                                                         $scope.mensajeEmail="Has llenado una solicitud con anterioridad y fue rechazada. Se han cargado algunos datos del usuario.";
@@ -610,6 +612,7 @@
                             $scope.datosPersona.birth_country= response.Person.birth_country;
                             $scope.datosPersona.birth_state= response.Person.birth_state;
                             $scope.datosPersona.city= response.Person.city;
+                            $scope.datosPersona.secondary_email= response.secondary_email;
 
                             $scope.llenarComboEstado();
                             $scope.mensajeEmail="Ingreso al Sistema Correcto. Se han cargado los datos del usuario.";

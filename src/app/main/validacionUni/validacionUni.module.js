@@ -22,12 +22,7 @@
             }/*,
             bodyClass: 'clasificacionPrograma'*/
         });
-          
-        
-        msNavigationServiceProvider.saveItem('validacionUni', {
-            title : 'validacion Uniersidad',
-            state : 'app.validacionUni'
-        }); 
+           
     }
 
 })();

@@ -27,6 +27,7 @@
             msNavigationService.deleteItem('apps.docsSol');
             msNavigationService.deleteItem('apps.documentosSolicitanteAsignacion');
             msNavigationService.deleteItem('apps.documentosSolicitanteAsignacion');
+            msNavigationService.deleteItem('app.validacionUni');
             //msNavigationService.deleteItem('apps.documentoSolicitante');
 
             msNavigationService.deleteItem('apps.entrevistas');
@@ -54,6 +55,7 @@
             msNavigationService.deleteItem('apps.validacionUniversidad');
             msNavigationService.deleteItem('apps.reportes');
             msNavigationService.deleteItem('apps.informes');
+            msNavigationService.deleteItem('app.validacionUni');
 
         } //else 
         if (localStorageService.get("session_typeId") == 4) { // MENU OPERADOR
@@ -74,6 +76,7 @@
             msNavigationService.deleteItem("apps.programascanalizacion");
             msNavigationService.deleteItem('apps.validacionUniversidad');
             msNavigationService.deleteItem('apps.docsSol.documentoSolicitanteUni');
+            msNavigationService.deleteItem('app.validacionUni');
             
         } //else 
         if (localStorageService.get("session_typeId") == 5) { // MENU SOLICITANTE
@@ -103,6 +106,7 @@
             msNavigationService.deleteItem('apps.solicitudes');
             msNavigationService.deleteItem('apps.donaciones');
             msNavigationService.deleteItem('apps.validacionUniversidad');
+            msNavigationService.deleteItem('app.validacionUni');
         } //else 
         if (localStorageService.get("session_typeId") == 6) { //MENU SUPERUSUARIO
            // console.log("6");
@@ -114,6 +118,7 @@
             msNavigationService.deleteItem("inicio_supervisor");
             msNavigationService.deleteItem("inicio_operador_vista");
             msNavigationService.deleteItem("inicio_operador_universidad");
+            msNavigationService.deleteItem('app.validacionUni');
             //msNavigationService.deleteItem('app.documentoSolicitante');
             //msNavigationService.deleteItem('documentosSolicitanteAsignacion');
             //msNavigationService.deleteItem('app.documentosSolicitanteAsignacion');
@@ -134,6 +139,7 @@
             msNavigationService.deleteItem("inicio_operador_vista");
             msNavigationService.deleteItem("inicio_operador_universidad");
             msNavigationService.deleteItem('apps.docsSol.documentoSolicitanteUni');
+            msNavigationService.deleteItem('app.validacionUni');
             //msNavigationService.deleteItem('app.documentoSolicitante');
             //msNavigationService.deleteItem('documentosSolicitanteAsignacion');
             //msNavigationService.deleteItem('app.documentosSolicitanteAsignacion');
@@ -153,6 +159,7 @@
             msNavigationService.deleteItem("inicio_super");
             msNavigationService.deleteItem("inicio_operador_universidad");
             msNavigationService.deleteItem('apps.docsSol.documentoSolicitanteUni');
+            msNavigationService.deleteItem('app.validacionUni');
             //msNavigationService.deleteItem("inicio_operador_vista");
             //msNavigationService.deleteItem('app.documentoSolicitante');
             //msNavigationService.deleteItem('documentosSolicitanteAsignacion');

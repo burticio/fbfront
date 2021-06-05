@@ -41,7 +41,7 @@
                                             {{solicitudes[solicitudes.length - 1].status === "1" ? "CANCELADA SIN DOCUMENTOS" : ''}} 
                                             {{solicitudes[solicitudes.length - 1].status === "2" ? "CANCELADA POR SOLICITANTE" : ''}} 
                                             {{solicitudes[solicitudes.length - 1].status === "3" ? "DOCUMENTOS COMPLETOS" : ''}} 
-                                            {{solicitudes[solicitudes.length - 1].status === "4" ? "RECHAZAADA EN ENTREVISTA" : ''}}
+                                            {{solicitudes[solicitudes.length - 1].status === "4" ? "RECHAZADA EN ENTREVISTA" : ''}}
                                             {{solicitudes[solicitudes.length - 1].status === "5" ? "CANALIZAR A ESTUDIA MAS" : ''}}
                                             {{solicitudes[solicitudes.length - 1].status === "6" ? "ENTREVISTA COMPLETA" : ''}} 
                                             {{solicitudes[solicitudes.length - 1].status === '7' ? "EN PROCESO" : ''}} 
@@ -113,6 +113,7 @@
                                                     {{ horaCita }}
                                                 </span>
                                             </div>
+
                                         </div>
                                         <md-button class="md-raised md-background" ng-click="vm.aceptarFecha(cita)">
                                             <span>ACEPTAR</span>
@@ -120,6 +121,17 @@
                                         <md-button class="md-raised md-background" ng-click="vm.proponerFecha(cita)">
                                             <span>PROPONER OTRA</span>
                                         </md-button>
+                                        <div>
+                                            <br><span class="h3" style="color:#781f23;">ESPERAMOS TU LLAMADA<br>POR ALGUNO DE LOS SIGUIENTES MEDIOS</span><br><br>
+                                            <span>Vía teléfonica al móvil <strong>+52 (442) 372 3119</strong></span><br>
+                                            <span>Vía WhatsApp al número <strong>+52 (442) 372 3119</strong></span><br>
+                                            <span>Vía Skype (audio) a la cuenta <strong>actividades _41</strong></span><br>
+                                            <!--ul>
+                                                <li>Vía teléfonica al móvil <strong>+52 (442) 372 3119</strong></li>
+                                                <li>Vía WhatsApp al número <strong>+52 (442) 372 3119</strong></li>
+                                                <li>Vía Skype (audio) a la cuenta <strong>actividades _41</strong></li>
+                                            </ul-->
+                                        </div>
 
                                     </div>
                                     <div ng-if="cita.status === '2'">
